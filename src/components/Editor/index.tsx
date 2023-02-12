@@ -35,15 +35,23 @@ const Dragable = (props: any) => {
 const Canvas = (props: any) => {
   const [collectedProps, drop] = useDrop(() => ({
     accept: ItemTypes.Button,
-    drop: (item) => {
-      props.onDrop(item);
+    drop: (item: any, monitor) => {
+      const cordinates = monitor.getSourceClientOffset();
+      props.onDrop({ ...item, ...cordinates });
     },
   }));
+
+  console.log(props.componentList);
 
   return (
     <div className="drawer" ref={drop}>
       {props.componentList.map((c: any, i: number) => (
-        <div key={c.id + i}>{c.id}</div>
+        <div
+          key={c.id + i}
+          style={{ position: "absolute", top: c.y, left: c.x }}
+        >
+          {c.id}
+        </div>
       ))}
     </div>
   );

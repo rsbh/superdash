@@ -1,9 +1,18 @@
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { DndProvider, useDrag, useDrop } from "react-dnd";
 import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 export const ItemTypes = {
   Button: "button",
+};
+
+const Widget = ({ x, y, id, children }: any) => {
+  return (
+    <div style={{ position: "absolute", top: y, left: x }}>
+      <Dragable id={id}>{children}</Dragable>
+    </div>
+  );
 };
 
 const Dragable = (props: any) => {
@@ -13,7 +22,7 @@ const Dragable = (props: any) => {
       isDragging: !!monitor.isDragging(),
     }),
     item: {
-      id: props.id,
+      ...(props.id && { id: props.id }),
     },
   }));
   return (
@@ -41,34 +50,33 @@ const Canvas = (props: any) => {
     },
   }));
 
-  console.log(props.componentList);
-
   return (
     <div className="drawer" ref={drop}>
-      {props.componentList.map((c: any, i: number) => (
-        <div
-          key={c.id + i}
-          style={{ position: "absolute", top: c.y, left: c.x }}
-        >
+      {Object.values(props.componentList).map((c: any, i: number) => (
+        <Widget key={c.id + i} {...c}>
           {c.id}
-        </div>
+        </Widget>
       ))}
     </div>
   );
 };
 
 export default function Editor() {
-  const [componentList, setComponentList] = useState<any>([]);
+  const [componentList, setComponentList] = useState<any>({});
 
   function onDrop(item: any) {
-    setComponentList([...componentList, item]);
+    const id = item.id || uuidv4();
+    setComponentList((prev: any) => ({
+      ...prev,
+      [id]: { id, ...item },
+    }));
   }
 
   return (
     <div className="editor">
       <DndProvider backend={HTML5Backend}>
         <div className="component-list">
-          <Dragable id={"btn-1"}>Button</Dragable>
+          <Dragable>Button</Dragable>
         </div>
         <Canvas componentList={componentList} onDrop={onDrop}></Canvas>
       </DndProvider>

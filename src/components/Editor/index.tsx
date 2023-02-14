@@ -1,7 +1,8 @@
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { DndProvider, useDrag, useDrop } from "react-dnd";
-import { useState } from "react";
+import { CSSProperties, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import { CustomDragLayer } from "../CustomDragLayer";
 
 export const ItemTypes = {
   Button: "button",
@@ -30,7 +31,6 @@ const Dragable = (props: any) => {
       className="component-small"
       ref={drag}
       style={{
-        opacity: isDragging ? 0.5 : 1,
         fontSize: 25,
         fontWeight: "bold",
         cursor: "move",
@@ -39,6 +39,13 @@ const Dragable = (props: any) => {
       {props.children}
     </div>
   );
+};
+
+const styles: CSSProperties = {
+  width: 500,
+  height: 500,
+  border: "1px solid black",
+  position: "relative",
 };
 
 const Canvas = (props: any) => {
@@ -51,7 +58,7 @@ const Canvas = (props: any) => {
   }));
 
   return (
-    <div className="drawer" ref={drop}>
+    <div className="drawer" ref={drop} style={styles}>
       {Object.values(props.componentList).map((c: any, i: number) => (
         <Widget key={c.id + i} {...c}>
           {c.id}
@@ -78,7 +85,10 @@ export default function Editor() {
         <div className="component-list">
           <Dragable>Button</Dragable>
         </div>
-        <Canvas componentList={componentList} onDrop={onDrop}></Canvas>
+        <div>
+          <Canvas componentList={componentList} onDrop={onDrop}></Canvas>
+          <CustomDragLayer />
+        </div>
       </DndProvider>
     </div>
   );

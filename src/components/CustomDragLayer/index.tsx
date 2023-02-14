@@ -1,6 +1,8 @@
 import type { CSSProperties, FC } from "react";
 import type { XYCoord } from "react-dnd";
 import { useDragLayer } from "react-dnd";
+import { ItemTypes } from "../../utils/ItemTypes";
+import { BoxDragPreview } from "../Box/BoxDragPreview";
 
 export interface CustomDragLayerProps {
   snapToGrid?: boolean;
@@ -46,7 +48,16 @@ export const CustomDragLayer: FC<CustomDragLayerProps> = (props) => {
     }));
 
   function renderItem() {
-    return <div>Drag Layer</div>;
+    switch (itemType) {
+      case ItemTypes.BOX:
+        return (
+          <BoxDragPreview>
+            <div>Hello World</div>
+          </BoxDragPreview>
+        );
+      default:
+        return null;
+    }
   }
 
   if (!isDragging) {

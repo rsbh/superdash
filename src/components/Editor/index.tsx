@@ -3,10 +3,8 @@ import { DndProvider, useDrag, useDrop } from "react-dnd";
 import { CSSProperties, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { CustomDragLayer } from "../CustomDragLayer";
-
-export const ItemTypes = {
-  Button: "button",
-};
+import { DraggableBox } from "../Box/DragableBox";
+import { ItemTypes } from "../../utils/ItemTypes";
 
 const Widget = ({ x, y, id, children }: any) => {
   return (
@@ -18,7 +16,7 @@ const Widget = ({ x, y, id, children }: any) => {
 
 const Dragable = (props: any) => {
   const [{ isDragging }, drag] = useDrag(() => ({
-    type: ItemTypes.Button,
+    type: ItemTypes.BOX,
     collect: (monitor) => ({
       isDragging: !!monitor.isDragging(),
     }),
@@ -50,7 +48,7 @@ const styles: CSSProperties = {
 
 const Canvas = (props: any) => {
   const [collectedProps, drop] = useDrop(() => ({
-    accept: ItemTypes.Button,
+    accept: ItemTypes.BOX,
     drop: (item: any, monitor) => {
       const cordinates = monitor.getSourceClientOffset();
       props.onDrop({ ...item, ...cordinates });
@@ -73,6 +71,7 @@ export default function Editor() {
 
   function onDrop(item: any) {
     const id = item.id || uuidv4();
+    console.log("called ");
     setComponentList((prev: any) => ({
       ...prev,
       [id]: { id, ...item },
@@ -83,7 +82,9 @@ export default function Editor() {
     <div className="editor">
       <DndProvider backend={HTML5Backend}>
         <div className="component-list">
-          <Dragable>Button</Dragable>
+          <DraggableBox>
+            <div>Button</div>
+          </DraggableBox>
         </div>
         <div>
           <Canvas componentList={componentList} onDrop={onDrop}></Canvas>

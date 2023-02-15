@@ -1,17 +1,21 @@
 import { useDrag } from "react-dnd";
 import { WidgetType } from "../../constants/widget";
+import { WidgetFactory } from "../WidgetFactory";
 import { DragWrapper } from "./DragWrapper";
 
-export const Widget = ({ x, y, id, children, previewStyle, type }: any) => {
+export const Widget = ({ x, y, id, previewStyle, widgetType }: any) => {
   return (
-    <div style={{ position: "absolute", top: y, left: x }}>
-      <DragWrapper id={id} widgetType={type} previewStyle={previewStyle}>
-        <div
-          style={{ border: "1px solid black", height: "100%", ...previewStyle }}
-        >
-          Mounted
-        </div>
-      </DragWrapper>
-    </div>
+    <DragWrapper
+      id={id}
+      widgetType={widgetType}
+      previewStyle={previewStyle}
+      styles={{ position: "absolute", top: y, left: x }}
+    >
+      <div
+        style={{ border: "1px solid black", height: "100%", ...previewStyle }}
+      >
+        <WidgetFactory widgetType={widgetType}></WidgetFactory>
+      </div>
+    </DragWrapper>
   );
 };

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { CSSProperties, useEffect } from "react";
 import { DragSourceMonitor, useDrag } from "react-dnd";
 import { getEmptyImage } from "react-dnd-html5-backend";
 import {
@@ -13,6 +13,7 @@ interface DragWrapperProps {
   previewStyle?: WidgetPreviewStyle;
   isNewWidget?: boolean;
   id?: string;
+  styles?: CSSProperties;
 }
 
 export function DragWrapper({
@@ -20,6 +21,7 @@ export function DragWrapper({
   widgetType,
   previewStyle,
   isNewWidget = false,
+  styles = {},
   ...props
 }: DragWrapperProps) {
   const [{ isDragging }, drag, preview] = useDrag(
@@ -43,7 +45,7 @@ export function DragWrapper({
   }, [preview]);
 
   return (
-    <div ref={drag} role="DraggableBox">
+    <div ref={drag} role="DraggableBox" style={styles}>
       {children}
     </div>
   );

@@ -20,9 +20,7 @@ export const Canvas = (props: CanvasProps) => {
   return (
     <div className="drawer" ref={drop}>
       {Object.values(props.componentList).map((c: WidgetItem, i: number) => (
-        <Widget key={c.id || "" + i} {...c}>
-          {c.id}
-        </Widget>
+        <Widget key={c.id || "" + i} {...c} />
       ))}
     </div>
   );

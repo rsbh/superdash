@@ -1,5 +1,3 @@
-import { useDrag } from "react-dnd";
-import { WidgetType } from "../../constants/widget";
 import { WidgetFactory } from "../WidgetFactory";
 import { DragWrapper } from "./DragWrapper";
 

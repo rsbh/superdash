@@ -1,7 +1,8 @@
 import type { CSSProperties, FC } from "react";
 import type { XYCoord } from "react-dnd";
 import { useDragLayer } from "react-dnd";
-import { WidgetItem, WidgetType } from "../../constants/widget";
+import { DefaultDragType } from "../../constants/widget";
+import { WidgetItem } from "../../types/widget";
 import { BoxDragPreview } from "./BoxDragPreview";
 
 export interface CustomDragLayerProps {
@@ -49,7 +50,7 @@ export const CustomDragLayer: FC<CustomDragLayerProps> = (props) => {
 
   function renderItem() {
     switch (itemType) {
-      case WidgetType:
+      case DefaultDragType:
         return <BoxDragPreview item={item} />;
       default:
         return null;

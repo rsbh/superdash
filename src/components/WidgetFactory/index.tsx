@@ -1,17 +1,17 @@
-import { WidgetItemTypes } from "../../constants/widget";
+import { WidgetTypes } from "../../types/widget";
 
 interface WidgetFactoryProps {
-  widgetType: WidgetItemTypes;
+  widgetType: WidgetTypes;
 }
 
 export const WidgetFactory = (props: WidgetFactoryProps) => {
   switch (props.widgetType) {
-    case "button": {
+    case "BUTTON": {
       return <button>Button</button>;
     }
-    case "input":
+    case "INPUT":
       return <input type="text"></input>;
-    case "table":
+    case "TABLE":
       return (
         <table>
           <thead></thead>

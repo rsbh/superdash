@@ -1,6 +1,6 @@
-import { CSSProperties } from "react";
 import { useDrop } from "react-dnd";
-import { WidgetItem, WidgetType } from "../../constants/widget";
+import { DefaultDragType } from "../../constants/widget";
+import { WidgetItem } from "../../types/widget";
 import { Widget } from "./Widget";
 
 interface CanvasProps {
@@ -10,7 +10,7 @@ interface CanvasProps {
 
 export const Canvas = (props: CanvasProps) => {
   const [collectedProps, drop] = useDrop(() => ({
-    accept: WidgetType,
+    accept: DefaultDragType,
     drop: (item: WidgetItem, monitor) => {
       const cordinates = monitor.getSourceClientOffset();
       props.onDrop({ ...item, ...cordinates });

@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 import { CustomDragLayer } from "./CustomDragLayer";
 import { Canvas } from "./Canvas";
 import WidgetList from "./WidgetList";
-import { WidgetItem } from "../../constants/widget";
+import { WidgetItem } from "../../types/widget";
 
 export default function Editor() {
   const [componentList, setComponentList] = useState<

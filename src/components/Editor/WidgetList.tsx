@@ -2,7 +2,6 @@ import { widgetList } from "../../constants/widget";
 import { DragWrapper } from "./DragWrapper";
 
 export default function WidgetList() {
-  console.log(widgetList);
   return (
     <div className="component-list">
       {widgetList.map((w) => (

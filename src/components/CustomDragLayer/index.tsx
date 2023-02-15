@@ -2,7 +2,7 @@ import type { CSSProperties, FC } from "react";
 import type { XYCoord } from "react-dnd";
 import { useDragLayer } from "react-dnd";
 import { ItemTypes } from "../../utils/ItemTypes";
-import { BoxDragPreview } from "../Box/BoxDragPreview";
+import { BoxDragPreview } from "../Editor/BoxDragPreview";
 
 export interface CustomDragLayerProps {
   snapToGrid?: boolean;
@@ -50,11 +50,7 @@ export const CustomDragLayer: FC<CustomDragLayerProps> = (props) => {
   function renderItem() {
     switch (itemType) {
       case ItemTypes.BOX:
-        return (
-          <BoxDragPreview>
-            <div>Hello World</div>
-          </BoxDragPreview>
-        );
+        return <BoxDragPreview item={item} />;
       default:
         return null;
     }

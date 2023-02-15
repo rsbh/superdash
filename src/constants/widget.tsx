@@ -1,13 +1,16 @@
 export const WidgetType = "Widget";
+export type WidgetItemTypes = "button" | "input" | "table";
+
+export interface WidgetPreviewStyle {
+  height: string | number;
+  width: string | number;
+}
 
 export interface WidgetItem {
   id?: string;
   title: string;
-  type: string;
-  previewStyle: {
-    height: string | number;
-    width: string | number;
-  };
+  type: WidgetItemTypes;
+  previewStyle: WidgetPreviewStyle;
 }
 
 export const widgetList: WidgetItem[] = [

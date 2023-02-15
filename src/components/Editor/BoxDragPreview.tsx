@@ -4,8 +4,6 @@ import { WidgetItem } from "../../constants/widget";
 
 const styles: CSSProperties = {
   display: "block",
-  height: "100px",
-  width: "200px",
   backgroundColor: "greenyellow",
   opacity: 0.2,
 };

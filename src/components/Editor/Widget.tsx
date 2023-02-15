@@ -1,9 +1,9 @@
 import { useDrag } from "react-dnd";
-import { ItemTypes } from "../../utils/ItemTypes";
+import { WidgetType } from "../../constants/widget";
 
 export const Dragable = (props: any) => {
   const [{ isDragging }, drag] = useDrag(() => ({
-    type: ItemTypes.BOX,
+    type: WidgetType,
     collect: (monitor) => ({
       isDragging: !!monitor.isDragging(),
     }),
@@ -13,12 +13,13 @@ export const Dragable = (props: any) => {
   }));
   return (
     <div
-      className="component-small"
       ref={drag}
       style={{
         fontSize: 25,
         fontWeight: "bold",
         cursor: "move",
+        border: "1px solid black",
+        height: "100%",
       }}
     >
       {props.children}
@@ -26,10 +27,10 @@ export const Dragable = (props: any) => {
   );
 };
 
-export const Widget = ({ x, y, id, children }: any) => {
+export const Widget = ({ x, y, id, children, previewStyle }: any) => {
   return (
-    <div style={{ position: "absolute", top: y, left: x }}>
-      <Dragable id={id}>{children}</Dragable>
+    <div style={{ position: "absolute", top: y, left: x, ...previewStyle }}>
+      <Dragable id={id}>Mounted</Dragable>
     </div>
   );
 };

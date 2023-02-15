@@ -1,5 +1,6 @@
 import type { CSSProperties, FC } from "react";
 import React, { memo } from "react";
+import { WidgetItem } from "../../constants/widget";
 
 const styles: CSSProperties = {
   display: "block",
@@ -10,11 +11,11 @@ const styles: CSSProperties = {
 };
 
 export interface BoxDragPreviewProps {
-  item: any;
+  item: WidgetItem;
 }
 
 export const BoxDragPreview: FC<BoxDragPreviewProps> = memo(
   function BoxDragPreview({ item }) {
-    return <div style={styles}></div>;
+    return <div style={{ ...styles, ...item.previewStyle }}></div>;
   }
 );

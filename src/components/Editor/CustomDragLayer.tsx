@@ -1,8 +1,8 @@
 import type { CSSProperties, FC } from "react";
 import type { XYCoord } from "react-dnd";
 import { useDragLayer } from "react-dnd";
-import { ItemTypes } from "../../utils/ItemTypes";
-import { BoxDragPreview } from "../Editor/BoxDragPreview";
+import { WidgetItem, WidgetType } from "../../constants/widget";
+import { BoxDragPreview } from "./BoxDragPreview";
 
 export interface CustomDragLayerProps {
   snapToGrid?: boolean;
@@ -40,7 +40,7 @@ function getItemStyles(
 export const CustomDragLayer: FC<CustomDragLayerProps> = (props) => {
   const { itemType, isDragging, item, initialOffset, currentOffset } =
     useDragLayer((monitor) => ({
-      item: monitor.getItem(),
+      item: monitor.getItem<WidgetItem>(),
       itemType: monitor.getItemType(),
       initialOffset: monitor.getInitialSourceClientOffset(),
       currentOffset: monitor.getSourceClientOffset(),
@@ -49,7 +49,7 @@ export const CustomDragLayer: FC<CustomDragLayerProps> = (props) => {
 
   function renderItem() {
     switch (itemType) {
-      case ItemTypes.BOX:
+      case WidgetType:
         return <BoxDragPreview item={item} />;
       default:
         return null;

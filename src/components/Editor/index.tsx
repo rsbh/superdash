@@ -1,16 +1,20 @@
 import { HTML5Backend } from "react-dnd-html5-backend";
-import { DndProvider, useDrag, useDrop } from "react-dnd";
-import { CSSProperties, useState } from "react";
+import { DndProvider } from "react-dnd";
+import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { CustomDragLayer } from "../CustomDragLayer";
+import { CustomDragLayer } from "./CustomDragLayer";
 import { Canvas } from "./Canvas";
 import WidgetList from "./WidgetList";
-export default function Editor() {
-  const [componentList, setComponentList] = useState<any>({});
+import { WidgetItem } from "../../constants/widget";
 
-  function onDrop(item: any) {
+export default function Editor() {
+  const [componentList, setComponentList] = useState<
+    Record<string, WidgetItem>
+  >({});
+
+  function onDrop(item: WidgetItem) {
     const id = item.id || uuidv4();
-    setComponentList((prev: any) => ({
+    setComponentList((prev: Record<string, WidgetItem>) => ({
       ...prev,
       [id]: { id, ...item },
     }));

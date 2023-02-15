@@ -1,12 +1,17 @@
 import { CSSProperties } from "react";
 import { useDrop } from "react-dnd";
-import { ItemTypes } from "../../utils/ItemTypes";
+import { WidgetItem, WidgetType } from "../../constants/widget";
 import { Widget } from "./Widget";
 
-export const Canvas = (props: any) => {
+interface CanvasProps {
+  componentList: Record<string, WidgetItem>;
+  onDrop: (i: any) => void;
+}
+
+export const Canvas = (props: CanvasProps) => {
   const [collectedProps, drop] = useDrop(() => ({
-    accept: ItemTypes.BOX,
-    drop: (item: any, monitor) => {
+    accept: WidgetType,
+    drop: (item: WidgetItem, monitor) => {
       const cordinates = monitor.getSourceClientOffset();
       props.onDrop({ ...item, ...cordinates });
     },
@@ -14,8 +19,8 @@ export const Canvas = (props: any) => {
 
   return (
     <div className="drawer" ref={drop}>
-      {Object.values(props.componentList).map((c: any, i: number) => (
-        <Widget key={c.id + i} {...c}>
+      {Object.values(props.componentList).map((c: WidgetItem, i: number) => (
+        <Widget key={c.id || "" + i} {...c}>
           {c.id}
         </Widget>
       ))}

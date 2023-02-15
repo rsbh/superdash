@@ -3,6 +3,7 @@ import { WidgetFactory } from "../WidgetFactory";
 import { DragWrapper } from "./DragWrapper";
 
 export const Widget = ({ id, baseWidget, currentOffset }: WidgetComponent) => {
+  const customStyle = { ...baseWidget.previewStyle };
   return (
     <DragWrapper
       id={id}
@@ -13,14 +14,10 @@ export const Widget = ({ id, baseWidget, currentOffset }: WidgetComponent) => {
         left: currentOffset?.x,
       }}
     >
-      <div
-        style={{
-          height: "100%",
-          ...baseWidget.previewStyle,
-        }}
-      >
-        <WidgetFactory widgetType={baseWidget.type}></WidgetFactory>
-      </div>
+      <WidgetFactory
+        widgetType={baseWidget.type}
+        style={customStyle}
+      ></WidgetFactory>
     </DragWrapper>
   );
 };

@@ -6,16 +6,16 @@ export const widgetList: WidgetItem[] = [
     title: "Button",
     type: "BUTTON",
     previewStyle: {
-      height: "20px",
-      width: "50px",
+      height: "32px",
+      width: "96px",
     },
   },
   {
     title: "Input",
     type: "INPUT",
     previewStyle: {
-      height: "20px",
-      width: "150px",
+      height: "32px",
+      width: "200px",
     },
   },
   {
@@ -23,7 +23,7 @@ export const widgetList: WidgetItem[] = [
     type: "TABLE",
     previewStyle: {
       height: "400px",
-      width: "300px",
+      width: "304px",
     },
   },
 ];

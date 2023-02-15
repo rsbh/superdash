@@ -1,19 +1,26 @@
+import { CSSProperties } from "styled-components";
 import { WidgetTypes } from "../../types/widget";
+import { Button } from "../../widgets/Button";
+import { Input } from "../../widgets/Input";
+import { Table } from "../../widgets/Table";
 
 interface WidgetFactoryProps {
   widgetType: WidgetTypes;
+  style?: CSSProperties;
 }
 
-export const WidgetFactory = (props: WidgetFactoryProps) => {
-  switch (props.widgetType) {
-    case "BUTTON": {
-      return <button>Button</button>;
-    }
+export const WidgetFactory = ({
+  widgetType,
+  style = {},
+}: WidgetFactoryProps) => {
+  switch (widgetType) {
+    case "BUTTON":
+      return <Button style={style}>Button</Button>;
     case "INPUT":
-      return <input type="text"></input>;
+      return <Input type="text" style={style}></Input>;
     case "TABLE":
       return (
-        <table>
+        <Table style={style}>
           <thead></thead>
           <tbody>
             <tr>
@@ -27,7 +34,7 @@ export const WidgetFactory = (props: WidgetFactoryProps) => {
               <td>Table</td>
             </tr>
           </tbody>
-        </table>
+        </Table>
       );
     default:
       return null;

@@ -2,7 +2,7 @@ import type { CSSProperties, FC } from "react";
 import type { XYCoord } from "react-dnd";
 import { useDragLayer } from "react-dnd";
 import { DefaultDragType } from "../../constants/widget";
-import { WidgetItem } from "../../types/widget";
+import { DropItem } from "../../types/widget";
 import { BoxDragPreview } from "./BoxDragPreview";
 
 export interface CustomDragLayerProps {
@@ -41,7 +41,7 @@ function getItemStyles(
 export const CustomDragLayer: FC<CustomDragLayerProps> = (props) => {
   const { itemType, isDragging, item, initialOffset, currentOffset } =
     useDragLayer((monitor) => ({
-      item: monitor.getItem<WidgetItem>(),
+      item: monitor.getItem<DropItem>(),
       itemType: monitor.getItemType(),
       initialOffset: monitor.getInitialSourceClientOffset(),
       currentOffset: monitor.getSourceClientOffset(),

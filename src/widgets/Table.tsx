@@ -8,4 +8,5 @@ export const Table = styled.table`
   border: 2px solid palevioletred;
   border-radius: 3px;
   display: block;
+  height: 100%;
 `;

@@ -5,18 +5,18 @@ import { v4 as uuidv4 } from "uuid";
 import { CustomDragLayer } from "./CustomDragLayer";
 import { Canvas } from "./Canvas";
 import WidgetList from "./WidgetList";
-import { WidgetItem } from "../../types/widget";
+import { WidgetComponent } from "../../types/widget";
 
 export default function Editor() {
   const [componentList, setComponentList] = useState<
-    Record<string, WidgetItem>
+    Record<string, WidgetComponent>
   >({});
 
-  function onDrop(item: WidgetItem) {
+  function onDrop(item: WidgetComponent) {
     const id = item.id || uuidv4();
-    setComponentList((prev: Record<string, WidgetItem>) => ({
+    setComponentList((prev: Record<string, WidgetComponent>) => ({
       ...prev,
-      [id]: { id, ...item },
+      [id]: { ...item, id },
     }));
   }
 

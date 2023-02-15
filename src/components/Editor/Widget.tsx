@@ -1,18 +1,25 @@
+import { WidgetComponent } from "../../types/widget";
 import { WidgetFactory } from "../WidgetFactory";
 import { DragWrapper } from "./DragWrapper";
 
-export const Widget = ({ x, y, id, previewStyle, widgetType }: any) => {
+export const Widget = ({ id, baseWidget, currentOffset }: WidgetComponent) => {
   return (
     <DragWrapper
       id={id}
-      widgetType={widgetType}
-      previewStyle={previewStyle}
-      styles={{ position: "absolute", top: y, left: x }}
+      baseWidget={baseWidget}
+      styles={{
+        position: "absolute",
+        top: currentOffset?.y,
+        left: currentOffset?.x,
+      }}
     >
       <div
-        style={{ border: "1px solid black", height: "100%", ...previewStyle }}
+        style={{
+          height: "100%",
+          ...baseWidget.previewStyle,
+        }}
       >
-        <WidgetFactory widgetType={widgetType}></WidgetFactory>
+        <WidgetFactory widgetType={baseWidget.type}></WidgetFactory>
       </div>
     </DragWrapper>
   );

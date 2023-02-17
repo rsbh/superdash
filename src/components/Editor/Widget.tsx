@@ -2,7 +2,13 @@ import { WidgetComponent } from "../../types/widget";
 import { WidgetFactory } from "../WidgetFactory";
 import { DragWrapper } from "./DragWrapper";
 
-export const Widget = ({ id, baseWidget, currentOffset }: WidgetComponent) => {
+interface WidgetProps {
+  widget: WidgetComponent;
+  onClick?: (id: string) => void;
+}
+
+export const Widget = ({ widget, onClick }: WidgetProps) => {
+  const { id, baseWidget, currentOffset } = widget;
   const customStyle = { ...baseWidget.previewStyle };
   return (
     <DragWrapper
@@ -13,6 +19,7 @@ export const Widget = ({ id, baseWidget, currentOffset }: WidgetComponent) => {
         top: currentOffset?.y,
         left: currentOffset?.x,
       }}
+      onClick={onClick}
     >
       <WidgetFactory
         widgetType={baseWidget.type}

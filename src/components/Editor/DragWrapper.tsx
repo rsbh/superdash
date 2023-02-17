@@ -10,6 +10,7 @@ interface DragWrapperProps {
   id?: string;
   styles?: CSSProperties;
   baseWidget: BaseWidget;
+  onClick?: (id: string) => void;
 }
 
 export function DragWrapper({
@@ -17,6 +18,8 @@ export function DragWrapper({
   isNewWidget = false,
   styles = {},
   baseWidget,
+  onClick,
+  id,
   ...props
 }: DragWrapperProps) {
   const [{ isDragging }, drag, preview] = useDrag(
@@ -25,7 +28,7 @@ export function DragWrapper({
       item: {
         baseWidget,
         isNewWidget: isNewWidget,
-        ...(props.id && { id: props.id }),
+        ...(id && { id: id }),
       },
       collect: (monitor: DragSourceMonitor) => ({
         isDragging: monitor.isDragging(),
@@ -38,8 +41,14 @@ export function DragWrapper({
     preview(getEmptyImage(), { captureDraggingState: true });
   }, [preview]);
 
+  function clickHandler() {
+    if (onClick && id) {
+      onClick(id);
+    }
+  }
+
   return (
-    <div ref={drag} role="DraggableBox" style={styles}>
+    <div ref={drag} role="DraggableBox" style={styles} onClick={clickHandler}>
       {children}
     </div>
   );

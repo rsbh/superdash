@@ -6,24 +6,27 @@ import { Widget } from "./Widget";
 interface CanvasProps {
   componentList: Record<string, WidgetComponent>;
   onDrop: (i: WidgetComponent) => void;
+  onWidgetClick?: (id: string) => void;
 }
 
-export const Canvas = (props: CanvasProps) => {
+export const Canvas = ({
+  onWidgetClick,
+  onDrop,
+  componentList,
+}: CanvasProps) => {
   const [collectedProps, drop] = useDrop(() => ({
     accept: DefaultDragType,
     drop: (item: DropItem, monitor) => {
       const currentOffset = monitor.getSourceClientOffset();
-      props.onDrop({ ...item, currentOffset });
+      onDrop({ ...item, currentOffset });
     },
   }));
 
   return (
     <div className="drawer" ref={drop}>
-      {Object.values(props.componentList).map(
-        (c: WidgetComponent, i: number) => (
-          <Widget key={c.id || "" + i} {...c} />
-        )
-      )}
+      {Object.values(componentList).map((c: WidgetComponent, i: number) => (
+        <Widget key={c.id || "" + i} widget={c} onClick={onWidgetClick} />
+      ))}
     </div>
   );
 };

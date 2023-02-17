@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 import { CustomDragLayer } from "./CustomDragLayer";
 import { Canvas } from "./Canvas";
 import WidgetList from "./WidgetList";
+import RightSidePanel from "../RightSidePanel";
 import { WidgetComponent } from "../../types/widget";
 
 export default function Editor() {
@@ -12,12 +13,27 @@ export default function Editor() {
     Record<string, WidgetComponent>
   >({});
 
+  const [selectedWidget, setSelectedWidget] = useState<WidgetComponent | null>(
+    null
+  );
+
   function onDrop(item: WidgetComponent) {
-    const id = item.id || uuidv4();
+    const widgetCompoenent = {
+      ...item,
+      id: item.id || uuidv4(),
+    };
     setComponentList((prev: Record<string, WidgetComponent>) => ({
       ...prev,
-      [id]: { ...item, id },
+      [widgetCompoenent.id]: widgetCompoenent,
     }));
+    setSelectedWidget(widgetCompoenent);
+  }
+
+  function onWidgetClick(id: string) {
+    const clickedWidget = componentList[id];
+    if (clickedWidget) {
+      setSelectedWidget(clickedWidget);
+    }
   }
 
   return (
@@ -25,10 +41,15 @@ export default function Editor() {
       <DndProvider backend={HTML5Backend}>
         <WidgetList />
         <>
-          <Canvas componentList={componentList} onDrop={onDrop}></Canvas>
+          <Canvas
+            componentList={componentList}
+            onDrop={onDrop}
+            onWidgetClick={onWidgetClick}
+          ></Canvas>
           <CustomDragLayer />
         </>
       </DndProvider>
+      <RightSidePanel selectedWidget={selectedWidget} />
     </div>
   );
 }

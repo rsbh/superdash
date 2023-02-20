@@ -23,7 +23,6 @@ export interface BaseWidget {
 export type WidgetTypes = keyof typeof WidgetsTypeMap;
 
 export interface DropItem {
-  baseWidget: BaseWidget;
   id: string;
   widgetType: WidgetTypes;
   styles: CSSProperties;

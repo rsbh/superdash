@@ -1,6 +1,6 @@
 import { CSSProperties } from "react";
 import { BASE_WIDGET_MAP } from "../constants/widget";
-import { WidgetComponent, WidgetTypes } from "../types/widget";
+import { WidgetTypes } from "../types/widget";
 
 export function getBaseWidgetStyles(
   widgetType: WidgetTypes,

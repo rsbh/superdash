@@ -2,7 +2,7 @@ import { CSSProperties, useEffect, useMemo } from "react";
 import { DragSourceMonitor, useDrag } from "react-dnd";
 import { getEmptyImage } from "react-dnd-html5-backend";
 import { DefaultDragType } from "../../constants/widget";
-import { BaseWidget, WidgetTypes } from "../../types/widget";
+import { WidgetTypes } from "../../types/widget";
 import { getBaseWidgetStyles } from "../../utils/style";
 
 interface DragWrapperProps {
@@ -10,14 +10,12 @@ interface DragWrapperProps {
   widgetType: WidgetTypes;
   id?: string;
   styles?: CSSProperties;
-  baseWidget: BaseWidget;
   onClick?: (id: string) => void;
 }
 
 export function DragWrapper({
   children,
   styles = {},
-  baseWidget,
   onClick,
   widgetType,
   id,
@@ -31,8 +29,7 @@ export function DragWrapper({
     () => ({
       type: DefaultDragType,
       item: {
-        baseWidget,
-        widgetType: baseWidget.type,
+        widgetType: widgetType,
         size: widgetSize,
         ...(id && { id: id }),
       },
@@ -40,7 +37,7 @@ export function DragWrapper({
         isDragging: monitor.isDragging(),
       }),
     }),
-    [baseWidget]
+    [widgetType, widgetSize, id]
   );
 
   useEffect(() => {

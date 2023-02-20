@@ -24,7 +24,7 @@ export const Canvas = ({
           top: currentOffset?.y + "px",
           left: currentOffset?.x + "px",
         };
-        onDrop({ ...item, styles });
+        onDrop({ ...item, styles, config: {} });
       },
     }),
     [componentList]

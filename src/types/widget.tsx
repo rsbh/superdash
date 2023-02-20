@@ -14,10 +14,22 @@ export interface WidgetStyleProperties {
   defaultValue: any;
 }
 
+export interface WidgetConfig {
+  id: string;
+  label: string;
+  type: string;
+  defaultValue: any;
+}
+
 export interface BaseWidget {
   title: string;
   type: WidgetTypes;
   styleProperties: WidgetStyleProperties[];
+  configs: WidgetConfig[];
+}
+
+export interface ButtonConfig {
+  text: string;
 }
 
 export type WidgetTypes = keyof typeof WidgetsTypeMap;
@@ -32,4 +44,6 @@ export interface DropItem {
   };
 }
 
-export interface WidgetComponent extends DropItem {}
+export interface WidgetComponent extends DropItem {
+  config: Record<string, any>;
+}

@@ -37,6 +37,10 @@ export default function Editor() {
         ...widget.styles,
         ...updatedData.styles,
       },
+      config: {
+        ...widget.config,
+        ...updatedData.config,
+      },
     };
   }
 
@@ -48,8 +52,6 @@ export default function Editor() {
     }));
     setSelectedWidget(widget);
   }
-
-  console.log(componentList);
 
   function onWidgetClick(id: string) {
     const clickedWidget = componentList[id];

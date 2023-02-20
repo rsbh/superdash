@@ -10,6 +10,27 @@ export const BASE_WIDGET_MAP: Record<WidgetTypes, BaseWidget> = {
       { id: "width", label: "Width", defaultValue: "96px", type: "string" },
       { id: "left", label: "Left", defaultValue: "0px", type: "string" },
       { id: "top", label: "Top", defaultValue: "0px", type: "string" },
+      { id: "color", label: "Color", defaultValue: "red", type: "string" },
+      {
+        id: "backgroundColor",
+        label: "Background Color",
+        defaultValue: "white",
+        type: "string",
+      },
+      {
+        id: "borderColor",
+        label: "Border Color",
+        defaultValue: "black",
+        type: "string",
+      },
+    ],
+    configs: [
+      {
+        id: "text",
+        label: "Text",
+        type: "string",
+        defaultValue: "Button",
+      },
     ],
   },
   INPUT: {
@@ -21,6 +42,26 @@ export const BASE_WIDGET_MAP: Record<WidgetTypes, BaseWidget> = {
       { id: "left", label: "Left", defaultValue: "0px", type: "string" },
       { id: "top", label: "Top", defaultValue: "0px", type: "string" },
     ],
+    configs: [
+      {
+        id: "type",
+        label: "Type",
+        type: "string",
+        defaultValue: "text",
+      },
+      {
+        id: "label",
+        label: "Label",
+        type: "string",
+        defaultValue: "Input",
+      },
+      {
+        id: "placeholder",
+        label: "Placeholder",
+        type: "string",
+        defaultValue: "placeholder",
+      },
+    ],
   },
   TABLE: {
     title: "Table",
@@ -30,6 +71,14 @@ export const BASE_WIDGET_MAP: Record<WidgetTypes, BaseWidget> = {
       { id: "width", label: "Width", defaultValue: "304px", type: "string" },
       { id: "left", label: "Left", defaultValue: "0px", type: "string" },
       { id: "top", label: "Top", defaultValue: "0px", type: "string" },
+    ],
+    configs: [
+      {
+        id: "title",
+        label: "Title",
+        type: "string",
+        defaultValue: "Table",
+      },
     ],
   },
 };

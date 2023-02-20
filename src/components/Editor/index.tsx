@@ -18,12 +18,26 @@ export default function Editor() {
   );
 
   function onDrop(item: WidgetComponent) {
-    const widgetCompoenent = item.id ? item : createNewWidgetFromDropItem(item);
+    const widgetCompoenent = item.id
+      ? updateWidget(item.id, item)
+      : createNewWidgetFromDropItem(item);
     setComponentList((prev: Record<string, WidgetComponent>) => ({
       ...prev,
       [widgetCompoenent.id]: widgetCompoenent,
     }));
     setSelectedWidget(widgetCompoenent);
+  }
+
+  function updateWidget(id: string, updatedData: WidgetComponent) {
+    const widget = componentList[id];
+    return {
+      ...widget,
+      ...updatedData,
+      styles: {
+        ...widget.styles,
+        ...updatedData.styles,
+      },
+    };
   }
 
   function onWidgetClick(id: string) {

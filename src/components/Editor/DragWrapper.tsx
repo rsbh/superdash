@@ -1,12 +1,13 @@
-import { CSSProperties, useEffect } from "react";
+import { CSSProperties, useEffect, useMemo } from "react";
 import { DragSourceMonitor, useDrag } from "react-dnd";
 import { getEmptyImage } from "react-dnd-html5-backend";
 import { DefaultDragType } from "../../constants/widget";
-import { BaseWidget } from "../../types/widget";
+import { BaseWidget, WidgetTypes } from "../../types/widget";
+import { getBaseWidgetStyles } from "../../utils/style";
 
 interface DragWrapperProps {
   children: React.ReactElement;
-  isNewWidget?: boolean;
+  widgetType: WidgetTypes;
   id?: string;
   styles?: CSSProperties;
   baseWidget: BaseWidget;
@@ -15,20 +16,24 @@ interface DragWrapperProps {
 
 export function DragWrapper({
   children,
-  isNewWidget = false,
   styles = {},
   baseWidget,
   onClick,
+  widgetType,
   id,
-  ...props
 }: DragWrapperProps) {
+  const widgetSize = useMemo(() => {
+    const widgetStyle = getBaseWidgetStyles(widgetType, styles);
+    return { height: widgetStyle.height, width: widgetStyle.width };
+  }, []);
+
   const [{ isDragging }, drag, preview] = useDrag(
     () => ({
       type: DefaultDragType,
       item: {
         baseWidget,
         widgetType: baseWidget.type,
-        isNewWidget: isNewWidget,
+        size: widgetSize,
         ...(id && { id: id }),
       },
       collect: (monitor: DragSourceMonitor) => ({

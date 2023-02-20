@@ -14,6 +14,6 @@ export interface BoxDragPreviewProps {
 
 export const BoxDragPreview: FC<BoxDragPreviewProps> = memo(
   function BoxDragPreview({ item }) {
-    return <div style={{ ...styles, ...item.baseWidget.previewStyle }}></div>;
+    return <div style={{ ...styles, ...item.size }}></div>;
   }
 );

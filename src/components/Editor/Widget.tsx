@@ -8,8 +8,7 @@ interface WidgetProps {
 }
 
 export const Widget = ({ widget, onClick }: WidgetProps) => {
-  const { id, baseWidget, styles } = widget;
-  const customStyle = { ...baseWidget.previewStyle };
+  const { id, baseWidget, styles, widgetType } = widget;
   return (
     <DragWrapper
       id={id}
@@ -20,10 +19,11 @@ export const Widget = ({ widget, onClick }: WidgetProps) => {
         left: styles.left,
       }}
       onClick={onClick}
+      widgetType={widgetType}
     >
       <WidgetFactory
         widgetType={baseWidget.type}
-        style={customStyle}
+        style={styles}
       ></WidgetFactory>
     </DragWrapper>
   );

@@ -17,7 +17,6 @@ export interface WidgetStyleProperties {
 export interface BaseWidget {
   title: string;
   type: WidgetTypes;
-  previewStyle: CSSProperties;
   styleProperties: WidgetStyleProperties[];
 }
 
@@ -25,10 +24,13 @@ export type WidgetTypes = keyof typeof WidgetsTypeMap;
 
 export interface DropItem {
   baseWidget: BaseWidget;
-  isNewWidget: boolean;
   id: string;
   widgetType: WidgetTypes;
   styles: CSSProperties;
+  size: {
+    height: string;
+    width: string;
+  };
 }
 
 export interface WidgetComponent extends DropItem {}

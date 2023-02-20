@@ -14,18 +14,21 @@ export const Canvas = ({
   onDrop,
   componentList,
 }: CanvasProps) => {
-  const [collectedProps, drop] = useDrop(() => ({
-    accept: DefaultDragType,
-    drop: (item: DropItem, monitor) => {
-      const currentOffset = monitor.getSourceClientOffset();
-      const styles = {
-        ...item.styles,
-        top: currentOffset?.y,
-        left: currentOffset?.x,
-      };
-      onDrop({ ...item, styles });
-    },
-  }));
+  const [collectedProps, drop] = useDrop(
+    () => ({
+      accept: DefaultDragType,
+      drop: (item: DropItem, monitor) => {
+        const currentOffset = monitor.getSourceClientOffset();
+        const styles = {
+          ...item.styles,
+          top: currentOffset?.y,
+          left: currentOffset?.x,
+        };
+        onDrop({ ...item, styles });
+      },
+    }),
+    [componentList]
+  );
 
   return (
     <div className="drawer" ref={drop}>

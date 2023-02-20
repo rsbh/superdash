@@ -5,10 +5,6 @@ export const BASE_WIDGET_MAP: Record<WidgetTypes, BaseWidget> = {
   BUTTON: {
     title: "Button",
     type: "BUTTON",
-    previewStyle: {
-      height: "32px",
-      width: "96px",
-    },
     styleProperties: [
       { id: "height", label: "Height", defaultValue: "32px", type: "string" },
       { id: "width", label: "Width", defaultValue: "96px", type: "string" },
@@ -19,10 +15,6 @@ export const BASE_WIDGET_MAP: Record<WidgetTypes, BaseWidget> = {
   INPUT: {
     title: "Input",
     type: "INPUT",
-    previewStyle: {
-      height: "32px",
-      width: "200px",
-    },
     styleProperties: [
       { id: "height", label: "Height", defaultValue: "32px", type: "string" },
       { id: "width", label: "Width", defaultValue: "200px", type: "string" },
@@ -33,10 +25,6 @@ export const BASE_WIDGET_MAP: Record<WidgetTypes, BaseWidget> = {
   TABLE: {
     title: "Table",
     type: "TABLE",
-    previewStyle: {
-      height: "400px",
-      width: "304px",
-    },
     styleProperties: [
       { id: "height", label: "Height", defaultValue: "400px", type: "string" },
       { id: "width", label: "Width", defaultValue: "304px", type: "string" },

@@ -1,5 +1,4 @@
 import { CSSProperties } from "react";
-import { XYCoord } from "react-dnd";
 
 export const WidgetsTypeMap = {
   BUTTON: "BUTTON",
@@ -30,6 +29,12 @@ export interface BaseWidget {
 
 export interface ButtonConfig {
   text: string;
+}
+
+export interface InputConfig {
+  type: string;
+  label: string;
+  placeholder: string;
 }
 
 export type WidgetTypes = keyof typeof WidgetsTypeMap;

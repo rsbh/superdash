@@ -21,8 +21,8 @@ export const Canvas = ({
         const currentOffset = monitor.getSourceClientOffset();
         const styles = {
           ...item.styles,
-          top: currentOffset?.y,
-          left: currentOffset?.x,
+          top: currentOffset?.y + "px",
+          left: currentOffset?.x + "px",
         };
         onDrop({ ...item, styles });
       },

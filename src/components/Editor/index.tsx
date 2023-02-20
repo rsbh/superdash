@@ -40,6 +40,17 @@ export default function Editor() {
     };
   }
 
+  function onWidgetUpdate(id: string, updatedData: WidgetComponent) {
+    const widget = updateWidget(id, updatedData);
+    setComponentList((prev: Record<string, WidgetComponent>) => ({
+      ...prev,
+      [id]: widget,
+    }));
+    setSelectedWidget(widget);
+  }
+
+  console.log(componentList);
+
   function onWidgetClick(id: string) {
     const clickedWidget = componentList[id];
     if (clickedWidget) {
@@ -60,7 +71,10 @@ export default function Editor() {
           <CustomDragLayer />
         </>
       </DndProvider>
-      <RightSidePanel selectedWidget={selectedWidget} />
+      <RightSidePanel
+        selectedWidget={selectedWidget}
+        onWidgetUpdate={onWidgetUpdate}
+      />
     </div>
   );
 }

@@ -27,6 +27,7 @@ export function DragWrapper({
       type: DefaultDragType,
       item: {
         baseWidget,
+        widgetType: baseWidget.type,
         isNewWidget: isNewWidget,
         ...(id && { id: id }),
       },

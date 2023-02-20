@@ -7,11 +7,11 @@ interface RightSidePanelProps {
 export default function RightSidePanel({
   selectedWidget,
 }: RightSidePanelProps) {
-  console.log(selectedWidget);
-  const { height, width } = selectedWidget?.baseWidget.previewStyle || {
+  const { height, width } = selectedWidget?.styles || {
     height: 0,
     width: 0,
   };
+
   return (
     <div className="right-side-panel">
       <label>Height</label>

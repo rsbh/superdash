@@ -11,7 +11,7 @@ export interface WidgetStyleProperties {
   id: keyof CSSProperties;
   label: string;
   type: string;
-  default: any;
+  defaultValue: any;
 }
 
 export interface BaseWidget {
@@ -31,6 +31,4 @@ export interface DropItem {
   styles: CSSProperties;
 }
 
-export interface WidgetComponent extends DropItem {
-  currentOffset: XYCoord | null;
-}
+export interface WidgetComponent extends DropItem {}

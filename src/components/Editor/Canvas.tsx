@@ -18,7 +18,12 @@ export const Canvas = ({
     accept: DefaultDragType,
     drop: (item: DropItem, monitor) => {
       const currentOffset = monitor.getSourceClientOffset();
-      onDrop({ ...item, currentOffset });
+      const styles = {
+        ...item.styles,
+        top: currentOffset?.y,
+        left: currentOffset?.x,
+      };
+      onDrop({ ...item, styles });
     },
   }));
 

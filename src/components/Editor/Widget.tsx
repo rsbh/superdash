@@ -8,7 +8,7 @@ interface WidgetProps {
 }
 
 export const Widget = ({ widget, onClick }: WidgetProps) => {
-  const { id, baseWidget, currentOffset } = widget;
+  const { id, baseWidget, styles } = widget;
   const customStyle = { ...baseWidget.previewStyle };
   return (
     <DragWrapper
@@ -16,8 +16,8 @@ export const Widget = ({ widget, onClick }: WidgetProps) => {
       baseWidget={baseWidget}
       styles={{
         position: "absolute",
-        top: currentOffset?.y,
-        left: currentOffset?.x,
+        top: styles.top,
+        left: styles.left,
       }}
       onClick={onClick}
     >

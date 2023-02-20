@@ -1,12 +1,12 @@
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { DndProvider } from "react-dnd";
 import { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
 import { CustomDragLayer } from "./CustomDragLayer";
 import { Canvas } from "./Canvas";
 import WidgetList from "./WidgetList";
 import RightSidePanel from "../RightSidePanel";
 import { WidgetComponent } from "../../types/widget";
+import { createNewWidgetFromDropItem } from "../../utils/widget";
 
 export default function Editor() {
   const [componentList, setComponentList] = useState<
@@ -18,10 +18,7 @@ export default function Editor() {
   );
 
   function onDrop(item: WidgetComponent) {
-    const widgetCompoenent = {
-      ...item,
-      id: item.id || uuidv4(),
-    };
+    const widgetCompoenent = item.id ? item : createNewWidgetFromDropItem(item);
     setComponentList((prev: Record<string, WidgetComponent>) => ({
       ...prev,
       [widgetCompoenent.id]: widgetCompoenent,

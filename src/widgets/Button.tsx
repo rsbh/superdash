@@ -1,6 +1,8 @@
+import { CSSProperties } from "react";
 import styled from "styled-components";
+import { ButtonConfig } from "../types/widget";
 
-export const Button = styled.button`
+export const ButtonWrapper = styled.button`
   display: inline-block;
   color: palevioletred;
   font-size: 1em;
@@ -9,3 +11,12 @@ export const Button = styled.button`
   border-radius: 3px;
   display: block;
 `;
+
+interface ButtonProps {
+  style: CSSProperties;
+  config?: ButtonConfig;
+}
+
+export default function Button({ style, config }: ButtonProps) {
+  return <ButtonWrapper style={style}>{config?.text}</ButtonWrapper>;
+}

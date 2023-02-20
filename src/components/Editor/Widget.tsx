@@ -8,7 +8,7 @@ interface WidgetProps {
 }
 
 export const Widget = ({ widget, onClick }: WidgetProps) => {
-  const { id, styles, widgetType } = widget;
+  const { id, styles, widgetType, config } = widget;
   return (
     <DragWrapper
       id={id}
@@ -20,7 +20,11 @@ export const Widget = ({ widget, onClick }: WidgetProps) => {
       onClick={onClick}
       widgetType={widgetType}
     >
-      <WidgetFactory widgetType={widgetType} style={styles}></WidgetFactory>
+      <WidgetFactory
+        widgetType={widgetType}
+        style={styles}
+        config={config}
+      ></WidgetFactory>
     </DragWrapper>
   );
 };

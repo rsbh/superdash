@@ -1,5 +1,5 @@
 import { Enable, Resizable, ResizeDirection } from "re-resizable";
-import { useState } from "react";
+import { CSSProperties, useEffect, useState } from "react";
 import { WidgetComponent } from "../../types/widget";
 import { WidgetFactory } from "../WidgetFactory";
 import { DragWrapper } from "./DragWrapper";
@@ -12,39 +12,56 @@ interface WidgetProps {
 
 function addSize(pxSize: string, delta: number): string {
   const [numSize] = pxSize.split("px");
-  console.log(pxSize, numSize, delta);
   return `${Number(numSize) + delta}px`;
 }
 
 export const Widget = ({ widget, onClick, onWidgetUpdate }: WidgetProps) => {
   const { id, styles, widgetType, config } = widget;
   const [isDragEnabled, setIsDragEnabled] = useState<boolean>(true);
+  const [widgetStyles, setWidgetStyles] = useState<CSSProperties>(styles);
+
+  useEffect(() => {
+    setWidgetStyles(styles);
+  }, [styles]);
 
   function onResizeStart() {
     setIsDragEnabled(false);
   }
 
-  function onResizeStop(
+  function onResize(
     e: MouseEvent | TouchEvent,
     direction: ResizeDirection,
     elementRef: HTMLElement,
     delta: { height: number; width: number }
   ) {
-    const newStyles = { ...styles };
     if (direction === "left") {
-      newStyles.left = addSize(styles.left as string, -1 * delta.width);
-      newStyles.width = addSize(styles.width as string, delta.width);
+      setWidgetStyles((prevStyles) => ({
+        ...prevStyles,
+        left: addSize(styles.left as string, -1 * delta.width),
+        width: addSize(styles.width as string, delta.width),
+      }));
     } else if (direction === "right") {
-      newStyles.width = addSize(styles.width as string, delta.width);
+      setWidgetStyles((prevStyles) => ({
+        ...prevStyles,
+        width: addSize(styles.width as string, delta.width),
+      }));
     } else if (direction === "top") {
-      newStyles.top = addSize(styles.top as string, -1 * delta.height);
-      newStyles.height = addSize(styles.height as string, delta.height);
+      setWidgetStyles((prevStyles) => ({
+        ...prevStyles,
+        top: addSize(styles.top as string, -1 * delta.height),
+        height: addSize(styles.height as string, delta.height),
+      }));
     } else if (direction === "bottom") {
-      newStyles.height = addSize(styles.height as string, delta.height);
+      setWidgetStyles((prevStyles) => ({
+        ...prevStyles,
+        height: addSize(styles.height as string, delta.height),
+      }));
     }
+  }
 
+  function onResizeStop() {
     if (onWidgetUpdate) {
-      onWidgetUpdate(id, { ...widget, styles: newStyles });
+      onWidgetUpdate(id, { ...widget, styles: widgetStyles });
     }
     setIsDragEnabled(true);
   }
@@ -54,8 +71,8 @@ export const Widget = ({ widget, onClick, onWidgetUpdate }: WidgetProps) => {
       id={id}
       styles={{
         position: "absolute",
-        top: styles.top,
-        left: styles.left,
+        top: widgetStyles.top,
+        left: widgetStyles.left,
       }}
       onClick={onClick}
       widgetType={widgetType}
@@ -64,11 +81,12 @@ export const Widget = ({ widget, onClick, onWidgetUpdate }: WidgetProps) => {
       <Resizable
         onResizeStart={onResizeStart}
         onResizeStop={onResizeStop}
+        onResize={onResize}
         defaultSize={{ width: styles.width || 0, height: styles.height || 0 }}
       >
         <WidgetFactory
           widgetType={widgetType}
-          style={styles}
+          style={widgetStyles}
           config={config}
         ></WidgetFactory>
       </Resizable>

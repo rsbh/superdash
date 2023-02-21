@@ -10,6 +10,7 @@ interface DragWrapperProps {
   widgetType: WidgetTypes;
   id?: string;
   styles?: CSSProperties;
+  isDragEnabled: boolean;
   onClick?: (id: string) => void;
 }
 
@@ -18,6 +19,7 @@ export function DragWrapper({
   styles = {},
   onClick,
   widgetType,
+  isDragEnabled,
   id,
 }: DragWrapperProps) {
   const widgetSize = useMemo(() => {
@@ -28,6 +30,9 @@ export function DragWrapper({
   const [{ isDragging }, drag, preview] = useDrag(
     () => ({
       type: DefaultDragType,
+      canDrag: () => {
+        return isDragEnabled;
+      },
       item: {
         widgetType: widgetType,
         size: widgetSize,
@@ -37,7 +42,7 @@ export function DragWrapper({
         isDragging: monitor.isDragging(),
       }),
     }),
-    [widgetType, widgetSize, id]
+    [widgetType, widgetSize, id, isDragEnabled]
   );
 
   useEffect(() => {

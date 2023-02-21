@@ -69,6 +69,7 @@ export default function Editor() {
             componentList={componentList}
             onDrop={onDrop}
             onWidgetClick={onWidgetClick}
+            onWidgetUpdate={onWidgetUpdate}
           ></Canvas>
           <CustomDragLayer />
         </>

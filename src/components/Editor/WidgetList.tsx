@@ -5,7 +5,7 @@ export default function WidgetList() {
   return (
     <div className="component-list">
       {widgetList.map((w) => (
-        <DragWrapper key={w.type} widgetType={w.type}>
+        <DragWrapper key={w.type} widgetType={w.type} isDragEnabled={true}>
           <div className="component-small">{w.title}</div>
         </DragWrapper>
       ))}

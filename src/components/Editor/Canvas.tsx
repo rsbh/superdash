@@ -7,12 +7,14 @@ interface CanvasProps {
   componentList: Record<string, WidgetComponent>;
   onDrop: (i: WidgetComponent) => void;
   onWidgetClick?: (id: string) => void;
+  onWidgetUpdate?: (id: string, updatedData: WidgetComponent) => void;
 }
 
 export const Canvas = ({
   onWidgetClick,
   onDrop,
   componentList,
+  onWidgetUpdate,
 }: CanvasProps) => {
   const [collectedProps, drop] = useDrop(
     () => ({
@@ -33,7 +35,12 @@ export const Canvas = ({
   return (
     <div className="drawer" ref={drop}>
       {Object.values(componentList).map((c: WidgetComponent, i: number) => (
-        <Widget key={c.id || "" + i} widget={c} onClick={onWidgetClick} />
+        <Widget
+          key={c.id || "" + i}
+          widget={c}
+          onClick={onWidgetClick}
+          onWidgetUpdate={onWidgetUpdate}
+        />
       ))}
     </div>
   );

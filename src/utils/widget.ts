@@ -4,11 +4,16 @@ import { BASE_WIDGET_MAP } from "../constants/widget";
 import { DropItem, WidgetComponent, WidgetTypes } from "../types/widget";
 import { getBaseWidgetStyles } from "./style";
 
-export function createNewWidgetFromDropItem(item: DropItem): WidgetComponent {
+export function createNewWidgetFromDropItem(
+  item: DropItem,
+  widgetCount: number
+): WidgetComponent {
   const id = uuidv4();
   const { widgetType, styles } = item;
   const widgetStyles = getBaseWidgetStyles(widgetType, styles);
-  const config = getWidgetConfig(widgetType);
+  const config = getWidgetConfig(widgetType, {
+    name: `${widgetType}-${widgetCount}`,
+  });
   return {
     ...item,
     id,

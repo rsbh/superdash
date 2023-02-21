@@ -31,6 +31,12 @@ export const BASE_WIDGET_MAP: Record<WidgetTypes, BaseWidget> = {
         type: "string",
         defaultValue: "Button",
       },
+      {
+        id: "name",
+        label: "Name",
+        type: "string",
+        defaultValue: "",
+      },
     ],
   },
   INPUT: {
@@ -61,6 +67,12 @@ export const BASE_WIDGET_MAP: Record<WidgetTypes, BaseWidget> = {
         type: "string",
         defaultValue: "placeholder",
       },
+      {
+        id: "name",
+        label: "Name",
+        type: "string",
+        defaultValue: "",
+      },
     ],
   },
   TABLE: {
@@ -78,6 +90,12 @@ export const BASE_WIDGET_MAP: Record<WidgetTypes, BaseWidget> = {
         label: "Title",
         type: "string",
         defaultValue: "Table",
+      },
+      {
+        id: "name",
+        label: "Name",
+        type: "string",
+        defaultValue: "",
       },
     ],
   },

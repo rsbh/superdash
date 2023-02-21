@@ -13,6 +13,8 @@ export default function Editor() {
     Record<string, WidgetComponent>
   >({});
 
+  const [widgetCount, setWidgetCount] = useState(0);
+
   const [selectedWidget, setSelectedWidget] = useState<WidgetComponent | null>(
     null
   );
@@ -20,12 +22,19 @@ export default function Editor() {
   function onDrop(item: WidgetComponent) {
     const widgetCompoenent = item.id
       ? updateWidget(item.id, item)
-      : createNewWidgetFromDropItem(item);
+      : createNewWidget(item);
     setComponentList((prev: Record<string, WidgetComponent>) => ({
       ...prev,
       [widgetCompoenent.id]: widgetCompoenent,
     }));
     setSelectedWidget(widgetCompoenent);
+  }
+
+  function createNewWidget(item: WidgetComponent) {
+    const newCount = widgetCount + 1;
+    const newWidget = createNewWidgetFromDropItem(item, newCount);
+    setWidgetCount(newCount);
+    return newWidget;
   }
 
   function updateWidget(id: string, updatedData: WidgetComponent) {

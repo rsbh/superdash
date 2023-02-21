@@ -25,7 +25,7 @@ export function DragWrapper({
   const widgetSize = useMemo(() => {
     const widgetStyle = getBaseWidgetStyles(widgetType, styles);
     return { height: widgetStyle.height, width: widgetStyle.width };
-  }, []);
+  }, [styles.height, styles.width, widgetType]);
 
   const [{ isDragging }, drag, preview] = useDrag(
     () => ({

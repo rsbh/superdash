@@ -1,4 +1,4 @@
-import { Enable, Resizable, ResizeDirection } from "re-resizable";
+import { Resizable, ResizeDirection } from "re-resizable";
 import { CSSProperties, useEffect, useState } from "react";
 import { WidgetComponent } from "../../types/widget";
 import { WidgetFactory } from "../WidgetFactory";
@@ -73,6 +73,8 @@ export const Widget = ({ widget, onClick, onWidgetUpdate }: WidgetProps) => {
         position: "absolute",
         top: widgetStyles.top,
         left: widgetStyles.left,
+        height: widgetStyles.height,
+        width: widgetStyles.width,
       }}
       onClick={onClick}
       widgetType={widgetType}

@@ -5,8 +5,8 @@ import { CustomDragLayer } from "./components/CustomDragLayer";
 import { Canvas } from "./components/Canvas";
 import WidgetList from "./components/WidgetList";
 import RightSidePanel from "./components/RightSidePanel";
-import { WidgetComponent } from "../../../../types/widget";
-import { createNewWidgetFromDropItem } from "../../../../utils/widget";
+import { WidgetComponent } from "@/types/widget";
+import { createNewWidgetFromDropItem } from "@/utils/widget";
 
 export default function Editor() {
   const [componentList, setComponentList] = useState<

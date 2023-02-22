@@ -1,18 +1,14 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Editor from "./pages/Editor";
 import HomePage from "./pages/HomePage";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <HomePage />,
-  },
-  {
-    path: "editor",
-    element: <Editor />,
-  },
-]);
-
 export default function Router() {
-  return <RouterProvider router={router} />;
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/editor/*" element={<Editor />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }

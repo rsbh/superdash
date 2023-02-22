@@ -1,6 +1,11 @@
 * {
   box-sizing: border-box;
 }
+body {
+  display: block;
+  margin: 0px;
+}
+
 .editor {
   display: flex;
   height: 100vh;

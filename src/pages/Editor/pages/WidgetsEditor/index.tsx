@@ -5,16 +5,20 @@ import { CustomDragLayer } from "./components/CustomDragLayer";
 import { Canvas } from "./components/Canvas";
 import WidgetList from "./components/WidgetList";
 import RightSidePanel from "./components/RightSidePanel";
-import { WidgetComponent } from "@/types/widget";
+import { WidgetComponent, WidgetsMap } from "@/types/widget";
 import { createNewWidgetFromDropItem } from "@/utils/widget";
 
-export default function Editor() {
-  const [componentList, setComponentList] = useState<
-    Record<string, WidgetComponent>
-  >({});
+interface WidgetsEditorProps {
+  widgetsMap: WidgetsMap;
+  updatePageWidgets: (widgetsMap: WidgetsMap) => void;
+  increaseWidgetsCount: () => number;
+}
 
-  const [widgetCount, setWidgetCount] = useState(0);
-
+export default function Editor({
+  updatePageWidgets,
+  widgetsMap,
+  increaseWidgetsCount,
+}: WidgetsEditorProps) {
   const [selectedWidget, setSelectedWidget] = useState<WidgetComponent | null>(
     null
   );
@@ -23,22 +27,21 @@ export default function Editor() {
     const widgetCompoenent = item.id
       ? updateWidget(item.id, item)
       : createNewWidget(item);
-    setComponentList((prev: Record<string, WidgetComponent>) => ({
-      ...prev,
+    updatePageWidgets({
+      ...widgetsMap,
       [widgetCompoenent.id]: widgetCompoenent,
-    }));
+    });
     setSelectedWidget(widgetCompoenent);
   }
 
   function createNewWidget(item: WidgetComponent) {
-    const newCount = widgetCount + 1;
+    const newCount = increaseWidgetsCount();
     const newWidget = createNewWidgetFromDropItem(item, newCount);
-    setWidgetCount(newCount);
     return newWidget;
   }
 
   function updateWidget(id: string, updatedData: WidgetComponent) {
-    const widget = componentList[id];
+    const widget = widgetsMap[id];
     return {
       ...widget,
       ...updatedData,
@@ -55,15 +58,15 @@ export default function Editor() {
 
   function onWidgetUpdate(id: string, updatedData: WidgetComponent) {
     const widget = updateWidget(id, updatedData);
-    setComponentList((prev: Record<string, WidgetComponent>) => ({
-      ...prev,
+    updatePageWidgets({
+      ...widgetsMap,
       [id]: widget,
-    }));
+    });
     setSelectedWidget(widget);
   }
 
   function onWidgetClick(id: string) {
-    const clickedWidget = componentList[id];
+    const clickedWidget = widgetsMap[id];
     if (clickedWidget) {
       setSelectedWidget(clickedWidget);
     }
@@ -75,7 +78,7 @@ export default function Editor() {
         <WidgetList />
         <>
           <Canvas
-            componentList={componentList}
+            componentList={widgetsMap}
             onDrop={onDrop}
             onWidgetClick={onWidgetClick}
             onWidgetUpdate={onWidgetUpdate}

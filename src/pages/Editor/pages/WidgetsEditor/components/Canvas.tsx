@@ -1,10 +1,10 @@
 import { useDrop } from "react-dnd";
 import { DefaultDragType } from "@/constants/widget";
-import { DropItem, WidgetComponent } from "@/types/widget";
+import { DropItem, WidgetComponent, WidgetsMap } from "@/types/widget";
 import { Widget } from "./Editor/Widget";
 
 interface CanvasProps {
-  componentList: Record<string, WidgetComponent>;
+  componentList: WidgetsMap;
   onDrop: (i: WidgetComponent) => void;
   onWidgetClick?: (id: string) => void;
   onWidgetUpdate?: (id: string, updatedData: WidgetComponent) => void;

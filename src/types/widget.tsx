@@ -52,3 +52,13 @@ export interface DropItem {
 export interface WidgetComponent extends DropItem {
   config: Record<string, any>;
 }
+
+export type WidgetsMap = Record<string, WidgetComponent>;
+
+export interface PageConfig {
+  title: string;
+  id: string;
+  widgets: WidgetsMap;
+  actions: any[];
+  widgetsCount: number;
+}

@@ -41,7 +41,10 @@ export default function EditorPage() {
           }
         />
 
-        <Route path="/actions" element={<ActionsPage />} />
+        <Route
+          path="/actions"
+          element={<ActionsPage widgetsMap={pageConfig.widgets} />}
+        />
       </Route>
     </Routes>
   );

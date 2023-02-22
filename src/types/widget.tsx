@@ -1,4 +1,5 @@
 import { CSSProperties } from "react";
+import { WIDGET_ACTION } from "./actions";
 
 export const WidgetsTypeMap = {
   BUTTON: "BUTTON",
@@ -59,6 +60,6 @@ export interface PageConfig {
   title: string;
   id: string;
   widgets: WidgetsMap;
-  actions: any[];
+  actions: WIDGET_ACTION[];
   widgetsCount: number;
 }

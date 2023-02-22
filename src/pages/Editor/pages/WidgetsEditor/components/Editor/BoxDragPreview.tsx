@@ -1,6 +1,6 @@
 import type { CSSProperties, FC } from "react";
 import React, { memo } from "react";
-import { DropItem } from "../../types/widget";
+import { DropItem } from "../../../../../../types/widget";
 
 const styles: CSSProperties = {
   display: "block",

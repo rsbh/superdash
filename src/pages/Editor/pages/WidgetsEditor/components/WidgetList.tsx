@@ -1,5 +1,5 @@
-import { widgetList } from "../../constants/widget";
-import { DragWrapper } from "./DragWrapper";
+import { widgetList } from "../../../../../constants/widget";
+import { DragWrapper } from "./Editor/DragWrapper";
 
 export default function WidgetList() {
   return (

@@ -1,9 +1,9 @@
 import { CSSProperties, useEffect, useMemo } from "react";
 import { DragSourceMonitor, useDrag } from "react-dnd";
 import { getEmptyImage } from "react-dnd-html5-backend";
-import { DefaultDragType } from "../../constants/widget";
-import { WidgetTypes } from "../../types/widget";
-import { getBaseWidgetStyles } from "../../utils/style";
+import { DefaultDragType } from "../../../../../../constants/widget";
+import { WidgetTypes } from "../../../../../../types/widget";
+import { getBaseWidgetStyles } from "../../../../../../utils/style";
 
 interface DragWrapperProps {
   children: React.ReactElement;

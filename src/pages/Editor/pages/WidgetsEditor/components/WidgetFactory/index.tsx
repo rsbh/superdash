@@ -1,8 +1,12 @@
 import { CSSProperties } from "styled-components";
-import { ButtonConfig, InputConfig, WidgetTypes } from "../../types/widget";
-import Button from "../../widgets/Button";
-import Input from "../../widgets/Input";
-import { Table } from "../../widgets/Table";
+import {
+  ButtonConfig,
+  InputConfig,
+  WidgetTypes,
+} from "../../../../../../types/widget";
+import Button from "../../../../../../widgets/Button";
+import Input from "../../../../../../widgets/Input";
+import { Table } from "../../../../../../widgets/Table";
 
 interface WidgetFactoryProps {
   widgetType: WidgetTypes;

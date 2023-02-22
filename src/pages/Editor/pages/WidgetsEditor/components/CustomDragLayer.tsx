@@ -1,9 +1,9 @@
 import type { CSSProperties, FC } from "react";
 import type { XYCoord } from "react-dnd";
 import { useDragLayer } from "react-dnd";
-import { DefaultDragType } from "../../constants/widget";
-import { DropItem } from "../../types/widget";
-import { BoxDragPreview } from "./BoxDragPreview";
+import { DefaultDragType } from "../../../../../constants/widget";
+import { DropItem } from "../../../../../types/widget";
+import { BoxDragPreview } from "./Editor/BoxDragPreview";
 
 export interface CustomDragLayerProps {
   snapToGrid?: boolean;

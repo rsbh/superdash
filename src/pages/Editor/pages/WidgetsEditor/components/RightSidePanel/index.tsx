@@ -1,5 +1,5 @@
-import { BASE_WIDGET_MAP } from "../../constants/widget";
-import { WidgetComponent } from "../../types/widget";
+import { BASE_WIDGET_MAP } from "../../../../../../constants/widget";
+import { WidgetComponent } from "../../../../../../types/widget";
 
 interface RightSidePanelProps {
   selectedWidget: WidgetComponent | null;

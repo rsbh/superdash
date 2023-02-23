@@ -5,6 +5,7 @@ import {
   WIDGET_ACTIONS_MAP,
 } from "@/types/actions";
 import { ActionsMap } from "@/types/widget";
+import { executeEvent } from "@/utils/events";
 import { Map } from "immutable";
 import React, { useState } from "react";
 import { Mention, MentionsInput } from "react-mentions";
@@ -20,9 +21,6 @@ const methods = [
     id: REST_METHODS_MAP.GET,
   },
 ];
-
-const regex =
-  /{{\w+-?\d*.\w+##[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}}}/g;
 
 interface RestActionFormProps {
   widgetsVariables: Array<{ id: string; display: string }>;
@@ -70,14 +68,8 @@ export default function RestActionForm({
   }
 
   function onClick() {
-    let newText = text;
-    const variables = text.match(regex);
-    variables?.forEach((v) => {
-      const [_, id] = v.replaceAll(/{{|}}/gi, "").split("##");
-      if (widgetsValuesMap.has(id)) {
-        newText = newText.replaceAll(v, widgetsValuesMap.get(id));
-      }
-    });
+    const action = createNewAction();
+    executeEvent({ action, widgetsValuesMap });
   }
 
   return (

@@ -1,12 +1,11 @@
-import { ActionsMap, WidgetsMap } from "@/types/widget";
-import { Map } from "immutable";
+import { ActionsMap, WidgetsMap, WidgetsValueMap } from "@/types/widget";
 import { useMemo } from "react";
 import RestActionForm from "./components/RestActionForm";
 
 interface ActionsPageProps {
   widgetsMap: WidgetsMap;
   actionMap: ActionsMap;
-  widgetsValuesMap: Map<string, any>;
+  widgetsValuesMap: WidgetsValueMap;
   updatePageActions: (actionMap: ActionsMap) => void;
 }
 

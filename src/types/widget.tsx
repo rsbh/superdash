@@ -1,3 +1,4 @@
+import { Map } from "immutable";
 import { CSSProperties } from "react";
 import { WIDGET_ACTION } from "./actions";
 
@@ -106,3 +107,5 @@ export interface PageConfig {
   actions: ActionsMap;
   widgetsCount: number;
 }
+
+export type WidgetsValueMap = Map<string, any>;

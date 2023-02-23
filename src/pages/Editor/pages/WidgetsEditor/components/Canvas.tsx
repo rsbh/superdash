@@ -28,7 +28,7 @@ export const Canvas = ({
           top: currentOffset?.y + "px",
           left: currentOffset?.x + "px",
         };
-        onDrop({ ...item, styles, config: {} });
+        onDrop({ ...item, styles, config: { name: "" }, events: {} });
       },
     }),
     [componentList]

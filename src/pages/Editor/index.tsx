@@ -1,10 +1,17 @@
-import { ActionsMap, PageConfig, WidgetsMap } from "@/types/widget";
+import {
+  ActionsMap,
+  PageConfig,
+  WidgetEventKeys,
+  WidgetsMap,
+  WidgetsValueMap,
+} from "@/types/widget";
 import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import Layout from "./Layout";
 import ActionsPage from "./pages/Actions";
 import WidgetsEditor from "./pages/WidgetsEditor";
 import { Map } from "immutable";
+import { executeEvents } from "@/utils/events";
 
 export default function EditorPage() {
   const [pageConfig, setPageConfig] = useState<PageConfig>({
@@ -15,7 +22,9 @@ export default function EditorPage() {
     widgetsCount: 0,
   });
 
-  const [widgetsValuesMap, setWidgetsValuesMap] = useState(Map<string, any>());
+  const [widgetsValuesMap, setWidgetsValuesMap] = useState<WidgetsValueMap>(
+    Map<string, any>()
+  );
 
   function updatePageWidgets(widgetsMap: WidgetsMap) {
     setPageConfig((prev) => ({ ...prev, widgets: widgetsMap }));
@@ -36,6 +45,15 @@ export default function EditorPage() {
       widgetsCount: count,
     }));
     return count;
+  }
+
+  function handleWidgetEvent(widgetId: string, eventKey: WidgetEventKeys) {
+    executeEvents({
+      widgetId,
+      eventKey,
+      pageConfig,
+      widgetsValuesMap,
+    });
   }
 
   return (

@@ -1,4 +1,4 @@
-import { PageConfig, WidgetsMap } from "@/types/widget";
+import { ActionsMap, PageConfig, WidgetsMap } from "@/types/widget";
 import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import Layout from "./Layout";
@@ -11,7 +11,7 @@ export default function EditorPage() {
     title: "",
     id: "",
     widgets: {},
-    actions: [],
+    actions: {},
     widgetsCount: 0,
   });
 
@@ -19,6 +19,10 @@ export default function EditorPage() {
 
   function updatePageWidgets(widgetsMap: WidgetsMap) {
     setPageConfig((prev) => ({ ...prev, widgets: widgetsMap }));
+  }
+
+  function updatePageActions(actionMap: ActionsMap) {
+    setPageConfig((prev) => ({ ...prev, actions: actionMap }));
   }
 
   function updateWidgetsValue(id: string, value: any) {
@@ -54,7 +58,9 @@ export default function EditorPage() {
           element={
             <ActionsPage
               widgetsMap={pageConfig.widgets}
+              actionMap={pageConfig.actions}
               widgetsValuesMap={widgetsValuesMap}
+              updatePageActions={updatePageActions}
             />
           }
         />

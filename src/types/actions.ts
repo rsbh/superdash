@@ -3,15 +3,20 @@ export const REST_METHODS_MAP = {
   POST: "POST",
 } as const;
 
-const WIDGET_ACTIONS_MAP = {
+export const WIDGET_ACTIONS_MAP = {
   REST_API: "REST_API",
 } as const;
 
-type WIDGET_ACTIONS_TYPES = keyof typeof WIDGET_ACTIONS_MAP;
-type REST_API_METHODS = keyof typeof REST_METHODS_MAP;
+export type WIDGET_ACTIONS_TYPES = keyof typeof WIDGET_ACTIONS_MAP;
+export type REST_API_METHODS = keyof typeof REST_METHODS_MAP;
 
-interface REST_API_ACTION {
+interface COMMON_ACTION_CONFIG {
+  id: string;
+  name: string;
   type: WIDGET_ACTIONS_TYPES;
+}
+
+interface REST_API_ACTION extends COMMON_ACTION_CONFIG {
   method: REST_API_METHODS;
   url: string;
 }

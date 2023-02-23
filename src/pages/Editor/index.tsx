@@ -12,6 +12,7 @@ import WidgetsEditor from "./pages/WidgetsEditor";
 import { Map } from "immutable";
 import { executeEvents } from "@/utils/events";
 import { PageConfig } from "@/types/page";
+import Preview from "./pages/Preview";
 
 export default function EditorPage() {
   const [pageConfig, setPageConfig] = useState<PageConfig>({
@@ -83,6 +84,7 @@ export default function EditorPage() {
             />
           }
         />
+        <Route path="/preview" element={<Preview pageConfig={pageConfig} />} />
       </Route>
     </Routes>
   );

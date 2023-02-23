@@ -2,6 +2,7 @@ import { CSSProperties } from "styled-components";
 import {
   ButtonWidgetConfig,
   InputWidgetConfig,
+  WidgetEventKeys,
   WidgetTypes,
 } from "@/types/widget";
 import Button from "@/widgets/Button";
@@ -13,7 +14,8 @@ interface WidgetFactoryProps {
   widgetType: WidgetTypes;
   style?: CSSProperties;
   config?: Record<string, any>;
-  updateWidgetsValue: (id: string, value: any) => void;
+  updateWidgetsValue: (widgetId: string, value: any) => void;
+  handleWidgetEvent?: (widgetId: string, eventName: WidgetEventKeys) => void;
 }
 
 export const WidgetFactory = ({
@@ -22,10 +24,18 @@ export const WidgetFactory = ({
   style = {},
   config,
   updateWidgetsValue,
+  handleWidgetEvent,
 }: WidgetFactoryProps) => {
   switch (widgetType) {
     case "BUTTON":
-      return <Button style={style} config={config as ButtonWidgetConfig} />;
+      return (
+        <Button
+          id={id}
+          style={style}
+          config={config as ButtonWidgetConfig}
+          handleWidgetEvent={handleWidgetEvent}
+        />
+      );
     case "INPUT":
       return (
         <Input

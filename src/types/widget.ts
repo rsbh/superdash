@@ -52,7 +52,7 @@ export interface DropItem {
   };
 }
 
-const ButtonWidgetEventsTypeMap = {
+export const ButtonWidgetEventsTypeMap = {
   onClick: "onClick",
 } as const;
 
@@ -67,7 +67,7 @@ export interface ButtonWidget extends DropItem {
   config: ButtonWidgetConfig;
 }
 
-const InputWidgetEventsType = {
+export const InputWidgetEventsType = {
   onChange: "onChange",
 } as const;
 

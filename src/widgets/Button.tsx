@@ -1,6 +1,10 @@
 import { CSSProperties } from "react";
 import styled from "styled-components";
-import { ButtonWidgetConfig } from "../types/widget";
+import {
+  ButtonWidgetConfig,
+  ButtonWidgetEventsTypeMap,
+  WidgetEventKeys,
+} from "../types/widget";
 
 export const ButtonWrapper = styled.button`
   display: inline-block;
@@ -10,13 +14,30 @@ export const ButtonWrapper = styled.button`
   border: 2px solid palevioletred;
   border-radius: 3px;
   display: block;
+  cursor: pointer;
 `;
 
 interface ButtonProps {
+  id: string;
   style: CSSProperties;
   config?: ButtonWidgetConfig;
+  handleWidgetEvent?: (widgetId: string, eventName: WidgetEventKeys) => void;
 }
 
-export default function Button({ style, config }: ButtonProps) {
-  return <ButtonWrapper style={style}>{config?.text}</ButtonWrapper>;
+export default function Button({
+  style,
+  config,
+  id,
+  handleWidgetEvent,
+}: ButtonProps) {
+  function onClick() {
+    if (handleWidgetEvent) {
+      handleWidgetEvent(id, ButtonWidgetEventsTypeMap.onClick);
+    }
+  }
+  return (
+    <ButtonWrapper style={style} onClick={onClick}>
+      {config?.text}
+    </ButtonWrapper>
+  );
 }

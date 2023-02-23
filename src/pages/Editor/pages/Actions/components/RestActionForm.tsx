@@ -85,9 +85,10 @@ export default function RestActionForm({
         value={text}
         onChange={handleChange}
         style={{ width: "400px" }}
+        singleLine={true}
       >
         <Mention
-          trigger="{{"
+          trigger={/({{(\w*))$/}
           displayTransform={(id, display) => `{{${display}}}`}
           data={widgetsVariables}
           markup="{{__display__##__id__}}"

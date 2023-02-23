@@ -22,7 +22,10 @@ export default function RightSidePanel({
 
   const baseWidget = BASE_WIDGET_MAP[selectedWidget?.widgetType];
 
-  const actions = useMemo(() => Object.values(actionMap), [actionMap]);
+  const actions = useMemo(
+    () => [{ id: "none", name: "No Action" }, ...Object.values(actionMap)],
+    [actionMap]
+  );
   const onStyleChange =
     (id: keyof CSSProperties) => (e: React.ChangeEvent<HTMLInputElement>) => {
       const value = e.target.value;
@@ -48,7 +51,8 @@ export default function RightSidePanel({
         config: newConfig,
       });
     };
-
+  // @ts-ignore
+  console.log(selectedWidget.config);
   const onEventsChange =
     (id: WidgetEventKeys) => (e: React.ChangeEvent<HTMLSelectElement>) => {
       const value = e.target.value;
@@ -109,7 +113,7 @@ export default function RightSidePanel({
               <label>{e.label}</label>
               <select
                 /* @ts-ignore */
-                value={selectedWidget.config[e.id]}
+                value={selectedWidget.events[e.id][0]}
                 onChange={onEventsChange(e.id)}
               >
                 {actions.map((act) => (

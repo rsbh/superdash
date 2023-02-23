@@ -22,13 +22,14 @@ export function executeEvents({
   const widget = widgets[widgetId];
   // @ts-ignore
   const actionsIds = widget.events[eventKey] as string[];
-
   actionsIds.forEach(async (actionId) => {
-    const action = actions[actionId];
-    await executeEvent({
-      widgetsValuesMap,
-      action,
-    });
+    if (actionId !== "none") {
+      const action = actions[actionId];
+      await executeEvent({
+        widgetsValuesMap,
+        action,
+      });
+    }
   });
 }
 
@@ -50,6 +51,5 @@ export async function executeEvent({
       urlWithValues = urlWithValues.replaceAll(v, widgetsValuesMap.get(id));
     }
   });
-
-  console.log(url, method);
+  console.log(urlWithValues, method);
 }

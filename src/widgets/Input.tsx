@@ -1,6 +1,10 @@
 import { CSSProperties } from "react";
 import styled from "styled-components";
-import { InputWidgetConfig } from "../types/widget";
+import {
+  InputWidgetConfig,
+  InputWidgetEventsType,
+  WidgetEventKeys,
+} from "../types/widget";
 
 export const InputWrapper = styled.input`
   display: inline-block;
@@ -17,6 +21,7 @@ interface InputProps {
   style: CSSProperties;
   config: InputWidgetConfig;
   updateWidgetsValue: (id: string, value: any) => void;
+  handleWidgetEvent?: (widgetId: string, eventName: WidgetEventKeys) => void;
 }
 
 export default function Input({
@@ -24,20 +29,23 @@ export default function Input({
   config,
   id,
   updateWidgetsValue,
+  handleWidgetEvent,
 }: InputProps) {
   function onChange(e: React.ChangeEvent<HTMLInputElement>) {
     const value = e.target.value;
     updateWidgetsValue(id, value);
+    if (handleWidgetEvent) {
+      handleWidgetEvent(id, InputWidgetEventsType.onChange);
+    }
   }
   return (
-    <>
+    <div style={style}>
       <label>{config.label}</label>
       <InputWrapper
-        style={style}
         placeholder={config.placeholder}
         type={config.type}
         onChange={onChange}
       />
-    </>
+    </div>
   );
 }

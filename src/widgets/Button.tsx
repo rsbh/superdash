@@ -1,6 +1,6 @@
 import { CSSProperties } from "react";
 import styled from "styled-components";
-import { ButtonConfig } from "../types/widget";
+import { ButtonWidgetConfig } from "../types/widget";
 
 export const ButtonWrapper = styled.button`
   display: inline-block;
@@ -14,7 +14,7 @@ export const ButtonWrapper = styled.button`
 
 interface ButtonProps {
   style: CSSProperties;
-  config?: ButtonConfig;
+  config?: ButtonWidgetConfig;
 }
 
 export default function Button({ style, config }: ButtonProps) {

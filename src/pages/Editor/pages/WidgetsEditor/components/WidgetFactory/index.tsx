@@ -1,5 +1,9 @@
 import { CSSProperties } from "styled-components";
-import { ButtonConfig, InputConfig, WidgetTypes } from "@/types/widget";
+import {
+  ButtonWidgetConfig,
+  InputWidgetConfig,
+  WidgetTypes,
+} from "@/types/widget";
 import Button from "@/widgets/Button";
 import Input from "@/widgets/Input";
 import { Table } from "@/widgets/Table";
@@ -21,13 +25,13 @@ export const WidgetFactory = ({
 }: WidgetFactoryProps) => {
   switch (widgetType) {
     case "BUTTON":
-      return <Button style={style} config={config as ButtonConfig} />;
+      return <Button style={style} config={config as ButtonWidgetConfig} />;
     case "INPUT":
       return (
         <Input
           id={id}
           style={style}
-          config={config as InputConfig}
+          config={config as InputWidgetConfig}
           updateWidgetsValue={updateWidgetsValue}
         />
       );

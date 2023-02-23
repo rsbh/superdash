@@ -28,16 +28,6 @@ export interface BaseWidget {
   configs: WidgetConfig[];
 }
 
-export interface ButtonConfig {
-  text: string;
-}
-
-export interface InputConfig {
-  type: string;
-  label: string;
-  placeholder: string;
-}
-
 export type WidgetTypes = keyof typeof WidgetsTypeMap;
 
 export interface DropItem {
@@ -50,10 +40,39 @@ export interface DropItem {
   };
 }
 
-export interface WidgetComponent extends DropItem {
-  config: Record<string, any>;
+const ButtonWidgetEventsTypeMap = {
+  onClick: "onClick",
+} as const;
+
+export type ButtonWidgetEventsType = keyof typeof ButtonWidgetEventsTypeMap;
+
+export interface ButtonWidgetConfig {
+  text: string;
 }
 
+export interface ButtonWidget extends DropItem {
+  events: Record<ButtonWidgetEventsType, Array<string>>;
+  config: ButtonWidgetConfig;
+}
+
+const InputWidgetEventsType = {
+  onChange: "onChange",
+} as const;
+
+export type InputWidgetEventsType = keyof typeof InputWidgetEventsType;
+
+export interface InputWidgetConfig {
+  type: string;
+  label: string;
+  placeholder: string;
+}
+
+export interface InputWidget extends DropItem {
+  events: Record<InputWidgetEventsType, Array<string>>;
+  config: InputWidgetConfig;
+}
+
+export type WidgetComponent = ButtonWidget | InputWidget;
 export type WidgetsMap = Record<string, WidgetComponent>;
 export type ActionsMap = Record<string, WIDGET_ACTION>;
 

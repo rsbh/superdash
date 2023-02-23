@@ -1,6 +1,6 @@
 import { CSSProperties } from "react";
 import styled from "styled-components";
-import { InputConfig } from "../types/widget";
+import { InputWidgetConfig } from "../types/widget";
 
 export const InputWrapper = styled.input`
   display: inline-block;
@@ -15,7 +15,7 @@ export const InputWrapper = styled.input`
 interface InputProps {
   id: string;
   style: CSSProperties;
-  config: InputConfig;
+  config: InputWidgetConfig;
   updateWidgetsValue: (id: string, value: any) => void;
 }
 

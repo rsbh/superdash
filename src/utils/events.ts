@@ -1,5 +1,6 @@
 import { WIDGET_ACTION } from "@/types/actions";
-import { PageConfig, WidgetEventKeys, WidgetsValueMap } from "@/types/widget";
+import { PageConfig } from "@/types/page";
+import { WidgetEventKeys, WidgetsValueMap } from "@/types/widget";
 
 interface executeEventsArgs {
   widgetId: string;

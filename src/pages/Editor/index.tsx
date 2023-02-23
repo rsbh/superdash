@@ -1,6 +1,5 @@
 import {
   ActionsMap,
-  PageConfig,
   WidgetEventKeys,
   WidgetsMap,
   WidgetsValueMap,
@@ -12,6 +11,7 @@ import ActionsPage from "./pages/Actions";
 import WidgetsEditor from "./pages/WidgetsEditor";
 import { Map } from "immutable";
 import { executeEvents } from "@/utils/events";
+import { PageConfig } from "@/types/page";
 
 export default function EditorPage() {
   const [pageConfig, setPageConfig] = useState<PageConfig>({

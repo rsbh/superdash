@@ -100,12 +100,4 @@ export interface WidgetComponent extends DropItem {
 export type WidgetsMap = Record<string, WidgetComponent>;
 export type ActionsMap = Record<string, WIDGET_ACTION>;
 
-export interface PageConfig {
-  title: string;
-  id: string;
-  widgets: WidgetsMap;
-  actions: ActionsMap;
-  widgetsCount: number;
-}
-
 export type WidgetsValueMap = Map<string, any>;

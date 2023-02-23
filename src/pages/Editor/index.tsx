@@ -34,8 +34,6 @@ export default function EditorPage() {
     return count;
   }
 
-  console.log(widgetsValuesMap);
-
   return (
     <Routes>
       <Route element={<Layout />}>
@@ -53,7 +51,12 @@ export default function EditorPage() {
 
         <Route
           path="/actions"
-          element={<ActionsPage widgetsMap={pageConfig.widgets} />}
+          element={
+            <ActionsPage
+              widgetsMap={pageConfig.widgets}
+              widgetsValuesMap={widgetsValuesMap}
+            />
+          }
         />
       </Route>
     </Routes>

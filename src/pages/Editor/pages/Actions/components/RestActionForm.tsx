@@ -1,5 +1,5 @@
 import { REST_METHODS_MAP } from "@/types/actions";
-import { WidgetsMap } from "@/types/widget";
+import { Map } from "immutable";
 import { useMemo, useState } from "react";
 import { Mention, MentionsInput } from "react-mentions";
 
@@ -19,10 +19,12 @@ const regex =
 
 interface RestActionFormProps {
   widgetsVariables: Array<{ id: string; display: string }>;
+  widgetsValuesMap: Map<string, any>;
 }
 
 export default function RestActionForm({
   widgetsVariables,
+  widgetsValuesMap,
 }: RestActionFormProps) {
   const [text, setText] = useState("");
 
@@ -31,8 +33,15 @@ export default function RestActionForm({
   }
 
   function onClick() {
+    let newText = text;
     const variables = text.match(regex);
-    console.log(variables);
+    variables?.forEach((v) => {
+      const [_, id] = v.replaceAll(/{{|}}/gi, "").split("##");
+      if (widgetsValuesMap.has(id)) {
+        newText = newText.replaceAll(v, widgetsValuesMap.get(id));
+      }
+    });
+    console.log(newText);
   }
 
   return (

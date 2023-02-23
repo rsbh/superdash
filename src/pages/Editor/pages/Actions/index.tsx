@@ -1,12 +1,17 @@
 import { WidgetsMap } from "@/types/widget";
-import { useMemo, useState } from "react";
-import { MentionsInput, Mention } from "react-mentions";
+import { Map } from "immutable";
+import { useMemo } from "react";
 import RestActionForm from "./components/RestActionForm";
+
 interface ActionsPageProps {
   widgetsMap: WidgetsMap;
+  widgetsValuesMap: Map<string, any>;
 }
 
-export default function ActionsPage({ widgetsMap }: ActionsPageProps) {
+export default function ActionsPage({
+  widgetsMap,
+  widgetsValuesMap,
+}: ActionsPageProps) {
   const widgetsVariables = useMemo(() => {
     return Object.values(widgetsMap).map((w) => ({
       id: w.id,
@@ -16,7 +21,10 @@ export default function ActionsPage({ widgetsMap }: ActionsPageProps) {
 
   return (
     <div>
-      <RestActionForm widgetsVariables={widgetsVariables} />
+      <RestActionForm
+        widgetsVariables={widgetsVariables}
+        widgetsValuesMap={widgetsValuesMap}
+      />
     </div>
   );
 }

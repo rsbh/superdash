@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import Layout from "./Layout";
 import ActionsPage from "./pages/Actions";
 import WidgetsEditor from "./pages/WidgetsEditor";
+import { Map } from "immutable";
 
 export default function EditorPage() {
   const [pageConfig, setPageConfig] = useState<PageConfig>({
@@ -14,8 +15,14 @@ export default function EditorPage() {
     widgetsCount: 0,
   });
 
+  const [widgetsValuesMap, setWidgetsValuesMap] = useState(Map<string, any>());
+
   function updatePageWidgets(widgetsMap: WidgetsMap) {
     setPageConfig((prev) => ({ ...prev, widgets: widgetsMap }));
+  }
+
+  function updateWidgetsValue(id: string, value: any) {
+    setWidgetsValuesMap((prev) => prev.set(id, value));
   }
 
   function increaseWidgetsCount() {
@@ -27,6 +34,8 @@ export default function EditorPage() {
     return count;
   }
 
+  console.log(widgetsValuesMap);
+
   return (
     <Routes>
       <Route element={<Layout />}>
@@ -37,6 +46,7 @@ export default function EditorPage() {
               widgetsMap={pageConfig.widgets}
               updatePageWidgets={updatePageWidgets}
               increaseWidgetsCount={increaseWidgetsCount}
+              updateWidgetsValue={updateWidgetsValue}
             />
           }
         />

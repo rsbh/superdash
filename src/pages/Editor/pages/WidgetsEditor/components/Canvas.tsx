@@ -8,6 +8,7 @@ interface CanvasProps {
   onDrop: (i: WidgetComponent) => void;
   onWidgetClick?: (id: string) => void;
   onWidgetUpdate?: (id: string, updatedData: WidgetComponent) => void;
+  updateWidgetsValue: (id: string, value: any) => void;
 }
 
 export const Canvas = ({
@@ -15,6 +16,7 @@ export const Canvas = ({
   onDrop,
   componentList,
   onWidgetUpdate,
+  updateWidgetsValue,
 }: CanvasProps) => {
   const [collectedProps, drop] = useDrop(
     () => ({
@@ -40,6 +42,7 @@ export const Canvas = ({
           widget={c}
           onClick={onWidgetClick}
           onWidgetUpdate={onWidgetUpdate}
+          updateWidgetsValue={updateWidgetsValue}
         />
       ))}
     </div>

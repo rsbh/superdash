@@ -13,11 +13,22 @@ export const InputWrapper = styled.input`
 `;
 
 interface InputProps {
+  id: string;
   style: CSSProperties;
   config: InputConfig;
+  updateWidgetsValue: (id: string, value: any) => void;
 }
 
-export default function Input({ style, config }: InputProps) {
+export default function Input({
+  style,
+  config,
+  id,
+  updateWidgetsValue,
+}: InputProps) {
+  function onChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const value = e.target.value;
+    updateWidgetsValue(id, value);
+  }
   return (
     <>
       <label>{config.label}</label>
@@ -25,6 +36,7 @@ export default function Input({ style, config }: InputProps) {
         style={style}
         placeholder={config.placeholder}
         type={config.type}
+        onChange={onChange}
       />
     </>
   );

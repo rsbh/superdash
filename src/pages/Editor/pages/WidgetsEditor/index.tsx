@@ -12,12 +12,14 @@ interface WidgetsEditorProps {
   widgetsMap: WidgetsMap;
   updatePageWidgets: (widgetsMap: WidgetsMap) => void;
   increaseWidgetsCount: () => number;
+  updateWidgetsValue: (id: string, value: any) => void;
 }
 
 export default function Editor({
   updatePageWidgets,
   widgetsMap,
   increaseWidgetsCount,
+  updateWidgetsValue,
 }: WidgetsEditorProps) {
   const [selectedWidget, setSelectedWidget] = useState<WidgetComponent | null>(
     null
@@ -82,6 +84,7 @@ export default function Editor({
             onDrop={onDrop}
             onWidgetClick={onWidgetClick}
             onWidgetUpdate={onWidgetUpdate}
+            updateWidgetsValue={updateWidgetsValue}
           ></Canvas>
           <CustomDragLayer />
         </>

@@ -8,6 +8,7 @@ interface WidgetProps {
   widget: WidgetComponent;
   onClick?: (id: string) => void;
   onWidgetUpdate?: (id: string, updatedData: WidgetComponent) => void;
+  updateWidgetsValue: (id: string, value: any) => void;
 }
 
 function addSize(pxSize: string, delta: number): string {
@@ -15,7 +16,12 @@ function addSize(pxSize: string, delta: number): string {
   return `${Number(numSize) + delta}px`;
 }
 
-export const Widget = ({ widget, onClick, onWidgetUpdate }: WidgetProps) => {
+export const Widget = ({
+  widget,
+  onClick,
+  onWidgetUpdate,
+  updateWidgetsValue,
+}: WidgetProps) => {
   const { id, styles, widgetType, config } = widget;
   const [isDragEnabled, setIsDragEnabled] = useState<boolean>(true);
   const [widgetStyles, setWidgetStyles] = useState<CSSProperties>(styles);
@@ -87,9 +93,11 @@ export const Widget = ({ widget, onClick, onWidgetUpdate }: WidgetProps) => {
         defaultSize={{ width: styles.width || 0, height: styles.height || 0 }}
       >
         <WidgetFactory
+          id={id}
           widgetType={widgetType}
           style={widgetStyles}
           config={config}
+          updateWidgetsValue={updateWidgetsValue}
         ></WidgetFactory>
       </Resizable>
     </DragWrapper>

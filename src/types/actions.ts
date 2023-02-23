@@ -1,4 +1,4 @@
-const REST_METHODS_MAP = {
+export const REST_METHODS_MAP = {
   GET: "GET",
   POST: "POST",
 } as const;

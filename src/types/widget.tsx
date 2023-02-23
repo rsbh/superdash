@@ -14,8 +14,8 @@ export interface WidgetStyleProperties {
   defaultValue: any;
 }
 
-export interface WidgetConfig {
-  id: string;
+export interface BaseWidgetConfigObject {
+  id: WidgetConfigKeys;
   label: string;
   type: string;
   defaultValue: any;
@@ -25,7 +25,11 @@ export interface BaseWidget {
   title: string;
   type: WidgetTypes;
   styleProperties: WidgetStyleProperties[];
-  configs: WidgetConfig[];
+  configs: BaseWidgetConfigObject[];
+}
+
+interface CommonWidgetConfig {
+  name: string;
 }
 
 export type WidgetTypes = keyof typeof WidgetsTypeMap;
@@ -46,7 +50,7 @@ const ButtonWidgetEventsTypeMap = {
 
 export type ButtonWidgetEventsType = keyof typeof ButtonWidgetEventsTypeMap;
 
-export interface ButtonWidgetConfig {
+export interface ButtonWidgetConfig extends CommonWidgetConfig {
   text: string;
 }
 
@@ -61,18 +65,29 @@ const InputWidgetEventsType = {
 
 export type InputWidgetEventsType = keyof typeof InputWidgetEventsType;
 
-export interface InputWidgetConfig {
+export interface InputWidgetConfig extends CommonWidgetConfig {
   type: string;
   label: string;
   placeholder: string;
 }
 
-export interface InputWidget extends DropItem {
-  events: Record<InputWidgetEventsType, Array<string>>;
-  config: InputWidgetConfig;
+type InputWidgetsEvents = Record<InputWidgetEventsType, Array<string>>;
+type ButtonWidgetsEvents = Record<ButtonWidgetEventsType, Array<string>>;
+export type WidgetEvents = ButtonWidgetsEvents | InputWidgetsEvents | {};
+
+export type WidgetConfig =
+  | ButtonWidgetConfig
+  | InputWidgetConfig
+  | CommonWidgetConfig;
+
+type KeysOfUnion<T> = T extends T ? keyof T : never;
+type WidgetConfigKeys = KeysOfUnion<WidgetConfig>;
+
+export interface WidgetComponent extends DropItem {
+  events: WidgetEvents;
+  config: WidgetConfig;
 }
 
-export type WidgetComponent = ButtonWidget | InputWidget;
 export type WidgetsMap = Record<string, WidgetComponent>;
 export type ActionsMap = Record<string, WIDGET_ACTION>;
 

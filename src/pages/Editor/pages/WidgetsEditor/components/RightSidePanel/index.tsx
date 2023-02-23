@@ -69,6 +69,7 @@ export default function RightSidePanel({
             >
               <label>{c.label}</label>
               <input
+                //@ts-ignore
                 value={selectedWidget.config[c.id]}
                 onChange={onConfigChange(c.id)}
               ></input>

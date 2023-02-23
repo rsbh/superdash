@@ -86,12 +86,6 @@ export const BASE_WIDGET_MAP: Record<WidgetTypes, BaseWidget> = {
     ],
     configs: [
       {
-        id: "title",
-        label: "Title",
-        type: "string",
-        defaultValue: "Table",
-      },
-      {
         id: "name",
         label: "Name",
         type: "string",

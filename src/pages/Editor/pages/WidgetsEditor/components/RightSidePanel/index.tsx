@@ -1,21 +1,30 @@
 import { BASE_WIDGET_MAP } from "@/constants/widget";
-import { WidgetComponent } from "@/types/widget";
+import {
+  ActionsMap,
+  WidgetComponent,
+  WidgetConfigKeys,
+  WidgetEventKeys,
+} from "@/types/widget";
+import { CSSProperties, useMemo } from "react";
 
 interface RightSidePanelProps {
   selectedWidget: WidgetComponent | null;
   onWidgetUpdate: (id: string, widget: WidgetComponent) => void;
+  actionMap: ActionsMap;
 }
 
 export default function RightSidePanel({
   selectedWidget,
   onWidgetUpdate,
+  actionMap,
 }: RightSidePanelProps) {
   if (!selectedWidget) return null;
 
   const baseWidget = BASE_WIDGET_MAP[selectedWidget?.widgetType];
 
+  const actions = useMemo(() => Object.values(actionMap), [actionMap]);
   const onStyleChange =
-    (id: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    (id: keyof CSSProperties) => (e: React.ChangeEvent<HTMLInputElement>) => {
       const value = e.target.value;
       const newStyles = {
         ...selectedWidget.styles,
@@ -28,7 +37,7 @@ export default function RightSidePanel({
     };
 
   const onConfigChange =
-    (id: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    (id: WidgetConfigKeys) => (e: React.ChangeEvent<HTMLInputElement>) => {
       const value = e.target.value;
       const newConfig = {
         ...selectedWidget.config,
@@ -37,6 +46,18 @@ export default function RightSidePanel({
       onWidgetUpdate(selectedWidget.id, {
         ...selectedWidget,
         config: newConfig,
+      });
+    };
+
+  const onEventsChange =
+    (id: WidgetEventKeys) => (e: React.ChangeEvent<HTMLSelectElement>) => {
+      const value = e.target.value;
+      const newEvents = {
+        [id]: [value],
+      };
+      onWidgetUpdate(selectedWidget.id, {
+        ...selectedWidget,
+        events: newEvents,
       });
     };
 
@@ -73,6 +94,30 @@ export default function RightSidePanel({
                 value={selectedWidget.config[c.id]}
                 onChange={onConfigChange(c.id)}
               ></input>
+            </div>
+          );
+        })}
+      </div>
+      <div>
+        <h2>Events</h2>
+        {baseWidget.events.map((e) => {
+          return (
+            <div
+              key={selectedWidget.id + "-" + e.id}
+              className="widget-property-item"
+            >
+              <label>{e.label}</label>
+              <select
+                /* @ts-ignore */
+                value={selectedWidget.config[e.id]}
+                onChange={onEventsChange(e.id)}
+              >
+                {actions.map((act) => (
+                  <option key={act.id} value={act.id}>
+                    {act.name}
+                  </option>
+                ))}
+              </select>
             </div>
           );
         })}

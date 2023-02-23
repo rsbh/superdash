@@ -46,6 +46,7 @@ export default function EditorPage() {
           element={
             <WidgetsEditor
               widgetsMap={pageConfig.widgets}
+              actionMap={pageConfig.actions}
               updatePageWidgets={updatePageWidgets}
               increaseWidgetsCount={increaseWidgetsCount}
               updateWidgetsValue={updateWidgetsValue}

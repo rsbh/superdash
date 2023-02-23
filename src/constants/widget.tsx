@@ -38,6 +38,13 @@ export const BASE_WIDGET_MAP: Record<WidgetTypes, BaseWidget> = {
         defaultValue: "",
       },
     ],
+    events: [
+      {
+        id: "onClick",
+        label: "onClick",
+        defaultValue: [],
+      },
+    ],
   },
   INPUT: {
     title: "Input",
@@ -74,6 +81,13 @@ export const BASE_WIDGET_MAP: Record<WidgetTypes, BaseWidget> = {
         defaultValue: "",
       },
     ],
+    events: [
+      {
+        id: "onChange",
+        label: "onChange",
+        defaultValue: [],
+      },
+    ],
   },
   TABLE: {
     title: "Table",
@@ -92,6 +106,7 @@ export const BASE_WIDGET_MAP: Record<WidgetTypes, BaseWidget> = {
         defaultValue: "",
       },
     ],
+    events: [],
   },
 };
 

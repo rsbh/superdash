@@ -21,11 +21,18 @@ export interface BaseWidgetConfigObject {
   defaultValue: any;
 }
 
+export interface BaseWidgetEventObject {
+  id: WidgetEventKeys;
+  label: string;
+  defaultValue: [];
+}
+
 export interface BaseWidget {
   title: string;
   type: WidgetTypes;
   styleProperties: WidgetStyleProperties[];
   configs: BaseWidgetConfigObject[];
+  events: BaseWidgetEventObject[];
 }
 
 interface CommonWidgetConfig {
@@ -81,7 +88,8 @@ export type WidgetConfig =
   | CommonWidgetConfig;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-type WidgetConfigKeys = KeysOfUnion<WidgetConfig>;
+export type WidgetConfigKeys = KeysOfUnion<WidgetConfig>;
+export type WidgetEventKeys = KeysOfUnion<WidgetEvents>;
 
 export interface WidgetComponent extends DropItem {
   events: WidgetEvents;

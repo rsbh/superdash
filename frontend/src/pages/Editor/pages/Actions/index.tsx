@@ -1,6 +1,8 @@
 import { ActionsMap, WidgetsMap, WidgetsValueMap } from "@/types/widget";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
+import styled from "styled-components";
 import RestActionForm from "./components/RestActionForm";
+import NewActionsList from "./components/NewActionsList";
 
 interface ActionsPageProps {
   widgetsMap: WidgetsMap;
@@ -9,12 +11,25 @@ interface ActionsPageProps {
   updatePageActions: (actionMap: ActionsMap) => void;
 }
 
+const ActionsPageWrapper = styled.div`
+  display: flex;
+  height: 100%;
+`;
+
+const ActionsList = styled.div`
+  min-width: 240px;
+  height: 100%;
+  border-right: 0.5px solid grey;
+`;
+
 export default function ActionsPage({
   widgetsMap,
   widgetsValuesMap,
   updatePageActions,
   actionMap,
 }: ActionsPageProps) {
+  const [selectedAction, setSelectedAction] = useState("");
+
   const widgetsVariables = useMemo(() => {
     return Object.values(widgetsMap).map((w) => ({
       id: w.id,
@@ -22,14 +37,32 @@ export default function ActionsPage({
     }));
   }, [widgetsMap]);
 
+  function onNewActionButtonClick(actionId: string) {
+    setSelectedAction(actionId);
+  }
+
+  function getActionComponent(id: string) {
+    switch (id) {
+      case "REST_API": {
+        return (
+          <RestActionForm
+            widgetsVariables={widgetsVariables}
+            widgetsValuesMap={widgetsValuesMap}
+            updatePageActions={updatePageActions}
+            actionMap={actionMap}
+          />
+        );
+      }
+      default: {
+        return <NewActionsList onClick={onNewActionButtonClick} />;
+      }
+    }
+  }
+
   return (
-    <div>
-      <RestActionForm
-        widgetsVariables={widgetsVariables}
-        widgetsValuesMap={widgetsValuesMap}
-        updatePageActions={updatePageActions}
-        actionMap={actionMap}
-      />
-    </div>
+    <ActionsPageWrapper>
+      <ActionsList>Actions List</ActionsList>
+      {getActionComponent(selectedAction)}
+    </ActionsPageWrapper>
   );
 }

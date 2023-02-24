@@ -3,7 +3,7 @@ import { WidgetComponent, WidgetsValueMap } from "@/types/widget";
 import { executeEvents } from "@/utils/events";
 import { Map } from "immutable";
 import { useMemo, useState } from "react";
-import { WidgetFactory } from "../WidgetsEditor/components/WidgetFactory";
+import { WidgetFactory } from "@/widgets/Widgetsfactory";
 
 interface PreviewProps {
   pageConfig: PageConfig;

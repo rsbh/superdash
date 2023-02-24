@@ -1,7 +1,7 @@
 import { Resizable, ResizeDirection } from "re-resizable";
 import { CSSProperties, useEffect, useState } from "react";
 import { WidgetComponent } from "@/types/widget";
-import { WidgetFactory } from "../WidgetFactory";
+import { WidgetFactory } from "@/widgets/Widgetsfactory";
 import { DragWrapper } from "./DragWrapper";
 
 interface WidgetProps {

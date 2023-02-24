@@ -1,8 +1,8 @@
 import { CSSProperties } from "styled-components";
 import { WidgetTypes } from "@/types/widget";
-import Button from "@/widgets/Button";
-import Input from "@/widgets/Input";
-import { Table } from "@/widgets/Table";
+import Button from "./Button";
+import Input from "./Input";
+import { Table } from "./Table";
 
 interface WidgetFactoryProps {
   id: string;

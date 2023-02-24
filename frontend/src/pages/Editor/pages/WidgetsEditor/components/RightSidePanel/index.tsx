@@ -51,11 +51,11 @@ export default function RightSidePanel({
         config: newConfig,
       });
     };
-  // @ts-ignore
-  console.log(selectedWidget.config);
+
   const onEventsChange =
     (id: WidgetEventKeys) => (e: React.ChangeEvent<HTMLSelectElement>) => {
       const value = e.target.value;
+      console.log(value);
       const newEvents = {
         [id]: [value],
       };
@@ -115,6 +115,7 @@ export default function RightSidePanel({
                 /* @ts-ignore */
                 value={selectedWidget.events[e.id][0]}
                 onChange={onEventsChange(e.id)}
+                multiple
               >
                 {actions.map((act) => (
                   <option key={act.id} value={act.id}>

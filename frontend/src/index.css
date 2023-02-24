@@ -11,13 +11,7 @@ body {
   height: 100vh;
 }
 
-.component-list {
-  padding: 4px;
-  margin: 4px;
-  border: 1px solid black;
-  width: 100%;
-  max-width: 360px;
-}
+
 
 .drawer {
   padding: 4px;

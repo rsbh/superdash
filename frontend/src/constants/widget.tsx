@@ -1,9 +1,11 @@
+import { RxButton, RxInput, RxTable } from "react-icons/rx";
 import { BaseWidget, WidgetTypes } from "../types/widget";
 export const DefaultDragType = "Widget";
 
 export const BASE_WIDGET_MAP: Record<WidgetTypes, BaseWidget> = {
   BUTTON: {
     title: "Button",
+    icon: <RxButton />,
     type: "BUTTON",
     styleProperties: [
       { id: "height", label: "Height", defaultValue: "32px", type: "string" },
@@ -49,6 +51,7 @@ export const BASE_WIDGET_MAP: Record<WidgetTypes, BaseWidget> = {
   INPUT: {
     title: "Input",
     type: "INPUT",
+    icon: <RxInput />,
     styleProperties: [
       { id: "height", label: "Height", defaultValue: "32px", type: "string" },
       { id: "width", label: "Width", defaultValue: "200px", type: "string" },
@@ -92,6 +95,7 @@ export const BASE_WIDGET_MAP: Record<WidgetTypes, BaseWidget> = {
   TABLE: {
     title: "Table",
     type: "TABLE",
+    icon: <RxTable />,
     styleProperties: [
       { id: "height", label: "Height", defaultValue: "400px", type: "string" },
       { id: "width", label: "Width", defaultValue: "304px", type: "string" },

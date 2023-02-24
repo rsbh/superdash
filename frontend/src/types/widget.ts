@@ -1,5 +1,5 @@
 import { Map } from "immutable";
-import { CSSProperties } from "react";
+import { CSSProperties, ReactElement } from "react";
 import { WIDGET_ACTION } from "./actions";
 
 export const WidgetsTypeMap = {
@@ -31,6 +31,7 @@ export interface BaseWidgetEventObject {
 export interface BaseWidget {
   title: string;
   type: WidgetTypes;
+  icon: ReactElement;
   styleProperties: WidgetStyleProperties[];
   configs: BaseWidgetConfigObject[];
   events: BaseWidgetEventObject[];

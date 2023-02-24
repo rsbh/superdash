@@ -15,6 +15,7 @@
     "react-dnd": "^16.0.1",
     "react-dnd-html5-backend": "^16.0.1",
     "react-dom": "^18.2.0",
+    "react-icons": "^4.7.1",
     "react-mentions": "^4.4.7",
     "react-router-dom": "^6.8.1",
     "styled-components": "^5.3.6",

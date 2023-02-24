@@ -1,9 +1,4 @@
-import {
-  ActionsMap,
-  WidgetEventKeys,
-  WidgetsMap,
-  WidgetsValueMap,
-} from "@/types/widget";
+import { ActionsMap, WidgetsMap, WidgetsValueMap } from "@/types/widget";
 import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import Layout from "./Layout";
@@ -48,7 +43,7 @@ export default function EditorPage() {
     return count;
   }
 
-  function handleWidgetEvent(widgetId: string, eventKey: WidgetEventKeys) {
+  function handleWidgetEvent(widgetId: string, eventKey: string) {
     executeEvents({
       widgetId,
       eventKey,

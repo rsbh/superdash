@@ -1,10 +1,5 @@
 import { BASE_WIDGET_MAP } from "@/constants/widget";
-import {
-  ActionsMap,
-  WidgetComponent,
-  WidgetConfigKeys,
-  WidgetEventKeys,
-} from "@/types/widget";
+import { ActionsMap, WidgetComponent } from "@/types/widget";
 import { CSSProperties, useMemo } from "react";
 
 interface RightSidePanelProps {
@@ -40,7 +35,7 @@ export default function RightSidePanel({
     };
 
   const onConfigChange =
-    (id: WidgetConfigKeys) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    (id: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
       const value = e.target.value;
       const newConfig = {
         ...selectedWidget.config,
@@ -53,7 +48,7 @@ export default function RightSidePanel({
     };
 
   const onEventsChange =
-    (id: WidgetEventKeys) => (e: React.ChangeEvent<HTMLSelectElement>) => {
+    (id: string) => (e: React.ChangeEvent<HTMLSelectElement>) => {
       const value = e.target.value;
       console.log(value);
       const newEvents = {
@@ -94,7 +89,6 @@ export default function RightSidePanel({
             >
               <label>{c.label}</label>
               <input
-                //@ts-ignore
                 value={selectedWidget.config[c.id]}
                 onChange={onConfigChange(c.id)}
               ></input>
@@ -112,7 +106,6 @@ export default function RightSidePanel({
             >
               <label>{e.label}</label>
               <select
-                /* @ts-ignore */
                 value={selectedWidget.events[e.id][0]}
                 onChange={onEventsChange(e.id)}
                 multiple

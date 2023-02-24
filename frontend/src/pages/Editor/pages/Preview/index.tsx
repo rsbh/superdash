@@ -1,9 +1,5 @@
 import { PageConfig } from "@/types/page";
-import {
-  WidgetComponent,
-  WidgetEventKeys,
-  WidgetsValueMap,
-} from "@/types/widget";
+import { WidgetComponent, WidgetsValueMap } from "@/types/widget";
 import { executeEvents } from "@/utils/events";
 import { Map } from "immutable";
 import { useMemo, useState } from "react";
@@ -23,7 +19,7 @@ export default function Preview({ pageConfig }: PreviewProps) {
     setWidgetsValuesMap((prev) => prev.set(id, value));
   }
 
-  function handleWidgetEvent(widgetId: string, eventKey: WidgetEventKeys) {
+  function handleWidgetEvent(widgetId: string, eventKey: string) {
     executeEvents({
       widgetId,
       eventKey,

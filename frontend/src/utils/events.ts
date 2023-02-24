@@ -1,10 +1,10 @@
 import { WIDGET_ACTION } from "@/types/actions";
 import { PageConfig } from "@/types/page";
-import { WidgetEventKeys, WidgetsValueMap } from "@/types/widget";
+import { WidgetsValueMap } from "@/types/widget";
 
 interface executeEventsArgs {
   widgetId: string;
-  eventKey: WidgetEventKeys;
+  eventKey: string;
   pageConfig: PageConfig;
   widgetsValuesMap: WidgetsValueMap;
 }
@@ -20,7 +20,6 @@ export function executeEvents({
 }: executeEventsArgs) {
   const { widgets, actions } = pageConfig;
   const widget = widgets[widgetId];
-  // @ts-ignore
   const actionsIds = widget.events[eventKey] as string[];
   actionsIds.forEach(async (actionId) => {
     if (actionId !== "none") {

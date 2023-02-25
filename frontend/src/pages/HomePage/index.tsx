@@ -1,5 +1,7 @@
+import Button from "@/components/Button";
+import Input from "@/components/Input";
+
 import Header from "@/components/Header";
-import { MouseEventHandler } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function HomePage() {
@@ -10,11 +12,11 @@ export default function HomePage() {
   }
   return (
     <div>
-      <Header />
-      <div>
+      <Header showAvatar={true} />
+      <div style={{ padding: "16px" }}>
         <div>
-          <input></input>
-          <button onClick={onNewAppBtnClick}>Create New App</button>
+          <Input></Input>
+          <Button onClick={onNewAppBtnClick}>Create New App</Button>
         </div>
       </div>
     </div>

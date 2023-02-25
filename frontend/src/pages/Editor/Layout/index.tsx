@@ -16,7 +16,7 @@ const StyledLayout = styled.div`
 export default function Layout() {
   return (
     <StyledLayout>
-      <Header></Header>
+      <Header previewLink="/editor/preview"></Header>
       <StyledSection>
         <Sidebar></Sidebar>
         <Container>

@@ -50,6 +50,7 @@ export interface DropItem {
 }
 
 export interface WidgetComponent extends DropItem {
+  name: string;
   events: Record<string, string[]>;
   config: Record<string, any>;
 }

@@ -1,3 +1,4 @@
+import InputWrapper from "@/components/Input";
 import { BASE_WIDGET_MAP } from "@/constants/widget";
 import { ActionsMap, WidgetComponent } from "@/types/widget";
 import { CSSProperties, useMemo } from "react";
@@ -50,7 +51,6 @@ export default function RightSidePanel({
   const onEventsChange =
     (id: string) => (e: React.ChangeEvent<HTMLSelectElement>) => {
       const value = e.target.value;
-      console.log(value);
       const newEvents = {
         [id]: [value],
       };
@@ -60,8 +60,20 @@ export default function RightSidePanel({
       });
     };
 
+  const onNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const name = e.target.value;
+    onWidgetUpdate(selectedWidget.id, {
+      ...selectedWidget,
+      name,
+    });
+  };
+
   return (
     <div className="right-side-panel">
+      <div>
+        <h2>Name</h2>
+        <InputWrapper value={selectedWidget.name} onChange={onNameChange} />
+      </div>
       <div>
         <h2>Styles</h2>
         {baseWidget.styleProperties.map((s) => {
@@ -71,10 +83,10 @@ export default function RightSidePanel({
               className="widget-property-item"
             >
               <label>{s.label}</label>
-              <input
+              <InputWrapper
                 value={selectedWidget.styles[s.id]}
                 onChange={onStyleChange(s.id)}
-              ></input>
+              ></InputWrapper>
             </div>
           );
         })}
@@ -88,10 +100,10 @@ export default function RightSidePanel({
               className="widget-property-item"
             >
               <label>{c.label}</label>
-              <input
+              <InputWrapper
                 value={selectedWidget.config[c.id]}
                 onChange={onConfigChange(c.id)}
-              ></input>
+              ></InputWrapper>
             </div>
           );
         })}
@@ -108,7 +120,6 @@ export default function RightSidePanel({
               <select
                 value={selectedWidget.events[e.id][0]}
                 onChange={onEventsChange(e.id)}
-                multiple
               >
                 {actions.map((act) => (
                   <option key={act.id} value={act.id}>

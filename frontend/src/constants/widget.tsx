@@ -33,12 +33,6 @@ export const BASE_WIDGET_MAP: Record<WidgetTypes, BaseWidget> = {
         type: "string",
         defaultValue: "Button",
       },
-      {
-        id: "name",
-        label: "Name",
-        type: "string",
-        defaultValue: "",
-      },
     ],
     events: [
       {
@@ -77,12 +71,6 @@ export const BASE_WIDGET_MAP: Record<WidgetTypes, BaseWidget> = {
         type: "string",
         defaultValue: "placeholder",
       },
-      {
-        id: "name",
-        label: "Name",
-        type: "string",
-        defaultValue: "",
-      },
     ],
     events: [
       {
@@ -102,14 +90,7 @@ export const BASE_WIDGET_MAP: Record<WidgetTypes, BaseWidget> = {
       { id: "left", label: "Left", defaultValue: "0px", type: "string" },
       { id: "top", label: "Top", defaultValue: "0px", type: "string" },
     ],
-    configs: [
-      {
-        id: "name",
-        label: "Name",
-        type: "string",
-        defaultValue: "",
-      },
-    ],
+    configs: [],
     events: [],
   },
 };

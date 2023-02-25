@@ -11,13 +11,13 @@ export function createNewWidgetFromDropItem(
   const id = uuidv4();
   const { widgetType, styles } = item;
   const widgetStyles = getBaseWidgetStyles(widgetType, styles);
-  const config = getWidgetConfig(widgetType, {
-    name: `${widgetType}-${widgetCount}`,
-  });
+  const name = `${widgetType}-${widgetCount}`;
+  const config = getWidgetConfig(widgetType);
   const events = getWidgetEvents(widgetType);
   return {
     ...item,
     id,
+    name,
     config,
     events,
     styles: widgetStyles,
@@ -25,14 +25,11 @@ export function createNewWidgetFromDropItem(
   };
 }
 
-export function getWidgetConfig(
-  widgetType: WidgetTypes,
-  config: Record<string, any>
-): Record<string, any> {
+export function getWidgetConfig(widgetType: WidgetTypes): Record<string, any> {
   const baseWidget = BASE_WIDGET_MAP[widgetType];
   return baseWidget.configs.reduce((acc, c) => {
     const { id, defaultValue } = c;
-    acc[id] = config[id] || defaultValue;
+    acc[id] = defaultValue;
     return acc;
   }, {} as any);
 }

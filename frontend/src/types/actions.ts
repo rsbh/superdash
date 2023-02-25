@@ -19,6 +19,9 @@ interface COMMON_ACTION_CONFIG {
 interface REST_API_ACTION extends COMMON_ACTION_CONFIG {
   method: REST_API_METHODS;
   url: string;
+  params: Record<string, any>;
+  headers: Record<string, any>;
+  payload: string;
 }
 
 export type WIDGET_ACTION = REST_API_ACTION;

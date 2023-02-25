@@ -12,7 +12,7 @@ interface executeEventsArgs {
 const VARIABLE_REGEX =
   /{{\w+-?\d*.\w+##[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}}}/g;
 
-export function executeEvents({
+export async function executeEvents({
   pageConfig,
   widgetId,
   eventKey,
@@ -21,15 +21,25 @@ export function executeEvents({
   const { widgets, actions } = pageConfig;
   const widget = widgets[widgetId];
   const actionsIds = widget.events[eventKey] as string[];
-  actionsIds.forEach(async (actionId) => {
-    if (actionId !== "none") {
-      const action = actions[actionId];
-      await executeEvent({
-        widgetsValuesMap,
-        action,
-      });
-    }
-  });
+  return Promise.all(
+    actionsIds.map(async (actionId) => {
+      if (actionId !== "none") {
+        const action = actions[actionId];
+        const result = await executeEvent({
+          widgetsValuesMap,
+          action,
+        });
+        return {
+          actionId,
+          result,
+        };
+      }
+      return {
+        actionId,
+        result: "No Action",
+      };
+    })
+  );
 }
 
 interface executeEventArgs {
@@ -40,7 +50,7 @@ interface executeEventArgs {
 export async function executeEvent({
   action,
   widgetsValuesMap,
-}: executeEventArgs) {
+}: executeEventArgs): Promise<any> {
   const { url, method } = action;
   let urlWithValues = url;
   const variables = urlWithValues.match(VARIABLE_REGEX);
@@ -50,5 +60,5 @@ export async function executeEvent({
       urlWithValues = urlWithValues.replaceAll(v, widgetsValuesMap.get(id));
     }
   });
-  console.log(urlWithValues, method);
+  return urlWithValues;
 }

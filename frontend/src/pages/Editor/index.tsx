@@ -1,4 +1,9 @@
-import { ActionsMap, WidgetsMap, WidgetsValueMap } from "@/types/widget";
+import {
+  ActionsMap,
+  ActionsValueMap,
+  WidgetsMap,
+  WidgetsValueMap,
+} from "@/types/widget";
 import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import Layout from "./Layout";
@@ -19,6 +24,10 @@ export default function EditorPage() {
   });
 
   const [widgetsValuesMap, setWidgetsValuesMap] = useState<WidgetsValueMap>(
+    Map<string, any>()
+  );
+
+  const [actionsValuesMap, setActionsValuesMap] = useState<ActionsValueMap>(
     Map<string, any>()
   );
 
@@ -43,12 +52,16 @@ export default function EditorPage() {
     return count;
   }
 
-  function handleWidgetEvent(widgetId: string, eventKey: string) {
-    executeEvents({
+  async function handleWidgetEvent(widgetId: string, eventKey: string) {
+    const results = await executeEvents({
       widgetId,
       eventKey,
       pageConfig,
       widgetsValuesMap,
+    });
+    setActionsValuesMap((prev) => {
+      results.forEach((res) => prev.set(res.actionId, res.result));
+      return prev;
     });
   }
 

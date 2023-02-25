@@ -59,3 +59,4 @@ export type WidgetsMap = Record<string, WidgetComponent>;
 export type ActionsMap = Record<string, WIDGET_ACTION>;
 
 export type WidgetsValueMap = Map<string, any>;
+export type ActionsValueMap = Map<string, any>;

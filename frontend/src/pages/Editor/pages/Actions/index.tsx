@@ -41,6 +41,10 @@ export default function ActionsPage({
     setSelectedAction(actionId);
   }
 
+  function onCloseActionForm() {
+    setSelectedAction("");
+  }
+
   function getActionComponent(id: string) {
     switch (id) {
       case "REST_API": {
@@ -50,6 +54,7 @@ export default function ActionsPage({
             widgetsValuesMap={widgetsValuesMap}
             updatePageActions={updatePageActions}
             actionMap={actionMap}
+            onClose={onCloseActionForm}
           />
         );
       }

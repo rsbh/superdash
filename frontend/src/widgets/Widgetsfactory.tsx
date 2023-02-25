@@ -1,8 +1,8 @@
 import { CSSProperties } from "styled-components";
 import { WidgetTypes } from "@/types/widget";
-import Button from "./Button";
-import Input from "./Input";
-import { Table } from "./Table";
+import ButtonWidget from "./Button";
+import InputWidget from "./Input";
+import TableWidget from "./Table";
 
 interface WidgetFactoryProps {
   id: string;
@@ -24,7 +24,7 @@ export const WidgetFactory = ({
   switch (widgetType) {
     case "BUTTON":
       return (
-        <Button
+        <ButtonWidget
           id={id}
           style={style}
           config={config}
@@ -33,7 +33,7 @@ export const WidgetFactory = ({
       );
     case "INPUT":
       return (
-        <Input
+        <InputWidget
           id={id}
           style={style}
           config={config}
@@ -41,23 +41,7 @@ export const WidgetFactory = ({
         />
       );
     case "TABLE":
-      return (
-        <Table style={style}>
-          <thead></thead>
-          <tbody>
-            <tr>
-              <td>Table</td>
-              <td>Table</td>
-              <td>Table</td>
-            </tr>
-            <tr>
-              <td>Table</td>
-              <td>Table</td>
-              <td>Table</td>
-            </tr>
-          </tbody>
-        </Table>
-      );
+      return <TableWidget style={style} />;
     default:
       return null;
   }

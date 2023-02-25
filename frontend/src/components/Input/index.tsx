@@ -1,23 +1,38 @@
 import styled from "styled-components";
-import { blackA } from "@radix-ui/colors";
+import { blackA, whiteA } from "@radix-ui/colors";
+import * as Label from "@radix-ui/react-label";
 
-const InputWrapper = styled.input`
-  width: 200px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 4px;
-  padding: 0 10px;
-  height: 35px;
-  font-size: 15px;
+const InputBox = styled.input`
+  box-shadow: none;
+  color: ${blackA.blackA12};
+
+  border: 2px solid ${blackA.blackA12};
+  background: ${whiteA.whiteA1};
+  padding: 8px 16px;
   line-height: 1;
-  color: white;
-  background-color: ${blackA.blackA5};
-  box-shadow: 0 0 0 1px ${blackA.blackA9};
-
+  font-size: 14px;
   &:focus {
-    box-shadow: 0 0 0 2px black;
+    outline: none;
   }
 `;
 
-export default InputWrapper;
+const StyledLabel = styled(Label.Root)`
+  font-size: 16;
+  font-weight: 600;
+`;
+
+interface InputProps {
+  id?: string;
+  value?: string | number;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  label?: string;
+}
+
+export default function Input({ id, value, onChange, label }: InputProps) {
+  return (
+    <>
+      {label ? <StyledLabel htmlFor={id}>{label}</StyledLabel> : null}
+      <InputBox value={value} onChange={onChange} id={id} />
+    </>
+  );
+}

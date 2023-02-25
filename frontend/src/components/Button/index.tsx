@@ -1,22 +1,22 @@
 import { ReactElement } from "react";
 import styled from "styled-components";
-import { violet, blackA } from "@radix-ui/colors";
+import { grayA, blackA, whiteA } from "@radix-ui/colors";
 
 const ButtonWrapper = styled.button`
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 4px;
-  padding: 0 15px;
-  font-size: 15px;
+  padding: 8px 16px;
+  font-size: 16px;
   line-height: 1;
-  font-weight: 500;
-  height: 35px;
-  background-color: white;
-  border-color: rgb(87, 70, 175);
-  color: ${violet.violet11};
-  border-color: ${violet.violet11};
-  box-shadow: 0 2px 10px ${blackA.blackA7};
+  font-weight: 600;
+  border: 2px solid ${blackA.blackA12};
+  background: ${whiteA.whiteA1};
+  cursor: pointer;
+
+  &:hover {
+    background: ${blackA.blackA6};
+  }
 `;
 
 interface ButtonProps {

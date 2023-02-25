@@ -1,4 +1,4 @@
-import InputWrapper from "@/components/Input";
+import Input from "@/components/Input";
 import { BASE_WIDGET_MAP } from "@/constants/widget";
 import { ActionsMap, WidgetComponent } from "@/types/widget";
 import { CSSProperties, useMemo } from "react";
@@ -70,9 +70,13 @@ export default function RightSidePanel({
 
   return (
     <div className="right-side-panel">
-      <div>
-        <h2>Name</h2>
-        <InputWrapper value={selectedWidget.name} onChange={onNameChange} />
+      <div className="widget-property-item">
+        <Input
+          id="widget-name"
+          label="Name"
+          value={selectedWidget.name}
+          onChange={onNameChange}
+        />
       </div>
       <div>
         <h2>Styles</h2>
@@ -82,11 +86,12 @@ export default function RightSidePanel({
               key={selectedWidget.id + "-" + s.id}
               className="widget-property-item"
             >
-              <label>{s.label}</label>
-              <InputWrapper
+              <Input
+                id={selectedWidget.id + "-" + s.id}
+                label={s.label}
                 value={selectedWidget.styles[s.id]}
                 onChange={onStyleChange(s.id)}
-              ></InputWrapper>
+              ></Input>
             </div>
           );
         })}
@@ -99,11 +104,12 @@ export default function RightSidePanel({
               key={selectedWidget.id + "-" + c.id}
               className="widget-property-item"
             >
-              <label>{c.label}</label>
-              <InputWrapper
+              <Input
+                id={selectedWidget.id + "-" + c.id}
+                label={c.label}
                 value={selectedWidget.config[c.id]}
                 onChange={onConfigChange(c.id)}
-              ></InputWrapper>
+              ></Input>
             </div>
           );
         })}

@@ -26,13 +26,28 @@ interface InputProps {
   value?: string | number;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   label?: string;
+  placeholder?: string;
+  type?: string;
 }
 
-export default function Input({ id, value, onChange, label }: InputProps) {
+export default function Input({
+  id,
+  value,
+  onChange,
+  label,
+  placeholder,
+  type,
+}: InputProps) {
   return (
     <>
       {label ? <StyledLabel htmlFor={id}>{label}</StyledLabel> : null}
-      <InputBox value={value} onChange={onChange} id={id} />
+      <InputBox
+        value={value}
+        onChange={onChange}
+        id={id}
+        placeholder={placeholder}
+        type={type}
+      />
     </>
   );
 }

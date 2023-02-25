@@ -124,7 +124,7 @@ export default function RightSidePanel({
             >
               <label>{e.label}</label>
               <select
-                value={selectedWidget.events[e.id][0]}
+                value={selectedWidget.events[e.id]?.[0]}
                 onChange={onEventsChange(e.id)}
               >
                 {actions.map((act) => (

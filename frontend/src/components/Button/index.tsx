@@ -1,6 +1,6 @@
-import { ReactElement } from "react";
+import { CSSProperties, ReactElement } from "react";
 import styled from "styled-components";
-import { grayA, blackA, whiteA } from "@radix-ui/colors";
+import { blackA, whiteA } from "@radix-ui/colors";
 
 const ButtonWrapper = styled.button`
   display: inline-flex;
@@ -23,11 +23,17 @@ interface ButtonProps {
   className?: string;
   children: ReactElement | string;
   onClick?: (e: React.MouseEvent<HTMLElement>) => void;
+  style?: CSSProperties;
 }
 
-export default function Button({ children, onClick, className }: ButtonProps) {
+export default function Button({
+  children,
+  onClick,
+  className,
+  style,
+}: ButtonProps) {
   return (
-    <ButtonWrapper onClick={onClick} className={className}>
+    <ButtonWrapper onClick={onClick} className={className} style={style}>
       {children}
     </ButtonWrapper>
   );

@@ -179,6 +179,9 @@ export default function RestActionForm({
       type: WIDGET_ACTIONS_MAP.REST_API,
       method: method,
       url: url,
+      params: {},
+      headers: {},
+      payload: "",
     };
     return action;
   }

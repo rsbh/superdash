@@ -12,7 +12,7 @@ export const BASE_WIDGET_MAP: Record<WidgetTypes, BaseWidget> = {
       { id: "width", label: "Width", defaultValue: "96px", type: "string" },
       { id: "left", label: "Left", defaultValue: "0px", type: "string" },
       { id: "top", label: "Top", defaultValue: "0px", type: "string" },
-      { id: "color", label: "Color", defaultValue: "red", type: "string" },
+      { id: "color", label: "Color", defaultValue: "black", type: "string" },
       {
         id: "backgroundColor",
         label: "Background Color",
@@ -90,7 +90,14 @@ export const BASE_WIDGET_MAP: Record<WidgetTypes, BaseWidget> = {
       { id: "left", label: "Left", defaultValue: "0px", type: "string" },
       { id: "top", label: "Top", defaultValue: "0px", type: "string" },
     ],
-    configs: [],
+    configs: [
+      {
+        id: "data",
+        label: "Data",
+        type: "string",
+        defaultValue: "",
+      },
+    ],
     events: [],
   },
 };

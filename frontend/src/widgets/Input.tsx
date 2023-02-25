@@ -1,17 +1,7 @@
+import Input from "@/components/Input";
 import { CSSProperties } from "react";
-import styled from "styled-components";
 
-export const InputWrapper = styled.input`
-  display: inline-block;
-  color: palevioletred;
-  font-size: 1em;
-  padding: 0.25em 1em;
-  border: 2px solid palevioletred;
-  border-radius: 3px;
-  display: block;
-`;
-
-interface InputProps {
+interface InputWidgetProps {
   id: string;
   style: CSSProperties;
   config: Record<string, any>;
@@ -19,13 +9,13 @@ interface InputProps {
   handleWidgetEvent?: (widgetId: string, eventName: string) => void;
 }
 
-export default function Input({
+export default function InputWidget({
   style,
   config,
   id,
   updateWidgetsValue,
   handleWidgetEvent,
-}: InputProps) {
+}: InputWidgetProps) {
   function onChange(e: React.ChangeEvent<HTMLInputElement>) {
     const value = e.target.value;
     updateWidgetsValue(id, value);
@@ -35,11 +25,12 @@ export default function Input({
   }
   return (
     <div style={style}>
-      <label>{config.label}</label>
-      <InputWrapper
+      <Input
         placeholder={config.placeholder}
         type={config.type}
         onChange={onChange}
+        label={config.label}
+        id={id}
       />
     </div>
   );

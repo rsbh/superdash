@@ -1,11 +1,12 @@
 import { CSSProperties } from "styled-components";
-import { WidgetTypes } from "@/types/widget";
+import { WidgetComponent, WidgetTypes } from "@/types/widget";
 import ButtonWidget from "./Button";
 import InputWidget from "./Input";
 import TableWidget from "./Table";
 import { ValuesMap } from "@/types/page";
 
 interface WidgetFactoryProps {
+  widget: WidgetComponent;
   name: string;
   id: string;
   widgetType: WidgetTypes;
@@ -13,10 +14,12 @@ interface WidgetFactoryProps {
   config: Record<string, any>;
   updateWidgetsValue: (widgetId: string, value: any) => void;
   handleWidgetEvent?: (widgetId: string, eventName: string) => void;
+  onWidgetUpdate?: (id: string, updatedData: WidgetComponent) => void;
   actionsValuesMap: ValuesMap;
 }
 
 export const WidgetFactory = ({
+  widget,
   id,
   widgetType,
   style = {},
@@ -25,6 +28,7 @@ export const WidgetFactory = ({
   handleWidgetEvent,
   name,
   actionsValuesMap,
+  onWidgetUpdate,
 }: WidgetFactoryProps) => {
   switch (widgetType) {
     case "BUTTON":
@@ -56,6 +60,8 @@ export const WidgetFactory = ({
           config={config}
           handleWidgetEvent={handleWidgetEvent}
           actionsValuesMap={actionsValuesMap}
+          onWidgetUpdate={onWidgetUpdate}
+          widget={widget}
         />
       );
     default:

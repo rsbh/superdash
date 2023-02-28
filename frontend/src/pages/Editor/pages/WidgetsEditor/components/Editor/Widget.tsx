@@ -96,6 +96,7 @@ export const Widget = ({
         defaultSize={{ width: styles.width || 0, height: styles.height || 0 }}
       >
         <WidgetFactory
+          widget={widget}
           id={id}
           widgetType={widgetType}
           style={widgetStyles}
@@ -103,6 +104,7 @@ export const Widget = ({
           updateWidgetsValue={updateWidgetsValue}
           name={name}
           actionsValuesMap={actionsValuesMap}
+          onWidgetUpdate={onWidgetUpdate}
         ></WidgetFactory>
       </Resizable>
     </DragWrapper>

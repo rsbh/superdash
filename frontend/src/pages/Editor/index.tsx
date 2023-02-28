@@ -1,18 +1,18 @@
-import {
-  ActionsMap,
-  ActionsValueMap,
-  WidgetsMap,
-  WidgetsValueMap,
-} from "@/types/widget";
+import { ActionsMap, WidgetsMap } from "@/types/widget";
 import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import Layout from "./Layout";
 import ActionsPage from "./pages/Actions";
 import WidgetsEditor from "./pages/WidgetsEditor";
-import { Map } from "immutable";
 import { executeEvents } from "@/utils/events";
-import { PageConfig } from "@/types/page";
+import { PageConfig, ValuesMap } from "@/types/page";
 import Preview from "./pages/Preview";
+
+const testData = {
+  getUserData: {
+    result: [{ id: 1, name: "User 1" }],
+  },
+};
 
 export default function EditorPage() {
   const [pageConfig, setPageConfig] = useState<PageConfig>({
@@ -23,13 +23,8 @@ export default function EditorPage() {
     widgetsCount: 0,
   });
 
-  const [widgetsValuesMap, setWidgetsValuesMap] = useState<WidgetsValueMap>(
-    Map<string, any>()
-  );
-
-  const [actionsValuesMap, setActionsValuesMap] = useState<ActionsValueMap>(
-    Map<string, any>()
-  );
+  const [widgetsValuesMap, setWidgetsValuesMap] = useState<ValuesMap>({});
+  const [actionsValuesMap, setActionsValuesMap] = useState<ValuesMap>(testData);
 
   function updatePageWidgets(widgetsMap: WidgetsMap) {
     setPageConfig((prev) => ({ ...prev, widgets: widgetsMap }));
@@ -40,7 +35,7 @@ export default function EditorPage() {
   }
 
   function updateWidgetsValue(id: string, value: any) {
-    setWidgetsValuesMap((prev) => prev.set(id, value));
+    setWidgetsValuesMap((prev) => ({ ...prev, [id]: value }));
   }
 
   function increaseWidgetsCount() {
@@ -60,8 +55,10 @@ export default function EditorPage() {
       widgetsValuesMap,
     });
     setActionsValuesMap((prev) => {
-      results.forEach((res) => prev.set(res.actionId, res.result));
-      return prev;
+      return results.reduce(
+        (acc, res) => ({ ...acc, [res.actionName]: res.result }),
+        prev
+      );
     });
   }
 
@@ -77,6 +74,7 @@ export default function EditorPage() {
               updatePageWidgets={updatePageWidgets}
               increaseWidgetsCount={increaseWidgetsCount}
               updateWidgetsValue={updateWidgetsValue}
+              actionsValuesMap={actionsValuesMap}
             />
           }
         />

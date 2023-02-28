@@ -7,6 +7,7 @@ import WidgetList from "./components/WidgetList";
 import RightSidePanel from "./components/RightSidePanel";
 import { ActionsMap, WidgetComponent, WidgetsMap } from "@/types/widget";
 import { createNewWidgetFromDropItem } from "@/utils/widget";
+import { ValuesMap } from "@/types/page";
 
 interface WidgetsEditorProps {
   widgetsMap: WidgetsMap;
@@ -14,6 +15,7 @@ interface WidgetsEditorProps {
   increaseWidgetsCount: () => number;
   updateWidgetsValue: (id: string, value: any) => void;
   actionMap: ActionsMap;
+  actionsValuesMap: ValuesMap;
 }
 
 export default function Editor({
@@ -22,6 +24,7 @@ export default function Editor({
   increaseWidgetsCount,
   updateWidgetsValue,
   actionMap,
+  actionsValuesMap,
 }: WidgetsEditorProps) {
   const [selectedWidget, setSelectedWidget] = useState<WidgetComponent | null>(
     null
@@ -87,6 +90,7 @@ export default function Editor({
             onWidgetClick={onWidgetClick}
             onWidgetUpdate={onWidgetUpdate}
             updateWidgetsValue={updateWidgetsValue}
+            actionsValuesMap={actionsValuesMap}
           ></Canvas>
           <CustomDragLayer />
         </>

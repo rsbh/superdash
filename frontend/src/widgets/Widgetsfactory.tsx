@@ -3,6 +3,7 @@ import { WidgetTypes } from "@/types/widget";
 import ButtonWidget from "./Button";
 import InputWidget from "./Input";
 import TableWidget from "./Table";
+import { ValuesMap } from "@/types/page";
 
 interface WidgetFactoryProps {
   name: string;
@@ -12,6 +13,7 @@ interface WidgetFactoryProps {
   config: Record<string, any>;
   updateWidgetsValue: (widgetId: string, value: any) => void;
   handleWidgetEvent?: (widgetId: string, eventName: string) => void;
+  actionsValuesMap: ValuesMap;
 }
 
 export const WidgetFactory = ({
@@ -22,6 +24,7 @@ export const WidgetFactory = ({
   updateWidgetsValue,
   handleWidgetEvent,
   name,
+  actionsValuesMap,
 }: WidgetFactoryProps) => {
   switch (widgetType) {
     case "BUTTON":
@@ -52,6 +55,7 @@ export const WidgetFactory = ({
           name={name}
           config={config}
           handleWidgetEvent={handleWidgetEvent}
+          actionsValuesMap={actionsValuesMap}
         />
       );
     default:

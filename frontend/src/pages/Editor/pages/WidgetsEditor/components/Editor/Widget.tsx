@@ -3,12 +3,14 @@ import { CSSProperties, useEffect, useState } from "react";
 import { WidgetComponent } from "@/types/widget";
 import { WidgetFactory } from "@/widgets/Widgetsfactory";
 import { DragWrapper } from "./DragWrapper";
+import { ValuesMap } from "@/types/page";
 
 interface WidgetProps {
   widget: WidgetComponent;
   onClick?: (id: string) => void;
   onWidgetUpdate?: (id: string, updatedData: WidgetComponent) => void;
   updateWidgetsValue: (id: string, value: any) => void;
+  actionsValuesMap: ValuesMap;
 }
 
 function addSize(pxSize: string, delta: number): string {
@@ -21,6 +23,7 @@ export const Widget = ({
   onClick,
   onWidgetUpdate,
   updateWidgetsValue,
+  actionsValuesMap,
 }: WidgetProps) => {
   const { id, name, styles, widgetType, config, events } = widget;
   const [isDragEnabled, setIsDragEnabled] = useState<boolean>(true);
@@ -99,6 +102,7 @@ export const Widget = ({
           config={config}
           updateWidgetsValue={updateWidgetsValue}
           name={name}
+          actionsValuesMap={actionsValuesMap}
         ></WidgetFactory>
       </Resizable>
     </DragWrapper>

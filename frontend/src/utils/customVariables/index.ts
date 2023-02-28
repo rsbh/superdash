@@ -24,11 +24,15 @@ export function runCustomCode(code: string, { actions, widgets }: PageData) {
   )(widgets, actions);
 }
 
+export function trimCustomVariableRegex(str: string) {
+  return str.replaceAll(/{{|}}/g, "");
+}
+
 export function resolveCustomVariables(data: string, pageData: PageData) {
   const variables = data.match(VARIABLE_REGEX);
   let dataWithValues = data;
   variables?.forEach((v) => {
-    const fnBodyStr = v.replaceAll(/{{|}}/g, "");
+    const fnBodyStr = trimCustomVariableRegex(v);
     const result = runCustomCode(fnBodyStr, pageData);
     dataWithValues = dataWithValues.replaceAll(v, result);
   });

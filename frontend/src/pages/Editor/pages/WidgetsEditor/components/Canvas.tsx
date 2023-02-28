@@ -2,6 +2,7 @@ import { useDrop } from "react-dnd";
 import { DefaultDragType } from "@/constants/widget";
 import { WidgetComponent, WidgetsMap } from "@/types/widget";
 import { Widget } from "./Editor/Widget";
+import { ValuesMap } from "@/types/page";
 
 interface CanvasProps {
   componentList: WidgetsMap;
@@ -9,6 +10,7 @@ interface CanvasProps {
   onWidgetClick?: (id: string) => void;
   onWidgetUpdate?: (id: string, updatedData: WidgetComponent) => void;
   updateWidgetsValue: (id: string, value: any) => void;
+  actionsValuesMap: ValuesMap;
 }
 
 export const Canvas = ({
@@ -17,6 +19,7 @@ export const Canvas = ({
   componentList,
   onWidgetUpdate,
   updateWidgetsValue,
+  actionsValuesMap,
 }: CanvasProps) => {
   const [collectedProps, drop] = useDrop(
     () => ({
@@ -47,6 +50,7 @@ export const Canvas = ({
           onClick={onWidgetClick}
           onWidgetUpdate={onWidgetUpdate}
           updateWidgetsValue={updateWidgetsValue}
+          actionsValuesMap={actionsValuesMap}
         />
       ))}
     </div>

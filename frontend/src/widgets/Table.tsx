@@ -78,11 +78,12 @@ export default function TableWidget({
     }
   }, [actionsValuesMap, config["data"]]);
 
+  const columns = useMemo(() => {
+    return config["columns"];
+  }, [config["columns"]]);
+
   useEffect(() => {
-    if (
-      (!config["columns"] || config["columns"].length === 0) &&
-      onWidgetUpdate
-    ) {
+    if ((!columns || columns.length === 0) && onWidgetUpdate) {
       const columnsFromHeadings = tableData.headings.map((h) => ({
         label: h,
       }));
@@ -94,7 +95,7 @@ export default function TableWidget({
         },
       });
     }
-  }, [tableData.headings, config["columns"]]);
+  }, [tableData.headings, columns]);
 
   return (
     <TableWrapper style={style}>
@@ -108,8 +109,8 @@ export default function TableWidget({
       <Table>
         <THead>
           <Tr>
-            {tableData.headings.map((h, i) => (
-              <Th key={`${h}-i`}>{h}</Th>
+            {columns.map((h: any, i: number) => (
+              <Th key={`${h.label}-i`}>{h.label}</Th>
             ))}
           </Tr>
         </THead>

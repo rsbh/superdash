@@ -2,6 +2,7 @@ import Input from "@/components/Input";
 import { BASE_WIDGET_MAP } from "@/constants/widget";
 import { ActionsMap, WidgetComponent } from "@/types/widget";
 import { CSSProperties, useMemo } from "react";
+import PropertiesTab from "./PropertiesTab";
 
 interface RightSidePanelProps {
   selectedWidget: WidgetComponent | null;
@@ -32,19 +33,6 @@ export default function RightSidePanel({
       onWidgetUpdate(selectedWidget.id, {
         ...selectedWidget,
         styles: newStyles,
-      });
-    };
-
-  const onConfigChange =
-    (id: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
-      const value = e.target.value;
-      const newConfig = {
-        ...selectedWidget.config,
-        [id]: value,
-      };
-      onWidgetUpdate(selectedWidget.id, {
-        ...selectedWidget,
-        config: newConfig,
       });
     };
 
@@ -96,24 +84,10 @@ export default function RightSidePanel({
           );
         })}
       </div>
-      <div>
-        <h2>Properties</h2>
-        {baseWidget.configs.map((c) => {
-          return (
-            <div
-              key={selectedWidget.id + "-" + c.id}
-              className="widget-property-item"
-            >
-              <Input
-                id={selectedWidget.id + "-" + c.id}
-                label={c.label}
-                value={selectedWidget.config[c.id]}
-                onChange={onConfigChange(c.id)}
-              ></Input>
-            </div>
-          );
-        })}
-      </div>
+      <PropertiesTab
+        onWidgetUpdate={onWidgetUpdate}
+        selectedWidget={selectedWidget}
+      />
       <div>
         <h2>Events</h2>
         {baseWidget.events.map((e) => {

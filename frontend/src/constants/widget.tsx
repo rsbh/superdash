@@ -98,7 +98,13 @@ export const BASE_WIDGET_MAP: Record<WidgetTypes, BaseWidget> = {
         defaultValue: "",
       },
     ],
-    events: [],
+    events: [
+      {
+        id: "onLoad",
+        label: "onLoad",
+        defaultValue: [],
+      },
+    ],
   },
 };
 

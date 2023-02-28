@@ -1,16 +1,31 @@
 import { Table, THead, Tr, Th, Tbody, Td } from "@/components/Table";
-import { CSSProperties } from "react";
+import { CSSProperties, useEffect } from "react";
 
 interface TableWidgetProps {
   data?: any[];
-  style?: CSSProperties;
+  id: string;
+  name: string;
+  style: CSSProperties;
+  config: Record<string, any>;
+  handleWidgetEvent?: (widgetId: string, eventName: string) => void;
 }
 
-export default function TableWidget({ style, data = [] }: TableWidgetProps) {
+export default function TableWidget({
+  id,
+  style,
+  data = [],
+  handleWidgetEvent,
+}: TableWidgetProps) {
   const headings = Object.keys(data?.[0] || {})?.map((key) =>
     key.toUpperCase()
   );
   const rows = data.map((row) => Object.keys(row).map((col) => row[col]));
+
+  useEffect(() => {
+    if (handleWidgetEvent) {
+      handleWidgetEvent(id, "onLoad");
+    }
+  }, []);
   return (
     <>
       <Table style={{ overflow: "scroll", tableLayout: "fixed", ...style }}>

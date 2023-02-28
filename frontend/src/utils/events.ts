@@ -1,12 +1,12 @@
 import { WIDGET_ACTION } from "@/types/actions";
-import { PageConfig } from "@/types/page";
-import { WidgetsValueMap } from "@/types/widget";
+import { PageConfig, ValuesMap } from "@/types/page";
+import { resolveCustomVariables } from "./customVariables";
 
 interface executeEventsArgs {
   widgetId: string;
   eventKey: string;
   pageConfig: PageConfig;
-  widgetsValuesMap: WidgetsValueMap;
+  widgetsValuesMap: ValuesMap;
 }
 
 const VARIABLE_REGEX =
@@ -20,22 +20,22 @@ export async function executeEvents({
 }: executeEventsArgs) {
   const { widgets, actions } = pageConfig;
   const widget = widgets[widgetId];
-  const actionsIds = widget.events[eventKey] as string[];
+  const actionNames = widget.events[eventKey] as string[];
   return Promise.all(
-    actionsIds.map(async (actionId) => {
-      if (actionId !== "none") {
-        const action = actions[actionId];
+    actionNames.map(async (actionName) => {
+      if (actionName !== "none") {
+        const action = actions[actionName];
         const result = await executeEvent({
           widgetsValuesMap,
           action,
         });
         return {
-          actionId,
+          actionName,
           result,
         };
       }
       return {
-        actionId,
+        actionName,
         result: "No Action",
       };
     })
@@ -43,7 +43,7 @@ export async function executeEvents({
 }
 
 interface executeEventArgs {
-  widgetsValuesMap: WidgetsValueMap;
+  widgetsValuesMap: ValuesMap;
   action: WIDGET_ACTION;
 }
 
@@ -52,13 +52,10 @@ export async function executeEvent({
   widgetsValuesMap,
 }: executeEventArgs): Promise<any> {
   const { url, method } = action;
-  let urlWithValues = url;
-  const variables = urlWithValues.match(VARIABLE_REGEX);
-  variables?.forEach((v) => {
-    const [_, id] = v.replaceAll(/{{|}}/gi, "").split("##");
-    if (widgetsValuesMap.has(id)) {
-      urlWithValues = urlWithValues.replaceAll(v, widgetsValuesMap.get(id));
-    }
+  const urlWithValues = resolveCustomVariables(url, {
+    actions: {},
+    widgets: {},
   });
+  console.log(urlWithValues);
   return urlWithValues;
 }

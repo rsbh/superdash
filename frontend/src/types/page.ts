@@ -7,3 +7,5 @@ export interface PageConfig {
   actions: ActionsMap;
   widgetsCount: number;
 }
+
+export type ValuesMap = Record<string, any>;

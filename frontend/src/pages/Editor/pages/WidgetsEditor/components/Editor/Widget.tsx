@@ -22,7 +22,7 @@ export const Widget = ({
   onWidgetUpdate,
   updateWidgetsValue,
 }: WidgetProps) => {
-  const { id, styles, widgetType, config } = widget;
+  const { id, name, styles, widgetType, config, events } = widget;
   const [isDragEnabled, setIsDragEnabled] = useState<boolean>(true);
   const [widgetStyles, setWidgetStyles] = useState<CSSProperties>(styles);
 
@@ -98,6 +98,7 @@ export const Widget = ({
           style={widgetStyles}
           config={config}
           updateWidgetsValue={updateWidgetsValue}
+          name={name}
         ></WidgetFactory>
       </Resizable>
     </DragWrapper>

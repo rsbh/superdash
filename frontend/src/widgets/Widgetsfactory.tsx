@@ -5,6 +5,7 @@ import InputWidget from "./Input";
 import TableWidget from "./Table";
 
 interface WidgetFactoryProps {
+  name: string;
   id: string;
   widgetType: WidgetTypes;
   style?: CSSProperties;
@@ -20,6 +21,7 @@ export const WidgetFactory = ({
   config,
   updateWidgetsValue,
   handleWidgetEvent,
+  name,
 }: WidgetFactoryProps) => {
   switch (widgetType) {
     case "BUTTON":
@@ -35,13 +37,23 @@ export const WidgetFactory = ({
       return (
         <InputWidget
           id={id}
+          name={name}
           style={style}
           config={config}
           updateWidgetsValue={updateWidgetsValue}
+          handleWidgetEvent={handleWidgetEvent}
         />
       );
     case "TABLE":
-      return <TableWidget style={style} />;
+      return (
+        <TableWidget
+          style={style}
+          id={id}
+          name={name}
+          config={config}
+          handleWidgetEvent={handleWidgetEvent}
+        />
+      );
     default:
       return null;
   }

@@ -3,6 +3,7 @@ import { CSSProperties } from "react";
 
 interface InputWidgetProps {
   id: string;
+  name: string;
   style: CSSProperties;
   config: Record<string, any>;
   updateWidgetsValue: (id: string, value: any) => void;
@@ -13,12 +14,13 @@ export default function InputWidget({
   style,
   config,
   id,
+  name,
   updateWidgetsValue,
   handleWidgetEvent,
 }: InputWidgetProps) {
   function onChange(e: React.ChangeEvent<HTMLInputElement>) {
     const value = e.target.value;
-    updateWidgetsValue(id, value);
+    updateWidgetsValue(name, value);
     if (handleWidgetEvent) {
       handleWidgetEvent(id, "onChange");
     }

@@ -5,11 +5,22 @@ interface PageData {
   widgets: Record<string, Record<string, any>>;
 }
 
-function runCustomCode(code: string, { actions, widgets }: PageData) {
-  return Function(
+export function runCustomCode(code: string, { actions, widgets }: PageData) {
+  return new Function(
     "widgets",
     "actions",
-    `'use strict'; return ${code}`
+    `'use strict'; 
+
+    const deepFreeze = obj => {
+      Object.keys(obj).forEach(prop => {
+        if (typeof obj[prop] === 'object' && !Object.isFrozen(obj[prop])) deepFreeze(obj[prop]);
+      });
+      return Object.freeze(obj);
+    };
+
+      deepFreeze(widgets);
+      deepFreeze(actions);
+      return ${code}`
   )(widgets, actions);
 }
 

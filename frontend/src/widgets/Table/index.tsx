@@ -2,7 +2,11 @@ import Button from "@/components/Button";
 import Input from "@/components/Input";
 import { Table, THead, Tr, Th, Tbody, Td } from "@/components/Table";
 import { ValuesMap } from "@/types/page";
-import { TableColumn, TableColumnTypesMap } from "@/types/table";
+import {
+  TableColumn,
+  TableColumnTypes,
+  TableColumnTypesMap,
+} from "@/types/table";
 import { WidgetComponent } from "@/types/widget";
 import {
   runCustomCode,
@@ -34,6 +38,22 @@ const TableTopBar = styled.div`
   justify-content: space-between;
   align-items: center;
 `;
+
+interface TableCellProps {
+  data: any;
+  colType: TableColumnTypes;
+}
+
+function TableCell({ colType, data }: TableCellProps) {
+  switch (colType) {
+    case TableColumnTypesMap.BUTTON:
+      return <Button>Button</Button>;
+    case TableColumnTypesMap.INPUT:
+      return <Input />;
+    default:
+      return <>{data}</>;
+  }
+}
 
 export default function TableWidget({
   id,
@@ -97,7 +117,11 @@ export default function TableWidget({
   const rows = useMemo(() => {
     return tableData.data.map((dataObj) => {
       return columns.map(
-        (col: TableColumn) => (col.key && dataObj[col.key]) || ""
+        (col: TableColumn) =>
+          (col.key && { data: dataObj[col.key], type: col.type }) || {
+            data: "",
+            type: col.type,
+          }
       );
     });
   }, [columns, tableData.data]);
@@ -123,7 +147,9 @@ export default function TableWidget({
           {rows.map((row, i) => (
             <Tr key={i}>
               {row.map((col, j) => (
-                <Td key={`${i}-${j}`}>{col}</Td>
+                <Td key={`${i}-${j}`}>
+                  <TableCell data={col.data} colType={col.type} />
+                </Td>
               ))}
             </Tr>
           ))}

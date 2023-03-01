@@ -1,10 +1,15 @@
 import Input from "@/components/Input";
 import { BASE_WIDGET_MAP } from "@/constants/widget";
-import { TableColumn, TableColumnTypesMap } from "@/types/table";
+import {
+  TableColumn,
+  TableColumnTypes,
+  TableColumnTypesMap,
+} from "@/types/table";
 import { WidgetComponent } from "@/types/widget";
 import { useState } from "react";
 import Collapsible from "@/components/Collapsible";
 import Button from "@/components/Button";
+import Select from "@/components/Select";
 
 interface PropertiesTabProps {
   selectedWidget: WidgetComponent | null;
@@ -24,6 +29,12 @@ interface ColumnPropertyEditor {
   onChange: (e: any) => void;
 }
 
+const tableColumnTypes: Array<{ label: string; value: TableColumnTypes }> = [
+  { label: "Text", value: TableColumnTypesMap.TEXT },
+  { label: "Input", value: TableColumnTypesMap.INPUT },
+  { label: "Button", value: TableColumnTypesMap.BUTTON },
+];
+
 function ColumnPropertyEditor({ columns, onChange }: ColumnPropertyEditor) {
   const [text, setText] = useState("");
 
@@ -40,6 +51,24 @@ function ColumnPropertyEditor({ columns, onChange }: ColumnPropertyEditor) {
       },
     });
   }
+
+  function onColumnTypeUpdate(colLabel: string) {
+    return function (newType: string) {
+      const updatedColumns = columns.map((c) => {
+        return c.label === colLabel
+          ? {
+              ...c,
+              type: newType as TableColumnTypes,
+            }
+          : c;
+      });
+      onChange({
+        target: {
+          value: updatedColumns,
+        },
+      });
+    };
+  }
   return (
     <div className="widget-property-item">
       <h3>Columns</h3>
@@ -50,7 +79,11 @@ function ColumnPropertyEditor({ columns, onChange }: ColumnPropertyEditor) {
               <div>
                 <Input value={c.label} label={"Label"} />
                 <br />
-                <Input value={c.type} label={"Type"} />
+                <Select
+                  onChange={onColumnTypeUpdate(c.label)}
+                  placeholder="Column Type"
+                  options={tableColumnTypes}
+                />
               </div>
             </Collapsible>
           );

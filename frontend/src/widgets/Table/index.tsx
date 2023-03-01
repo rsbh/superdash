@@ -23,6 +23,7 @@ interface TableWidgetProps {
   config: Record<string, any>;
   handleWidgetEvent?: (widgetId: string, eventName: string) => void;
   onWidgetUpdate?: (id: string, updatedData: WidgetComponent) => void;
+  updateWidgetsData: (name: string, value: any, keyName?: string) => void;
   actionsValuesMap: ValuesMap;
 }
 
@@ -64,6 +65,7 @@ export default function TableWidget({
   config,
   name,
   onWidgetUpdate,
+  updateWidgetsData,
 }: TableWidgetProps) {
   useEffect(() => {
     if (handleWidgetEvent) {
@@ -126,6 +128,12 @@ export default function TableWidget({
     });
   }, [columns, tableData.data]);
 
+  function onRowClick(rowData: any) {
+    return function () {
+      updateWidgetsData(name, rowData, "selectedRow");
+    };
+  }
+
   return (
     <TableWrapper style={style}>
       <TableTopBar>
@@ -145,7 +153,7 @@ export default function TableWidget({
         </THead>
         <Tbody>
           {rows.map((row, i) => (
-            <Tr key={i}>
+            <Tr key={i} onClick={onRowClick(row)}>
               {row.map((col, j) => (
                 <Td key={`${i}-${j}`}>
                   <TableCell data={col.data} colType={col.type} />

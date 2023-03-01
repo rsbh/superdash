@@ -13,7 +13,7 @@ interface WidgetFactoryProps {
   widgetType: WidgetTypes;
   style?: CSSProperties;
   config: Record<string, any>;
-  updateWidgetsValue: (widgetId: string, value: any) => void;
+  updateWidgetsData: (name: string, value: any, keyName?: string) => void;
   handleWidgetEvent?: (widgetId: string, eventName: string) => void;
   onWidgetUpdate?: (id: string, updatedData: WidgetComponent) => void;
   actionsValuesMap: ValuesMap;
@@ -25,7 +25,7 @@ export const WidgetFactory = ({
   widgetType,
   style = {},
   config,
-  updateWidgetsValue,
+  updateWidgetsData,
   handleWidgetEvent,
   name,
   actionsValuesMap,
@@ -48,7 +48,7 @@ export const WidgetFactory = ({
           name={name}
           style={style}
           config={config}
-          updateWidgetsValue={updateWidgetsValue}
+          updateWidgetsData={updateWidgetsData}
           handleWidgetEvent={handleWidgetEvent}
         />
       );
@@ -63,6 +63,7 @@ export const WidgetFactory = ({
           actionsValuesMap={actionsValuesMap}
           onWidgetUpdate={onWidgetUpdate}
           widget={widget}
+          updateWidgetsData={updateWidgetsData}
         />
       );
     case "SELECT":
@@ -72,7 +73,7 @@ export const WidgetFactory = ({
           name={name}
           style={style}
           config={config}
-          updateWidgetsValue={updateWidgetsValue}
+          updateWidgetsData={updateWidgetsData}
           handleWidgetEvent={handleWidgetEvent}
         />
       );

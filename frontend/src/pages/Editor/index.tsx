@@ -34,8 +34,18 @@ export default function EditorPage() {
     setPageConfig((prev) => ({ ...prev, actions: actionMap }));
   }
 
-  function updateWidgetsValue(id: string, value: any) {
-    setWidgetsValuesMap((prev) => ({ ...prev, [id]: value }));
+  function updateWidgetsData(
+    name: string,
+    value: any,
+    keyName: string = "value"
+  ) {
+    setWidgetsValuesMap((prev) => ({
+      ...prev,
+      [name]: {
+        ...prev.id,
+        [keyName]: value,
+      },
+    }));
   }
 
   function increaseWidgetsCount() {
@@ -73,7 +83,7 @@ export default function EditorPage() {
               actionMap={pageConfig.actions}
               updatePageWidgets={updatePageWidgets}
               increaseWidgetsCount={increaseWidgetsCount}
-              updateWidgetsValue={updateWidgetsValue}
+              updateWidgetsData={updateWidgetsData}
               actionsValuesMap={actionsValuesMap}
             />
           }

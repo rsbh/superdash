@@ -6,7 +6,7 @@ interface InputWidgetProps {
   name: string;
   style: CSSProperties;
   config: Record<string, any>;
-  updateWidgetsValue: (id: string, value: any) => void;
+  updateWidgetsData: (name: string, value: any) => void;
   handleWidgetEvent?: (widgetId: string, eventName: string) => void;
 }
 
@@ -15,12 +15,12 @@ export default function InputWidget({
   config,
   id,
   name,
-  updateWidgetsValue,
+  updateWidgetsData,
   handleWidgetEvent,
 }: InputWidgetProps) {
   function onChange(e: React.ChangeEvent<HTMLInputElement>) {
     const value = e.target.value;
-    updateWidgetsValue(name, value);
+    updateWidgetsData(name, value);
     if (handleWidgetEvent) {
       handleWidgetEvent(id, "onChange");
     }

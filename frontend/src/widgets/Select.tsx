@@ -7,7 +7,7 @@ interface SelectWidgetProps {
   name: string;
   style: CSSProperties;
   config: Record<string, any>;
-  updateWidgetsValue: (id: string, value: any) => void;
+  updateWidgetsData: (name: string, value: any) => void;
   handleWidgetEvent?: (widgetId: string, eventName: string) => void;
 }
 
@@ -16,11 +16,11 @@ export default function SelectWidget({
   config,
   id,
   name,
-  updateWidgetsValue,
+  updateWidgetsData,
   handleWidgetEvent,
 }: SelectWidgetProps) {
   function onChange(value: string) {
-    updateWidgetsValue(name, value);
+    updateWidgetsData(name, value);
     if (handleWidgetEvent) {
       handleWidgetEvent(id, "onChange");
     }

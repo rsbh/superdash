@@ -9,7 +9,7 @@ interface CanvasProps {
   onDrop: (i: WidgetComponent) => void;
   onWidgetClick?: (id: string) => void;
   onWidgetUpdate?: (id: string, updatedData: WidgetComponent) => void;
-  updateWidgetsValue: (id: string, value: any) => void;
+  updateWidgetsData: (name: string, value: any, keyName?: string) => void;
   actionsValuesMap: ValuesMap;
 }
 
@@ -18,7 +18,7 @@ export const Canvas = ({
   onDrop,
   componentList,
   onWidgetUpdate,
-  updateWidgetsValue,
+  updateWidgetsData,
   actionsValuesMap,
 }: CanvasProps) => {
   const [collectedProps, drop] = useDrop(
@@ -49,7 +49,7 @@ export const Canvas = ({
           widget={c}
           onClick={onWidgetClick}
           onWidgetUpdate={onWidgetUpdate}
-          updateWidgetsValue={updateWidgetsValue}
+          updateWidgetsData={updateWidgetsData}
           actionsValuesMap={actionsValuesMap}
         />
       ))}

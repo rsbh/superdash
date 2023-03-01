@@ -9,7 +9,7 @@ interface WidgetProps {
   widget: WidgetComponent;
   onClick?: (id: string) => void;
   onWidgetUpdate?: (id: string, updatedData: WidgetComponent) => void;
-  updateWidgetsValue: (id: string, value: any) => void;
+  updateWidgetsData: (name: string, value: any, keyName?: string) => void;
   actionsValuesMap: ValuesMap;
 }
 
@@ -22,7 +22,7 @@ export const Widget = ({
   widget,
   onClick,
   onWidgetUpdate,
-  updateWidgetsValue,
+  updateWidgetsData,
   actionsValuesMap,
 }: WidgetProps) => {
   const { id, name, styles, widgetType, config, events } = widget;
@@ -101,7 +101,7 @@ export const Widget = ({
           widgetType={widgetType}
           style={widgetStyles}
           config={config}
-          updateWidgetsValue={updateWidgetsValue}
+          updateWidgetsData={updateWidgetsData}
           name={name}
           actionsValuesMap={actionsValuesMap}
           onWidgetUpdate={onWidgetUpdate}

@@ -1,4 +1,4 @@
-import { PageConfig } from "@/types/page";
+import { PageConfig, ValuesMap } from "@/types/page";
 import { WidgetComponent } from "@/types/widget";
 import { executeEvents } from "@/utils/events";
 import { useMemo, useState } from "react";
@@ -9,16 +9,22 @@ interface PreviewProps {
 }
 
 export default function Preview({ pageConfig }: PreviewProps) {
-  const [widgetsValuesMap, setWidgetsValuesMap] = useState<Record<string, any>>(
-    {}
-  );
-  const [actionsValuesMap, setActionsValuesMap] = useState<Record<string, any>>(
-    {}
-  );
+  const [widgetsValuesMap, setWidgetsValuesMap] = useState<ValuesMap>({});
+  const [actionsValuesMap, setActionsValuesMap] = useState<ValuesMap>({});
 
   const widgetsMap = useMemo(() => pageConfig.widgets, [pageConfig.widgets]);
-  function updateWidgetsValue(id: string, value: any) {
-    setWidgetsValuesMap((prev) => ({ ...prev, [id]: value }));
+  function updateWidgetsData(
+    name: string,
+    value: any,
+    keyName: string = "value"
+  ) {
+    setWidgetsValuesMap((prev) => ({
+      ...prev,
+      [name]: {
+        ...prev.name,
+        [keyName]: value,
+      },
+    }));
   }
 
   async function handleWidgetEvent(widgetId: string, eventKey: string) {
@@ -48,7 +54,8 @@ export default function Preview({ pageConfig }: PreviewProps) {
             widgetType={widgetType}
             style={{ ...styles, position: "absolute" }}
             config={config}
-            updateWidgetsValue={updateWidgetsValue}
+            widget={wc}
+            updateWidgetsData={updateWidgetsData}
             handleWidgetEvent={handleWidgetEvent}
             actionsValuesMap={actionsValuesMap}
           ></WidgetFactory>

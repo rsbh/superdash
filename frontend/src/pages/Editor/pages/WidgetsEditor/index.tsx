@@ -13,7 +13,7 @@ interface WidgetsEditorProps {
   widgetsMap: WidgetsMap;
   updatePageWidgets: (widgetsMap: WidgetsMap) => void;
   increaseWidgetsCount: () => number;
-  updateWidgetsValue: (id: string, value: any) => void;
+  updateWidgetsData: (name: string, value: any, keyName?: string) => void;
   actionMap: ActionsMap;
   actionsValuesMap: ValuesMap;
 }
@@ -22,13 +22,12 @@ export default function Editor({
   updatePageWidgets,
   widgetsMap,
   increaseWidgetsCount,
-  updateWidgetsValue,
+  updateWidgetsData,
   actionMap,
   actionsValuesMap,
 }: WidgetsEditorProps) {
-  const [selectedWidget, setSelectedWidget] = useState<WidgetComponent | null>(
-    null
-  );
+  const [selectedWidget, setSelectedWidget] =
+    useState<WidgetComponent | null>(null);
 
   function onDrop(item: WidgetComponent) {
     const widgetCompoenent = item.id
@@ -89,7 +88,7 @@ export default function Editor({
             onDrop={onDrop}
             onWidgetClick={onWidgetClick}
             onWidgetUpdate={onWidgetUpdate}
-            updateWidgetsValue={updateWidgetsValue}
+            updateWidgetsData={updateWidgetsData}
             actionsValuesMap={actionsValuesMap}
           ></Canvas>
           <CustomDragLayer />

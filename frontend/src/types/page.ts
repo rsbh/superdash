@@ -8,4 +8,4 @@ export interface PageConfig {
   widgetsCount: number;
 }
 
-export type ValuesMap = Record<string, any>;
+export type ValuesMap = Record<string, Record<string, any>>;

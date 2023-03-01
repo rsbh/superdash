@@ -1,4 +1,5 @@
 import Input from "@/components/Input";
+import Tabs from "@/components/Tabs";
 import { ActionsMap, WidgetComponent } from "@/types/widget";
 import EventsTab from "./EventsTab";
 import PropertiesTab from "./PropertiesTab";
@@ -35,18 +36,41 @@ export default function RightSidePanel({
           onChange={onNameChange}
         />
       </div>
-      <StylesTab
-        onWidgetUpdate={onWidgetUpdate}
-        selectedWidget={selectedWidget}
-      />
-      <PropertiesTab
-        onWidgetUpdate={onWidgetUpdate}
-        selectedWidget={selectedWidget}
-      />
-      <EventsTab
-        onWidgetUpdate={onWidgetUpdate}
-        selectedWidget={selectedWidget}
-        actionMap={actionMap}
+      <Tabs
+        defaultValue="properties"
+        tabs={[
+          {
+            value: "styles",
+            label: "Styles",
+            content: (
+              <StylesTab
+                onWidgetUpdate={onWidgetUpdate}
+                selectedWidget={selectedWidget}
+              />
+            ),
+          },
+          {
+            value: "properties",
+            label: "Properties",
+            content: (
+              <PropertiesTab
+                onWidgetUpdate={onWidgetUpdate}
+                selectedWidget={selectedWidget}
+              />
+            ),
+          },
+          {
+            value: "events",
+            label: "Events",
+            content: (
+              <EventsTab
+                onWidgetUpdate={onWidgetUpdate}
+                selectedWidget={selectedWidget}
+                actionMap={actionMap}
+              />
+            ),
+          },
+        ]}
       />
     </div>
   );

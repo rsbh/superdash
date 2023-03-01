@@ -163,7 +163,6 @@ export default function PropertiesTab({
 
   return (
     <div>
-      <h2>Properties</h2>
       {baseWidget.configs.map((c) => {
         return (
           <PropertiesItem

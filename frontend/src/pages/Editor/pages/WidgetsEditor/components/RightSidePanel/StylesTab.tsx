@@ -31,7 +31,6 @@ export default function StylesTab({
 
   return (
     <div>
-      <h2>Styles</h2>
       {baseWidget.styleProperties.map((s) => {
         return (
           <div

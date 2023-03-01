@@ -36,7 +36,6 @@ export default function EventsTab({
 
   return (
     <div>
-      <h2>Events</h2>
       {baseWidget.events.map((e) => {
         return (
           <div

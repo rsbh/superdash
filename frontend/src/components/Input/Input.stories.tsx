@@ -11,3 +11,4 @@ export default {
 
 export const Primary = () => <Input label="Label" />;
 export const LabelTop = () => <Input label="Label" labelPostion="top" />;
+export const LabelRight = () => <Input label="Label" labelPostion="right" />;

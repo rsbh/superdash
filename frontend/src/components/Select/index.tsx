@@ -1,10 +1,8 @@
 import { blackA, whiteA } from "@radix-ui/colors";
 import * as RadixSelect from "@radix-ui/react-select";
-import { RxChevronDown, RxChevronUp } from "react-icons/rx";
+import { RxChevronDown } from "react-icons/rx";
 import styled from "styled-components";
-
-import * as Label from "@radix-ui/react-label";
-type LabelPosition = "left" | "top";
+import Label, { LabelPosition } from "../Label";
 
 interface SelectProps {
   id?: string;
@@ -14,13 +12,6 @@ interface SelectProps {
   label?: string;
   onChange: (value: string) => void;
 }
-
-const StyledLabel = styled(Label.Root)<{ labelPostion?: LabelPosition }>`
-  font-size: 16;
-  font-weight: 600;
-  margin-right: ${({ labelPostion }) => (labelPostion === "left" ? "16px" : 0)};
-  margin-bottom: ${({ labelPostion }) => (labelPostion === "left" ? 0 : "8px")};
-`;
 
 const SelectTrigger = styled(RadixSelect.Trigger)`
   all: unset;
@@ -75,16 +66,6 @@ const SelectItem = styled(RadixSelect.Item)`
   }
 `;
 
-const SelectWrapper = styled.div<{ labelPostion?: LabelPosition }>`
-  display: flex;
-  justify-content: center;
-  align-items: ${({ labelPostion }) =>
-    labelPostion === "left" ? "center" : "left"};
-  width: fit-content;
-  flex-direction: ${({ labelPostion }) =>
-    labelPostion === "left" ? "row" : "column"};
-`;
-
 export default function Select({
   placeholder,
   options,
@@ -94,12 +75,7 @@ export default function Select({
   onChange,
 }: SelectProps) {
   return (
-    <SelectWrapper labelPostion={labelPostion}>
-      {label ? (
-        <StyledLabel htmlFor={id} labelPostion={labelPostion}>
-          {label}
-        </StyledLabel>
-      ) : null}
+    <Label label={label} htmlFor={id} position={labelPostion}>
       <RadixSelect.Root onValueChange={onChange}>
         <SelectTrigger>
           <RadixSelect.Value placeholder={placeholder} />
@@ -120,6 +96,6 @@ export default function Select({
           </SelectContent>
         </RadixSelect.Portal>
       </RadixSelect.Root>
-    </SelectWrapper>
+    </Label>
   );
 }

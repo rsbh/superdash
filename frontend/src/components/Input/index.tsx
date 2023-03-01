@@ -1,8 +1,6 @@
 import styled from "styled-components";
 import { blackA, whiteA } from "@radix-ui/colors";
-import * as Label from "@radix-ui/react-label";
-
-type LabelPosition = "left" | "top";
+import Label, { LabelPosition } from "../Label";
 
 const InputBox = styled.input`
   box-shadow: none;
@@ -18,23 +16,6 @@ const InputBox = styled.input`
   &:focus {
     outline: none;
   }
-`;
-
-const StyledLabel = styled(Label.Root)<{ labelPostion?: LabelPosition }>`
-  font-size: 16;
-  font-weight: 600;
-  margin-right: ${({ labelPostion }) => (labelPostion === "left" ? "16px" : 0)};
-  margin-bottom: ${({ labelPostion }) => (labelPostion === "left" ? 0 : "8px")};
-`;
-
-const InputWrapper = styled.div<{ labelPostion?: LabelPosition }>`
-  display: flex;
-  justify-content: center;
-  align-items: ${({ labelPostion }) =>
-    labelPostion === "left" ? "center" : "left"};
-  width: fit-content;
-  flex-direction: ${({ labelPostion }) =>
-    labelPostion === "left" ? "row" : "column"};
 `;
 
 interface InputProps {
@@ -57,12 +38,7 @@ export default function Input({
   labelPostion = "left",
 }: InputProps) {
   return (
-    <InputWrapper labelPostion={labelPostion}>
-      {label ? (
-        <StyledLabel htmlFor={id} labelPostion={labelPostion}>
-          {label}
-        </StyledLabel>
-      ) : null}
+    <Label position={labelPostion} htmlFor={id} label={label}>
       <InputBox
         value={value}
         onChange={onChange}
@@ -70,6 +46,6 @@ export default function Input({
         placeholder={placeholder}
         type={type}
       />
-    </InputWrapper>
+    </Label>
   );
 }

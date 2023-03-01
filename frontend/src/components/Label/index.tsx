@@ -4,26 +4,29 @@ import styled from "styled-components";
 
 export type LabelPosition = "left" | "top" | "right";
 
-export const StyledLabel = styled(RadixLabel.Root)<{
-  labelPostion?: LabelPosition;
-}>`
+export const StyledLabel = styled(RadixLabel.Root).withConfig({
+  shouldForwardProp: (prop) => !["labelPosition"].includes(prop),
+})<{ labelPosition?: LabelPosition }>`
   font-size: 16;
   font-weight: 600;
-  margin-right: ${({ labelPostion }) => (labelPostion === "left" ? "16px" : 0)};
-  margin-bottom: ${({ labelPostion }) => (labelPostion === "top" ? "8px" : 0)};
-  margin-left: ${({ labelPostion }) => (labelPostion === "right" ? "16px" : 0)};
+  margin-right: ${({ labelPosition }) =>
+    labelPosition === "left" ? "16px" : 0};
+  margin-bottom: ${({ labelPosition }) =>
+    labelPosition === "top" ? "8px" : 0};
+  margin-left: ${({ labelPosition }) =>
+    labelPosition === "right" ? "16px" : 0};
 `;
 
-export const LabelWrapper = styled.div<{ labelPostion?: LabelPosition }>`
+export const LabelWrapper = styled.div<{ labelPosition?: LabelPosition }>`
   display: flex;
   justify-content: center;
-  align-items: ${({ labelPostion }) =>
-    labelPostion === "top" ? "left" : "center"};
+  align-items: ${({ labelPosition }) =>
+    labelPosition === "top" ? "left" : "center"};
   width: fit-content;
-  flex-direction: ${({ labelPostion }) =>
-    labelPostion === "left"
+  flex-direction: ${({ labelPosition }) =>
+    labelPosition === "left"
       ? "row"
-      : labelPostion === "right"
+      : labelPosition === "right"
       ? "row-reverse"
       : "column"};
 `;
@@ -42,9 +45,9 @@ export default function Label({
   children,
 }: LabelProps) {
   return (
-    <LabelWrapper labelPostion={position}>
+    <LabelWrapper labelPosition={position}>
       {label ? (
-        <StyledLabel htmlFor={htmlFor} labelPostion={position}>
+        <StyledLabel htmlFor={htmlFor} labelPosition={position}>
           {label}
         </StyledLabel>
       ) : null}

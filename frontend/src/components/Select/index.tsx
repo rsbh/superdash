@@ -7,7 +7,7 @@ import Label, { LabelPosition } from "../Label";
 interface SelectProps {
   id?: string;
   placeholder?: string;
-  options: Array<{ label: string; value: string }>;
+  options: Array<{ label: string; value: string; key?: string | number }>;
   labelPostion?: LabelPosition;
   label?: string;
   onChange: (value: string) => void;
@@ -88,7 +88,7 @@ export default function Select({
           <SelectContent>
             <SelectViewport>
               {options.map((o) => (
-                <SelectItem value={o.value}>
+                <SelectItem value={o.value} key={o.key || o.value}>
                   <RadixSelect.ItemText>{o.label}</RadixSelect.ItemText>
                 </SelectItem>
               ))}

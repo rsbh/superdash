@@ -1,10 +1,9 @@
-import { Map } from "immutable";
 import React, { useEffect, useState } from "react";
 import { Mention, MentionsInput } from "react-mentions";
 import styled from "styled-components";
 import { v4 as uuidv4 } from "uuid";
 import { MdClose, MdSave } from "react-icons/md";
-import * as Tabs from "@radix-ui/react-tabs";
+import Tabs from "@/components/Tabs";
 
 import {
   REST_API_METHODS,
@@ -15,8 +14,8 @@ import {
 import { ActionsMap } from "@/types/widget";
 import { executeEvent } from "@/utils/events";
 import Button from "@/components/Button";
-import { mauve, violet } from "@radix-ui/colors";
 import InputWrapper from "@/components/Input";
+import { ValuesMap } from "@/types/page";
 
 const methods = [
   {
@@ -80,48 +79,6 @@ const RunActionButton = styled(Button)`
   cursor: pointer;
 `;
 
-const TabsRoot = styled(Tabs.Root)({
-  display: "flex",
-  flexDirection: "column",
-});
-
-const TabsList = styled(Tabs.List)({
-  flexShrink: 0,
-  display: "flex",
-  borderBottom: `1px solid ${mauve.mauve6}`,
-  width: "300px",
-});
-
-const TabsTrigger = styled(Tabs.Trigger)({
-  all: "unset",
-  fontFamily: "inherit",
-  backgroundColor: "white",
-  padding: "0 20px",
-  height: 45,
-  flex: 1,
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  fontSize: 15,
-  lineHeight: 1,
-  color: mauve.mauve11,
-  userSelect: "none",
-  "&:first-child": { borderTopLeftRadius: 6 },
-  "&:last-child": { borderTopRightRadius: 6 },
-  "&:hover": { color: violet.violet11 },
-  '&[data-state="active"]': {
-    color: violet.violet11,
-    boxShadow: "inset 0 -1px 0 0 currentColor, 0 1px 0 0 currentColor",
-  },
-  "&:focus": { position: "relative", boxShadow: `0 0 0 2px black` },
-});
-
-const TabsContent = styled(Tabs.Content)({
-  flexGrow: 1,
-  padding: 20,
-  outline: "none",
-});
-
 const KeyValueTable = styled.table``;
 const KeyValueTableHead = styled.th`
   display: flex;
@@ -136,7 +93,7 @@ const KeyValueTableCol = styled.td`
 
 interface RestActionFormProps {
   widgetsVariables: Array<{ id: string; display: string }>;
-  widgetsValuesMap: Map<string, any>;
+  widgetsValuesMap: ValuesMap;
   updatePageActions: (actionMap: ActionsMap) => void;
   actionMap: ActionsMap;
   onClose: () => void;
@@ -247,58 +204,68 @@ export default function RestActionForm({
           <RunActionButton onClick={onClick}>Go</RunActionButton>
         </RestActionMethodURLWrapper>
         <RestActionMethodContentWrapper>
-          <TabsRoot defaultValue="params">
-            <TabsList>
-              <TabsTrigger value="params">Params</TabsTrigger>
-              <TabsTrigger value="headers">Headers</TabsTrigger>
-              <TabsTrigger value="body">Body</TabsTrigger>
-            </TabsList>
-            <TabsContent value="params">
-              <KeyValueTable>
-                <KeyValueTableHead>
-                  <KeyValueTableRow>
-                    <KeyValueTableCol width={"200px"}>Key</KeyValueTableCol>
-                    <KeyValueTableCol>Value</KeyValueTableCol>
-                  </KeyValueTableRow>
-                </KeyValueTableHead>
-                <tbody>
-                  {params.map((p) => (
-                    <KeyValueTableRow key={p.key}>
-                      <KeyValueTableCol width={"200px"}>
-                        <InputWrapper value={p.keyName} />
-                      </KeyValueTableCol>
-                      <KeyValueTableCol>
-                        <InputWrapper value={p.value} />
-                      </KeyValueTableCol>
-                    </KeyValueTableRow>
-                  ))}
-                </tbody>
-              </KeyValueTable>
-            </TabsContent>
-            <TabsContent value="headers">
-              <KeyValueTable>
-                <KeyValueTableHead>
-                  <KeyValueTableRow>
-                    <KeyValueTableCol width={"200px"}>Key</KeyValueTableCol>
-                    <KeyValueTableCol>Value</KeyValueTableCol>
-                  </KeyValueTableRow>
-                </KeyValueTableHead>
-                <tbody>
-                  {params.map((p) => (
-                    <KeyValueTableRow key={p.key}>
-                      <KeyValueTableCol width={"200px"}>
-                        <InputWrapper value={p.keyName} />
-                      </KeyValueTableCol>
-                      <KeyValueTableCol>
-                        <InputWrapper value={p.value} />
-                      </KeyValueTableCol>
-                    </KeyValueTableRow>
-                  ))}
-                </tbody>
-              </KeyValueTable>
-            </TabsContent>
-            <TabsContent value="body">Body</TabsContent>
-          </TabsRoot>
+          <Tabs
+            defaultValue="params"
+            tabs={[
+              {
+                value: "params",
+                label: "Params",
+                content: (
+                  <KeyValueTable>
+                    <KeyValueTableHead>
+                      <KeyValueTableRow>
+                        <KeyValueTableCol width={"200px"}>Key</KeyValueTableCol>
+                        <KeyValueTableCol>Value</KeyValueTableCol>
+                      </KeyValueTableRow>
+                    </KeyValueTableHead>
+                    <tbody>
+                      {params.map((p) => (
+                        <KeyValueTableRow key={p.key}>
+                          <KeyValueTableCol width={"200px"}>
+                            <InputWrapper value={p.keyName} />
+                          </KeyValueTableCol>
+                          <KeyValueTableCol>
+                            <InputWrapper value={p.value} />
+                          </KeyValueTableCol>
+                        </KeyValueTableRow>
+                      ))}
+                    </tbody>
+                  </KeyValueTable>
+                ),
+              },
+              {
+                value: "headers",
+                label: "Headers",
+                content: (
+                  <KeyValueTable>
+                    <KeyValueTableHead>
+                      <KeyValueTableRow>
+                        <KeyValueTableCol width={"200px"}>Key</KeyValueTableCol>
+                        <KeyValueTableCol>Value</KeyValueTableCol>
+                      </KeyValueTableRow>
+                    </KeyValueTableHead>
+                    <tbody>
+                      {params.map((p) => (
+                        <KeyValueTableRow key={p.key}>
+                          <KeyValueTableCol width={"200px"}>
+                            <InputWrapper value={p.keyName} />
+                          </KeyValueTableCol>
+                          <KeyValueTableCol>
+                            <InputWrapper value={p.value} />
+                          </KeyValueTableCol>
+                        </KeyValueTableRow>
+                      ))}
+                    </tbody>
+                  </KeyValueTable>
+                ),
+              },
+              {
+                value: "body",
+                label: "Body",
+                content: <div>Body</div>,
+              },
+            ]}
+          />
         </RestActionMethodContentWrapper>
       </RestActionFormBody>
     </RestActionFormWrapper>

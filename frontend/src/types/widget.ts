@@ -1,12 +1,12 @@
-import { Map } from "immutable";
 import { CSSProperties, ReactElement } from "react";
 import { WIDGET_ACTION } from "./actions";
 
-export const WidgetsTypeMap = {
+export const WIDGET_TYPES = {
   BUTTON: "BUTTON",
   INPUT: "INPUT",
   TABLE: "TABLE",
   SELECT: "SELECT",
+  SWITCH: "SWITCH",
 } as const;
 
 export interface WidgetStyleProperties {
@@ -38,7 +38,7 @@ export interface BaseWidget {
   events: BaseWidgetEventObject[];
 }
 
-export type WidgetTypes = keyof typeof WidgetsTypeMap;
+export type WidgetTypes = keyof typeof WIDGET_TYPES;
 
 export interface DropItem {
   id: string;

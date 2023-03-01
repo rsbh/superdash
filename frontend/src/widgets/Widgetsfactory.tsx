@@ -1,10 +1,11 @@
 import { CSSProperties } from "styled-components";
-import { WidgetComponent, WidgetTypes } from "@/types/widget";
+import { WidgetComponent, WidgetTypes, WIDGET_TYPES } from "@/types/widget";
 import ButtonWidget from "./Button";
 import InputWidget from "./Input";
 import TableWidget from "./Table";
 import { ValuesMap } from "@/types/page";
 import SelectWidget from "./Select";
+import Switch from "./Switch";
 
 interface WidgetFactoryProps {
   widget: WidgetComponent;
@@ -32,7 +33,7 @@ export const WidgetFactory = ({
   onWidgetUpdate,
 }: WidgetFactoryProps) => {
   switch (widgetType) {
-    case "BUTTON":
+    case WIDGET_TYPES.BUTTON:
       return (
         <ButtonWidget
           id={id}
@@ -41,7 +42,7 @@ export const WidgetFactory = ({
           handleWidgetEvent={handleWidgetEvent}
         />
       );
-    case "INPUT":
+    case WIDGET_TYPES.INPUT:
       return (
         <InputWidget
           id={id}
@@ -52,7 +53,7 @@ export const WidgetFactory = ({
           handleWidgetEvent={handleWidgetEvent}
         />
       );
-    case "TABLE":
+    case WIDGET_TYPES.TABLE:
       return (
         <TableWidget
           style={style}
@@ -66,9 +67,21 @@ export const WidgetFactory = ({
           updateWidgetsData={updateWidgetsData}
         />
       );
-    case "SELECT":
+    case WIDGET_TYPES.SELECT:
       return (
         <SelectWidget
+          id={id}
+          name={name}
+          style={style}
+          config={config}
+          updateWidgetsData={updateWidgetsData}
+          handleWidgetEvent={handleWidgetEvent}
+        />
+      );
+
+    case WIDGET_TYPES.SWITCH:
+      return (
+        <Switch
           id={id}
           name={name}
           style={style}

@@ -1,5 +1,6 @@
 import Input from "@/components/Input";
 import { BASE_WIDGET_MAP } from "@/constants/widget";
+import { TableColumn } from "@/types/table";
 import { WidgetComponent } from "@/types/widget";
 import { useState } from "react";
 
@@ -17,7 +18,7 @@ interface PropertiesItemProps {
 }
 
 interface ColumnPropertyEditor {
-  columns: Array<any>;
+  columns: TableColumn[];
   onChange: (e: any) => void;
 }
 
@@ -76,7 +77,7 @@ function PropertiesItem({
     case "columns": {
       return (
         <ColumnPropertyEditor
-          columns={value as Array<any>}
+          columns={value as TableColumn[]}
           onChange={onChange}
         />
       );

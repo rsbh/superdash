@@ -12,6 +12,7 @@ interface SelectProps {
   options: Array<{ label: string; value: string }>;
   labelPostion?: LabelPosition;
   label?: string;
+  onChange: (value: string) => void;
 }
 
 const StyledLabel = styled(Label.Root)<{ labelPostion?: LabelPosition }>`
@@ -35,7 +36,7 @@ const SelectTrigger = styled(RadixSelect.Trigger)`
   cursor: pointer;
   background: ${whiteA.whiteA1};
   border: 2px solid ${blackA.blackA12};
-  color: "#FFF";
+  color: #000;
   min-width: 120px;
 
   svg {
@@ -62,7 +63,6 @@ const SelectViewport = styled(RadixSelect.Viewport)`
 const SelectItem = styled(RadixSelect.Item)`
   padding: 12px 0;
   display: flex;
-  user-select: none;
   align-items: center;
   justify-content: center;
   outline: none;
@@ -91,6 +91,7 @@ export default function Select({
   labelPostion = "left",
   label,
   id,
+  onChange,
 }: SelectProps) {
   return (
     <SelectWrapper labelPostion={labelPostion}>
@@ -99,7 +100,7 @@ export default function Select({
           {label}
         </StyledLabel>
       ) : null}
-      <RadixSelect.Root>
+      <RadixSelect.Root onValueChange={onChange}>
         <SelectTrigger>
           <RadixSelect.Value placeholder={placeholder} />
           <RadixSelect.Icon>

@@ -6,6 +6,7 @@ export const WidgetsTypeMap = {
   BUTTON: "BUTTON",
   INPUT: "INPUT",
   TABLE: "TABLE",
+  SELECT: "SELECT",
 } as const;
 
 export interface WidgetStyleProperties {

@@ -4,6 +4,8 @@ import { DragWrapper } from "./Editor/DragWrapper";
 
 const WidgetsList = styled.div`
   display: flex;
+  flex-wrap: wrap;
+  width: 100%;
 `;
 
 const WidgetsListItem = styled.div`

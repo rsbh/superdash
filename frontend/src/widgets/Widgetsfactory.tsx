@@ -4,6 +4,7 @@ import ButtonWidget from "./Button";
 import InputWidget from "./Input";
 import TableWidget from "./Table";
 import { ValuesMap } from "@/types/page";
+import SelectWidget from "./Select";
 
 interface WidgetFactoryProps {
   widget: WidgetComponent;
@@ -62,6 +63,17 @@ export const WidgetFactory = ({
           actionsValuesMap={actionsValuesMap}
           onWidgetUpdate={onWidgetUpdate}
           widget={widget}
+        />
+      );
+    case "SELECT":
+      return (
+        <SelectWidget
+          id={id}
+          name={name}
+          style={style}
+          config={config}
+          updateWidgetsValue={updateWidgetsValue}
+          handleWidgetEvent={handleWidgetEvent}
         />
       );
     default:

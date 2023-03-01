@@ -24,6 +24,7 @@ interface ButtonProps {
   children: ReactElement | string;
   onClick?: (e: React.MouseEvent<HTMLElement>) => void;
   style?: CSSProperties;
+  disabled?: boolean;
 }
 
 export default function Button({
@@ -31,9 +32,15 @@ export default function Button({
   onClick,
   className,
   style,
+  disabled = false,
 }: ButtonProps) {
   return (
-    <ButtonWrapper onClick={onClick} className={className} style={style}>
+    <ButtonWrapper
+      onClick={onClick}
+      className={className}
+      style={style}
+      disabled={disabled}
+    >
       {children}
     </ButtonWrapper>
   );

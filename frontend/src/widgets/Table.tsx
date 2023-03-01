@@ -2,7 +2,7 @@ import Button from "@/components/Button";
 import Input from "@/components/Input";
 import { Table, THead, Tr, Th, Tbody, Td } from "@/components/Table";
 import { ValuesMap } from "@/types/page";
-import { TableColumn } from "@/types/table";
+import { TableColumn, TableColumnTypesMap } from "@/types/table";
 import { WidgetComponent } from "@/types/widget";
 import {
   runCustomCode,
@@ -82,6 +82,7 @@ export default function TableWidget({
       const columnsFromHeadings: TableColumn[] = tableData.keys.map((key) => ({
         label: key.toUpperCase(),
         key,
+        type: TableColumnTypesMap.TEXT,
       }));
       onWidgetUpdate(id, {
         ...widget,

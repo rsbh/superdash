@@ -1,8 +1,10 @@
 import Input from "@/components/Input";
 import { BASE_WIDGET_MAP } from "@/constants/widget";
-import { TableColumn } from "@/types/table";
+import { TableColumn, TableColumnTypesMap } from "@/types/table";
 import { WidgetComponent } from "@/types/widget";
 import { useState } from "react";
+import Collapsible from "@/components/Collapsible";
+import Button from "@/components/Button";
 
 interface PropertiesTabProps {
   selectedWidget: WidgetComponent | null;
@@ -30,7 +32,7 @@ function ColumnPropertyEditor({ columns, onChange }: ColumnPropertyEditor) {
   }
 
   function onClick() {
-    const newCol = { label: text };
+    const newCol: TableColumn = { label: text, type: TableColumnTypesMap.TEXT };
     const updatedColumns = [...columns, newCol];
     onChange({
       target: {
@@ -43,12 +45,20 @@ function ColumnPropertyEditor({ columns, onChange }: ColumnPropertyEditor) {
       <h3>Columns</h3>
       <div>
         {columns.map((c) => {
-          return <div key={c.label}>{c.label}</div>;
+          return (
+            <Collapsible key={c.label} label={c.label}>
+              <div>
+                <Input value={c.label} label={"Label"} />
+                <br />
+                <Input value={c.type} label={"Type"} />
+              </div>
+            </Collapsible>
+          );
         })}
-        <input value={text} onChange={onTextChange} />
-        <button disabled={text.trim().length === 0} onClick={onClick}>
+        <Input value={text} onChange={onTextChange} />
+        <Button disabled={text.trim().length === 0} onClick={onClick}>
           Add Column
-        </button>
+        </Button>
       </div>
     </div>
   );

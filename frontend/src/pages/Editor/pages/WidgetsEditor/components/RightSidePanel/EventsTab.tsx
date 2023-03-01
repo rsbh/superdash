@@ -1,3 +1,4 @@
+import Select from "@/components/Select";
 import { BASE_WIDGET_MAP } from "@/constants/widget";
 import { WidgetComponent, ActionsMap } from "@/types/widget";
 import { useMemo } from "react";
@@ -22,17 +23,15 @@ export default function EventsTab({
     [actionMap]
   );
 
-  const onEventsChange =
-    (id: string) => (e: React.ChangeEvent<HTMLSelectElement>) => {
-      const value = e.target.value;
-      const newEvents = {
-        [id]: [value],
-      };
-      onWidgetUpdate(selectedWidget.id, {
-        ...selectedWidget,
-        events: newEvents,
-      });
+  const onEventsChange = (id: string) => (value: string) => {
+    const newEvents = {
+      [id]: [value],
     };
+    onWidgetUpdate(selectedWidget.id, {
+      ...selectedWidget,
+      events: newEvents,
+    });
+  };
 
   return (
     <div>
@@ -42,17 +41,14 @@ export default function EventsTab({
             key={selectedWidget.id + "-" + e.id}
             className="widget-property-item"
           >
-            <label>{e.label}</label>
-            <select
-              value={selectedWidget.events[e.id]?.[0]}
+            <Select
+              label={e.label}
+              options={actions.map((act) => ({
+                label: act.name,
+                value: act.id,
+              }))}
               onChange={onEventsChange(e.id)}
-            >
-              {actions.map((act) => (
-                <option key={act.id} value={act.id}>
-                  {act.name}
-                </option>
-              ))}
-            </select>
+            />
           </div>
         );
       })}

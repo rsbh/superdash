@@ -82,6 +82,7 @@ function ColumnPropertyEditor({ columns, onChange }: ColumnPropertyEditor) {
                 <Select
                   onChange={onColumnTypeUpdate(c.label)}
                   placeholder="Column Type"
+                  label="Type"
                   options={tableColumnTypes}
                 />
               </div>

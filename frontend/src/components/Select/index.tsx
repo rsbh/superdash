@@ -6,7 +6,7 @@ import Label, { LabelPosition } from "../Label";
 
 interface SelectProps {
   id?: string;
-  placeholder: string;
+  placeholder?: string;
   options: Array<{ label: string; value: string }>;
   labelPostion?: LabelPosition;
   label?: string;

@@ -1,5 +1,5 @@
 import Switch from "@/components/Switch";
-import { CSSProperties } from "react";
+import { CSSProperties, useMemo } from "react";
 
 interface SwitchWidgetProps {
   id: string;
@@ -25,9 +25,20 @@ export default function SwitchWidget({
     }
   }
 
+  const defaultValue = useMemo(() => {
+    return config["defaultValue"] === "true" || config["defaultValue"] === true
+      ? true
+      : false;
+  }, [config["defaultValue"]]);
+
   return (
     <div style={style}>
-      <Switch label={config["label"]} id={id} onChange={onChange} />
+      <Switch
+        label={config["label"]}
+        id={id}
+        onChange={onChange}
+        defaultValue={defaultValue}
+      />
     </div>
   );
 }

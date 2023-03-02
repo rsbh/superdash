@@ -36,6 +36,7 @@ interface CheckBoxProps {
   label?: string;
   labelPosition?: LabelPosition;
   onChange?: (value: boolean) => void;
+  defaultValue?: boolean;
 }
 
 export default function Checkbox({
@@ -43,10 +44,11 @@ export default function Checkbox({
   label,
   labelPosition,
   onChange,
+  defaultValue,
 }: CheckBoxProps) {
   return (
     <Label htmlFor={id} label={label} position={labelPosition}>
-      <CheckboxRoot onCheckedChange={onChange}>
+      <CheckboxRoot onCheckedChange={onChange} defaultChecked={defaultValue}>
         <CheckboxIndicator></CheckboxIndicator>
       </CheckboxRoot>
     </Label>

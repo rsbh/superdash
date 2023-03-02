@@ -146,6 +146,12 @@ export const BASE_WIDGET_MAP: Record<WidgetTypes, BaseWidget> = {
         type: "string",
         defaultValue: "",
       },
+      {
+        id: "defaultValue",
+        label: "Default Value",
+        type: "boolean",
+        defaultValue: false,
+      },
     ],
     events: [
       {
@@ -171,6 +177,12 @@ export const BASE_WIDGET_MAP: Record<WidgetTypes, BaseWidget> = {
         label: "Label",
         type: "string",
         defaultValue: "",
+      },
+      {
+        id: "defaultValue",
+        label: "Default Value",
+        type: "boolean",
+        defaultValue: false,
       },
     ],
     events: [

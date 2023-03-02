@@ -1,5 +1,5 @@
 import Checkbox from "@/components/Checkbox";
-import { CSSProperties } from "react";
+import { CSSProperties, useMemo } from "react";
 
 interface CheckboxWidgetProps {
   id: string;
@@ -25,9 +25,20 @@ export default function CheckboxWidget({
     }
   }
 
+  const defaultValue = useMemo(() => {
+    return config["defaultValue"] === "true" || config["defaultValue"] === true
+      ? true
+      : false;
+  }, [config["defaultValue"]]);
+
   return (
     <div style={style}>
-      <Checkbox label={config["label"]} id={id} onChange={onChange} />
+      <Checkbox
+        label={config["label"]}
+        id={id}
+        onChange={onChange}
+        defaultValue={defaultValue}
+      />
     </div>
   );
 }

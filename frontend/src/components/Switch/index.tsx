@@ -8,6 +8,7 @@ interface SwitchProps {
   labelPostion?: LabelPosition;
   label?: string;
   onChange?: (checked: boolean) => void;
+  defaultValue?: boolean;
 }
 
 const SwitchRoot = styled(RadixSwitch.Root)`
@@ -47,10 +48,15 @@ export default function Switch({
   label,
   labelPostion,
   onChange,
+  defaultValue,
 }: SwitchProps) {
   return (
     <Label label={label} position={labelPostion} htmlFor={id}>
-      <SwitchRoot id={id} onCheckedChange={onChange}>
+      <SwitchRoot
+        id={id}
+        onCheckedChange={onChange}
+        defaultChecked={defaultValue}
+      >
         <SwitchThumb />
       </SwitchRoot>
     </Label>

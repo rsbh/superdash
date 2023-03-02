@@ -26,6 +26,7 @@ interface InputProps {
   placeholder?: string;
   type?: string;
   labelPostion?: LabelPosition;
+  defaultValue?: string;
 }
 
 export default function Input({
@@ -36,6 +37,7 @@ export default function Input({
   placeholder,
   type,
   labelPostion = "left",
+  defaultValue,
 }: InputProps) {
   return (
     <Label position={labelPostion} htmlFor={id} label={label}>
@@ -45,6 +47,7 @@ export default function Input({
         id={id}
         placeholder={placeholder}
         type={type}
+        defaultValue={defaultValue}
       />
     </Label>
   );

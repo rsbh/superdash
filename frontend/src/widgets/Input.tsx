@@ -33,6 +33,7 @@ export default function InputWidget({
         onChange={onChange}
         label={config.label}
         id={id}
+        defaultValue={config["defaultValue"]}
       />
     </div>
   );

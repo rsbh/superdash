@@ -75,6 +75,12 @@ export const BASE_WIDGET_MAP: Record<WidgetTypes, BaseWidget> = {
         type: "string",
         defaultValue: "placeholder",
       },
+      {
+        id: "defaultValue",
+        label: "Default Value",
+        type: "string",
+        defaultValue: "",
+      },
     ],
     events: [
       {

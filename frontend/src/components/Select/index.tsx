@@ -10,7 +10,7 @@ interface SelectProps {
   options: Array<{ label: string; value: string; key?: string | number }>;
   labelPostion?: LabelPosition;
   label?: string;
-  onChange: (value: string) => void;
+  onChange?: (value: string) => void;
 }
 
 const SelectTrigger = styled(RadixSelect.Trigger)`

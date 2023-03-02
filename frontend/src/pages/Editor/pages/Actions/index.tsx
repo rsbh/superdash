@@ -1,13 +1,14 @@
-import { ActionsMap, WidgetsMap, WidgetsValueMap } from "@/types/widget";
+import { ActionsMap, WidgetsMap } from "@/types/widget";
 import { useMemo, useState } from "react";
 import styled from "styled-components";
 import RestActionForm from "./components/RestActionForm";
 import NewActionsList from "./components/NewActionsList";
+import { ValuesMap } from "@/types/page";
 
 interface ActionsPageProps {
   widgetsMap: WidgetsMap;
   actionMap: ActionsMap;
-  widgetsValuesMap: WidgetsValueMap;
+  widgetsValuesMap: ValuesMap;
   updatePageActions: (actionMap: ActionsMap) => void;
 }
 

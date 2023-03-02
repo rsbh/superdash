@@ -35,7 +35,7 @@ interface CheckBoxProps {
   id?: string;
   label?: string;
   labelPosition?: LabelPosition;
-  onChange: (value: boolean) => void;
+  onChange?: (value: boolean) => void;
 }
 
 export default function Checkbox({

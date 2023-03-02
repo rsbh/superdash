@@ -7,7 +7,7 @@ interface SwitchProps {
   id: string;
   labelPostion?: LabelPosition;
   label?: string;
-  onChange: (checked: boolean) => void;
+  onChange?: (checked: boolean) => void;
 }
 
 const SwitchRoot = styled(RadixSwitch.Root)`

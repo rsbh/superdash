@@ -2,6 +2,8 @@ import { RxButton, RxInput, RxTable, RxSwitch } from "react-icons/rx";
 import { IconSelect } from "@tabler/icons-react";
 
 import { BaseWidget, WidgetTypes, WIDGET_TYPES } from "../types/widget";
+import TableConfig from "@/widgets/Table/config";
+
 export const DefaultDragType = "Widget";
 
 export const BASE_WIDGET_MAP: Record<WidgetTypes, BaseWidget> = {
@@ -120,38 +122,7 @@ export const BASE_WIDGET_MAP: Record<WidgetTypes, BaseWidget> = {
       },
     ],
   },
-  TABLE: {
-    title: "Table",
-    type: "TABLE",
-    icon: <RxTable />,
-    styleProperties: [
-      { id: "height", label: "Height", defaultValue: "400px", type: "string" },
-      { id: "width", label: "Width", defaultValue: "304px", type: "string" },
-      { id: "left", label: "Left", defaultValue: "0px", type: "string" },
-      { id: "top", label: "Top", defaultValue: "0px", type: "string" },
-    ],
-    configs: [
-      {
-        id: "data",
-        label: "Data",
-        type: "string",
-        defaultValue: "",
-      },
-      {
-        id: "columns",
-        label: "columns",
-        type: "columns",
-        defaultValue: [],
-      },
-    ],
-    events: [
-      {
-        id: "onLoad",
-        label: "onLoad",
-        defaultValue: [],
-      },
-    ],
-  },
+  TABLE: TableConfig,
   SWITCH: {
     title: "Switch",
     type: WIDGET_TYPES.SWITCH,

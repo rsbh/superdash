@@ -7,6 +7,7 @@ export const WIDGET_TYPES = {
   TABLE: "TABLE",
   SELECT: "SELECT",
   SWITCH: "SWITCH",
+  CHECKBOX: "CHECKBOX",
 } as const;
 
 export interface WidgetStyleProperties {

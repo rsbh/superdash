@@ -35,12 +35,18 @@ interface CheckBoxProps {
   id?: string;
   label?: string;
   labelPosition?: LabelPosition;
+  onChange: (value: boolean) => void;
 }
 
-export default function Checkbox({ id, label, labelPosition }: CheckBoxProps) {
+export default function Checkbox({
+  id,
+  label,
+  labelPosition,
+  onChange,
+}: CheckBoxProps) {
   return (
     <Label htmlFor={id} label={label} position={labelPosition}>
-      <CheckboxRoot>
+      <CheckboxRoot onCheckedChange={onChange}>
         <CheckboxIndicator></CheckboxIndicator>
       </CheckboxRoot>
     </Label>

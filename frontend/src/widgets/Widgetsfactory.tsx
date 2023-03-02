@@ -5,7 +5,8 @@ import InputWidget from "./Input";
 import TableWidget from "./Table";
 import { ValuesMap } from "@/types/page";
 import SelectWidget from "./Select";
-import Switch from "./Switch";
+import SwitchWidget from "./Switch";
+import CheckboxWidget from "./Checkbox";
 
 interface WidgetFactoryProps {
   widget: WidgetComponent;
@@ -78,10 +79,20 @@ export const WidgetFactory = ({
           handleWidgetEvent={handleWidgetEvent}
         />
       );
-
     case WIDGET_TYPES.SWITCH:
       return (
-        <Switch
+        <SwitchWidget
+          id={id}
+          name={name}
+          style={style}
+          config={config}
+          updateWidgetsData={updateWidgetsData}
+          handleWidgetEvent={handleWidgetEvent}
+        />
+      );
+    case WIDGET_TYPES.CHECKBOX:
+      return (
+        <CheckboxWidget
           id={id}
           name={name}
           style={style}

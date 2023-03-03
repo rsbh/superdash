@@ -1,3 +1,5 @@
+import theme from "@/config/theme";
+import { ThemeProvider } from "styled-components";
 import Checkbox from ".";
 
 export default {
@@ -9,9 +11,23 @@ export default {
   component: Checkbox,
 };
 
-export const Primary = () => <Checkbox />;
-export const LabelLeft = () => <Checkbox label="Label" />;
-export const LabelTop = () => <Checkbox label="Label" labelPosition="top" />;
+export const Primary = () => (
+  <ThemeProvider theme={theme}>
+    <Checkbox />
+  </ThemeProvider>
+);
+export const LabelLeft = () => (
+  <ThemeProvider theme={theme}>
+    <Checkbox label="Label" />
+  </ThemeProvider>
+);
+export const LabelTop = () => (
+  <ThemeProvider theme={theme}>
+    <Checkbox label="Label" labelPosition="top" />
+  </ThemeProvider>
+);
 export const LabelRight = () => (
-  <Checkbox label="Label" labelPosition="right" />
+  <ThemeProvider theme={theme}>
+    <Checkbox label="Label" labelPosition="right" />
+  </ThemeProvider>
 );

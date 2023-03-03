@@ -1,3 +1,5 @@
+import theme from "@/config/theme";
+import { ThemeProvider } from "styled-components";
 import Button from ".";
 
 export default {
@@ -9,5 +11,13 @@ export default {
   component: Button,
 };
 
-export const Primary = () => <Button>Button</Button>;
-export const Secondary = () => <Button type="secondary">Button</Button>;
+export const Primary = () => (
+  <ThemeProvider theme={theme}>
+    <Button>Button</Button>
+  </ThemeProvider>
+);
+export const Secondary = () => (
+  <ThemeProvider theme={theme}>
+    <Button type="secondary">Button</Button>
+  </ThemeProvider>
+);

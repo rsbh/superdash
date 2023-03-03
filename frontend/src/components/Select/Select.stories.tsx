@@ -1,3 +1,5 @@
+import theme from "@/config/theme";
+import { ThemeProvider } from "styled-components";
 import Select from "./index";
 
 export default {
@@ -10,24 +12,28 @@ export default {
 };
 
 export const Primary = () => (
-  <Select
-    placeholder="Select"
-    label="Label"
-    options={[
-      { label: "Option1", value: "1" },
-      { label: "Option2", value: "2" },
-    ]}
-  />
+  <ThemeProvider theme={theme}>
+    <Select
+      placeholder="Select"
+      label="Label"
+      options={[
+        { label: "Option1", value: "1" },
+        { label: "Option2", value: "2" },
+      ]}
+    />
+  </ThemeProvider>
 );
 
 export const LabelTop = () => (
-  <Select
-    placeholder="Select"
-    label="Label"
-    options={[
-      { label: "Option1", value: "1" },
-      { label: "Option2", value: "2" },
-    ]}
-    labelPostion="top"
-  />
+  <ThemeProvider theme={theme}>
+    <Select
+      placeholder="Select"
+      label="Label"
+      options={[
+        { label: "Option1", value: "1" },
+        { label: "Option2", value: "2" },
+      ]}
+      labelPostion="top"
+    />
+  </ThemeProvider>
 );

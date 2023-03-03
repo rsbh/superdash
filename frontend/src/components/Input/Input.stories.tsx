@@ -1,3 +1,5 @@
+import theme from "@/config/theme";
+import { ThemeProvider } from "styled-components";
 import Input from ".";
 
 export default {
@@ -9,6 +11,18 @@ export default {
   component: Input,
 };
 
-export const Primary = () => <Input label="Label" />;
-export const LabelTop = () => <Input label="Label" labelPostion="top" />;
-export const LabelRight = () => <Input label="Label" labelPostion="right" />;
+export const Primary = () => (
+  <ThemeProvider theme={theme}>
+    <Input label="Label" />
+  </ThemeProvider>
+);
+export const LabelTop = () => (
+  <ThemeProvider theme={theme}>
+    <Input label="Label" labelPostion="top" />
+  </ThemeProvider>
+);
+export const LabelRight = () => (
+  <ThemeProvider theme={theme}>
+    <Input label="Label" labelPostion="right" />
+  </ThemeProvider>
+);

@@ -1,3 +1,5 @@
+import theme from "@/config/theme";
+import { ThemeProvider } from "styled-components";
 import Switch from ".";
 
 export default {
@@ -9,8 +11,18 @@ export default {
   component: Switch,
 };
 
-export const Primary = () => <Switch id="switch" />;
-export const LeftLabel = () => <Switch id="switch" label="Label" />;
+export const Primary = () => (
+  <ThemeProvider theme={theme}>
+    <Switch id="switch" />
+  </ThemeProvider>
+);
+export const LeftLabel = () => (
+  <ThemeProvider theme={theme}>
+    <Switch id="switch" label="Label" />
+  </ThemeProvider>
+);
 export const TopLabel = () => (
-  <Switch id="switch" label="Label" labelPostion="top" />
+  <ThemeProvider theme={theme}>
+    <Switch id="switch" label="Label" labelPostion="top" />
+  </ThemeProvider>
 );

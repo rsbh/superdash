@@ -14,16 +14,19 @@ const TabsList = styled(RadixTabs.List)`
 const TabsTrigger = styled(RadixTabs.Trigger)`
   all: unset;
   background-color: white;
-  padding: 8px 16px;
+  padding: 4px 16px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid black;
-  font-weight: 600;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.primary};
+  font-weight: regular;
   cursor: pointer;
+  color: ${({ theme }) => theme.colors.primary};
 
   &[data-state="active"] {
-    background-color: ${blackA.blackA6};
+    font-weight: bold;
+
+    border-bottom: 2px solid ${({ theme }) => theme.colors.primary};
   }
 `;
 const TabsContent = styled(RadixTabs.Content)`

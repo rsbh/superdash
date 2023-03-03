@@ -1,5 +1,5 @@
-import { blackA } from "@radix-ui/colors";
 import * as RadixSwitch from "@radix-ui/react-switch";
+import { rgba } from "polished";
 import styled from "styled-components";
 import Label, { LabelPosition, LabelWrapper, StyledLabel } from "../Label";
 
@@ -15,16 +15,16 @@ const SwitchRoot = styled(RadixSwitch.Root)`
   all: unset;
   width: 42px;
   height: 25px;
-  background-color: ${blackA.blackA9};
+  background-color: ${({ theme }) => rgba(theme.colors.primary, 0.3)};
   border-radius: 9999px;
   position: relative;
-  box-shadow: 0 2px 10px ${blackA.blackA7};
+  box-shadow: 0 2px 10px ${({ theme }) => rgba(theme.colors.primary, 0.3)};
 
   &:focus {
-    box-shadow: 0 0 2px #000;
+    box-shadow: 0 0 2px ${({ theme }) => rgba(theme.colors.primary, 0.3)};
   }
   &[data-state="checked"] {
-    background-color: #000;
+    background-color: ${({ theme }) => theme.colors.primary};
   }
 `;
 
@@ -32,9 +32,9 @@ const SwitchThumb = styled(RadixSwitch.Thumb)`
   display: block;
   width: 21px;
   height: 21px;
-  background-color: white;
+  background-color: ${({ theme }) => theme.colors.white};
   border-radius: 9999px;
-  box-shadow: 0 0 2px ${blackA.blackA7};
+  box-shadow: 0 0 2px ${({ theme }) => rgba(theme.colors.primary, 0.3)};
   transition: transform 100ms;
   transform: translateX(2px);
 

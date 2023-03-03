@@ -1,5 +1,5 @@
-import { blackA, whiteA } from "@radix-ui/colors";
 import * as RadixSelect from "@radix-ui/react-select";
+import { rgba } from "polished";
 import { RxChevronDown } from "react-icons/rx";
 import styled from "styled-components";
 import Label, { LabelPosition } from "../Label";
@@ -25,8 +25,8 @@ const SelectTrigger = styled(RadixSelect.Trigger)`
   line-height: 1;
   gap: 4px;
   cursor: pointer;
-  background: ${whiteA.whiteA1};
-  border: 2px solid ${blackA.blackA12};
+  background: ${({ theme }) => theme.colors.white};
+  border: 2px solid ${({ theme }) => theme.colors.primary};
   color: #000;
   min-width: 120px;
 
@@ -36,7 +36,7 @@ const SelectTrigger = styled(RadixSelect.Trigger)`
 `;
 
 const SelectContent = styled(RadixSelect.SelectContent)`
-  background-color: white;
+  background-color: ${({ theme }) => theme.colors.white};
   overflow: hidden;
   border-radius: 4px;
   min-width: 120px;
@@ -62,7 +62,7 @@ const SelectItem = styled(RadixSelect.Item)`
 
   &[data-highlighted] {
     outline: none;
-    background-color: ${blackA.blackA6};
+    background-color: ${({ theme }) => rgba(theme.colors.primary, 0.2)};
   }
 `;
 

@@ -1,20 +1,21 @@
 import styled from "styled-components";
-import { blackA, whiteA } from "@radix-ui/colors";
 import Label, { LabelPosition } from "../Label";
+import { rgba } from "polished";
 
 const InputBox = styled.input`
   box-shadow: none;
-  color: ${blackA.blackA12};
+  color: ${({ theme }) => theme.colors.primary};
 
-  border: 2px solid ${blackA.blackA12};
-  background: ${whiteA.whiteA1};
-  padding: 8px 16px;
+  border: 2px solid ${({ theme }) => rgba(theme.colors.primary, 0.7)};
+  background: ${({ theme }) => theme.colors.white};
+  padding: 8px;
   line-height: 1;
-  font-size: 14px;
+  font-size: 16px;
   border-radius: 4px;
+  height: 32px;
 
   &:focus {
-    outline: none;
+    outline: 2px solid ${({ theme }) => rgba(theme.colors.primary, 0.1)};
   }
 `;
 

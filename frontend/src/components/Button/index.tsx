@@ -1,6 +1,6 @@
 import { CSSProperties, ReactElement } from "react";
 import styled from "styled-components";
-import { blackA, whiteA } from "@radix-ui/colors";
+import { rgba } from "polished";
 
 type ButtonType = "primary" | "secondary";
 
@@ -12,16 +12,19 @@ const ButtonWrapper = styled.button<{ buttonType: ButtonType }>`
   font-size: 16px;
   line-height: 1;
   font-weight: 600;
-  border: 2px solid ${blackA.blackA12};
-  background: ${({ buttonType }) =>
-    buttonType === "primary" ? whiteA.whiteA1 : blackA.blackA12};
-  color: ${({ buttonType }) => (buttonType === "primary" ? "#000" : "#FFF")};
+  border: 2px solid ${({ theme }) => theme.colors.primary};
+  background: ${({ buttonType, theme }) =>
+    buttonType === "primary" ? theme.colors.primary : theme.colors.white};
+  color: ${({ buttonType, theme }) =>
+    buttonType === "primary" ? theme.colors.white : theme.colors.primary};
   cursor: pointer;
   border-radius: 4px;
 
   &:hover {
-    background: ${({ buttonType }) =>
-      buttonType === "primary" ? blackA.blackA6 : blackA.blackA11};
+    background: ${({ buttonType, theme }) =>
+      buttonType === "primary"
+        ? rgba(theme.colors.primary, 0.9)
+        : rgba(theme.colors.primary, 0.1)};
   }
 `;
 

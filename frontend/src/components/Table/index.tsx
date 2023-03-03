@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { grayA } from "@radix-ui/colors";
+import { rgba } from "polished";
 
 export const Table = styled.table`
   border-collapse: collapse;
@@ -12,14 +12,16 @@ export const THead = styled.thead``;
 export const Th = styled.th`
   padding: 8px;
   text-align: left;
-  border: 1px solid ${grayA.grayA5};
+  border: 0.5px solid ${({ theme }) => rgba(theme.colors.primary, 0.7)};
+  background-color: ${({ theme }) => rgba(theme.colors.primary, 0.7)};
+  color: ${({ theme }) => theme.colors.white};
 `;
 
 export const Td = styled.td`
   padding: 8px;
-  border: 1px solid ${grayA.grayA5};
+  border: 0.5px solid ${({ theme }) => rgba(theme.colors.primary, 0.7)};
   text-align: left;
 `;
 
-export const Tbody = styled.tbody``;
+export const TBody = styled.tbody``;
 export const Tr = styled.tr``;

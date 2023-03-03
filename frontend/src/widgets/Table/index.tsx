@@ -1,6 +1,6 @@
 import Button from "@/components/Button";
 import Input from "@/components/Input";
-import { Table, THead, Tr, Th, Tbody, Td } from "@/components/Table";
+import { Table, THead, Tr, Th, TBody, Td } from "@/components/Table";
 import { ValuesMap } from "@/types/page";
 import {
   TableColumn,
@@ -151,7 +151,7 @@ export default function TableWidget({
             ))}
           </Tr>
         </THead>
-        <Tbody>
+        <TBody>
           {rows.map((row, i) => (
             <Tr key={i} onClick={onRowClick(row)}>
               {row.map((col, j) => (
@@ -161,7 +161,7 @@ export default function TableWidget({
               ))}
             </Tr>
           ))}
-        </Tbody>
+        </TBody>
       </Table>
     </TableWrapper>
   );

@@ -1,4 +1,3 @@
-import { blackA } from "@radix-ui/colors";
 import * as RadixTabs from "@radix-ui/react-tabs";
 import { ReactNode } from "react";
 import styled from "styled-components";

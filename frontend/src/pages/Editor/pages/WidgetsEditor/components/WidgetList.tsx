@@ -1,4 +1,5 @@
 import { widgetList } from "@/constants/widget";
+import { rgba } from "polished";
 import styled from "styled-components";
 import { DragWrapper } from "./Editor/DragWrapper";
 
@@ -6,6 +7,8 @@ const WidgetsList = styled.div`
   display: flex;
   flex-wrap: wrap;
   width: 100%;
+  justify-content: space-evenly;
+  align-items: center;
 `;
 
 const WidgetsListItem = styled.div`
@@ -14,24 +17,24 @@ const WidgetsListItem = styled.div`
   justify-content: center;
   align-items: center;
   padding: 8px;
-  border: 0.5px solid grey;
+  border: 0.5px solid ${({ theme }) => rgba(theme.colors.primary, 0.5)};
   border-radius: 10%;
   margin: 8px;
   min-width: 60px;
 `;
 
 const WidgetsListItemIcon = styled.div`
-  color: grey;
+  color: ${({ theme }) => theme.colors.primary};
   font-size: 24px;
 `;
 const WidgetsListItemTitle = styled.div`
-  color: grey;
-  font-size: 12px;
+  color: ${({ theme }) => theme.colors.primary};
+  font-size: 10px;
 `;
 
 const WidgetsListDrawer = styled.div`
-  width: 240px;
-  border-right: 1px solid grey;
+  max-width: 174px;
+  border-right: 0.5px solid grey;
   padding: 8px;
 `;
 

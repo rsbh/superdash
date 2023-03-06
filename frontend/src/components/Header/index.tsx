@@ -3,15 +3,17 @@ import styled from "styled-components";
 import Button from "../Button";
 import * as Avatar from "@radix-ui/react-avatar";
 import { blackA, violet } from "@radix-ui/colors";
+import { rgba } from "polished";
 
 const StyledHeader = styled.header`
   width: 100%;
   background-color: white;
-  border-bottom: 1px solid grey;
   min-height: 48px;
-  padding: 8px;
+  padding: 8px 16px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px 0 ${({ theme }) => rgba(theme.colors.black, 0.1)};
 `;
 
 const AvatarRoot = styled(Avatar.Root)`
@@ -45,12 +47,22 @@ interface HeaderProps {
   showAvatar?: boolean;
 }
 
+const Logo = styled.div`
+  font-size: 32px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: ${({ theme }) => theme.colors.primary};
+  cursor: pointer;
+`;
+
 export default function Header({ previewLink, showAvatar }: HeaderProps) {
   return (
     <StyledHeader>
-      <div>Logo</div>
+      <Link to="/" style={{ textDecoration: "none" }}>
+        <Logo>One App</Logo>
+      </Link>
       {previewLink ? (
-        <Link to="/editor/preview">
+        <Link to="/editor/preview" style={{ textDecoration: "none" }}>
           <Button>Preview</Button>
         </Link>
       ) : null}

@@ -10,11 +10,14 @@ const CollapsibleRoot = styled(RadixCollapsible.Root)`
 const CollapsibleTrigger = styled(RadixCollapsible.Trigger)`
   width: 100%;
   padding: 8px;
+  text-align: left;
+  background: white;
+  border: 0.5px solid ${({ theme }) => theme.colors.primary};
+  cursor: pointer;
 `;
 
 const CollapsibleContent = styled(RadixCollapsible.Content)`
   width: 100%;
-  padding: 8px;
 `;
 
 interface CollapsibleProps {

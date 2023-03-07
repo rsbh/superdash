@@ -1,6 +1,7 @@
 import Input from "@/components/Input";
 import Tabs from "@/components/Tabs";
 import { ActionsMap, WidgetComponent } from "@/types/widget";
+import styled from "styled-components";
 import EventsTab from "./EventsTab";
 import PropertiesTab from "./PropertiesTab";
 import StylesTab from "./StylesTab";
@@ -10,6 +11,15 @@ interface RightSidePanelProps {
   onWidgetUpdate: (id: string, widget: WidgetComponent) => void;
   actionMap: ActionsMap;
 }
+
+const RightSidePanelWrapper = styled.div`
+  width: 300px;
+  border-left: 0.5px solid grey;
+`;
+
+const StyledTab = styled(Tabs)`
+  width: 100%;
+`;
 
 export default function RightSidePanel({
   selectedWidget,
@@ -27,7 +37,7 @@ export default function RightSidePanel({
   };
 
   return (
-    <div className="right-side-panel">
+    <RightSidePanelWrapper className="right-side-panel">
       <div className="widget-property-item">
         <Input
           id="widget-name"
@@ -36,7 +46,7 @@ export default function RightSidePanel({
           onChange={onNameChange}
         />
       </div>
-      <Tabs
+      <StyledTab
         defaultValue="properties"
         tabs={[
           {
@@ -72,6 +82,6 @@ export default function RightSidePanel({
           },
         ]}
       />
-    </div>
+    </RightSidePanelWrapper>
   );
 }

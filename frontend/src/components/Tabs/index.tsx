@@ -6,8 +6,11 @@ const TabsRoot = styled(RadixTabs.Root)`
   display: flex;
   flex-direction: column;
 `;
+
 const TabsList = styled(RadixTabs.List)`
   display: flex;
+  width: 100%;
+  justify-content: center;
 `;
 
 const TabsTrigger = styled(RadixTabs.Trigger)`
@@ -22,15 +25,15 @@ const TabsTrigger = styled(RadixTabs.Trigger)`
   cursor: pointer;
   color: ${({ theme }) => theme.colors.primary};
 
+  width: 100%;
   &[data-state="active"] {
     font-weight: bold;
 
     border-bottom: 2px solid ${({ theme }) => theme.colors.primary};
   }
 `;
-const TabsContent = styled(RadixTabs.Content)`
-  padding: 16px;
-`;
+
+const TabsContent = styled(RadixTabs.Content)``;
 
 interface TabsProps {
   defaultValue: string;

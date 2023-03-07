@@ -28,6 +28,7 @@ interface InputProps {
   type?: string;
   labelPostion?: LabelPosition;
   defaultValue?: string;
+  className?: string;
 }
 
 export default function Input({
@@ -39,9 +40,15 @@ export default function Input({
   type,
   labelPostion = "left",
   defaultValue,
+  className,
 }: InputProps) {
   return (
-    <Label position={labelPostion} htmlFor={id} label={label}>
+    <Label
+      position={labelPostion}
+      htmlFor={id}
+      label={label}
+      className={className}
+    >
       <InputBox
         value={value}
         onChange={onChange}

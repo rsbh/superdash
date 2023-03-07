@@ -29,14 +29,6 @@ body {
   cursor: grab;
 }
 
-.right-side-panel {
-  padding: 4px;
-  margin: 4px;
-
-  border: 1px solid black;
-  width: 100%;
-  max-width: 360px;
-}
 
 .widget-property-item {
   padding: 8px;

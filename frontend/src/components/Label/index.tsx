@@ -1,5 +1,5 @@
 import * as RadixLabel from "@radix-ui/react-label";
-import { ReactNode } from "react";
+import { CSSProperties, ReactNode } from "react";
 import styled from "styled-components";
 
 export type LabelPosition = "left" | "top" | "right";
@@ -18,11 +18,11 @@ export const StyledLabel = styled(RadixLabel.Root).withConfig({
 `;
 
 export const LabelWrapper = styled.div<{ labelPosition?: LabelPosition }>`
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: ${({ labelPosition }) =>
     labelPosition === "top" ? "left" : "center"};
-  width: fit-content;
   flex-direction: ${({ labelPosition }) =>
     labelPosition === "left"
       ? "row"
@@ -36,6 +36,7 @@ interface LabelProps {
   htmlFor?: string;
   label?: string;
   position?: LabelPosition;
+  className?: string;
 }
 
 export default function Label({
@@ -43,9 +44,10 @@ export default function Label({
   label,
   position = "left",
   children,
+  className = "",
 }: LabelProps) {
   return (
-    <LabelWrapper labelPosition={position}>
+    <LabelWrapper labelPosition={position} className={className}>
       {label ? (
         <StyledLabel htmlFor={htmlFor} labelPosition={position}>
           {label}

@@ -10,6 +10,31 @@ import { useState } from "react";
 import Collapsible from "@/components/Collapsible";
 import Button from "@/components/Button";
 import Select from "@/components/Select";
+import styled from "styled-components";
+
+const WidgetPropertyItemWrapper = styled.div`
+  label {
+    font-size: 12px;
+    width: 40px;
+  }
+  margin: 8px 0;
+`;
+
+const StyledInput = styled(Input)`
+  justify-content: space-between !important;
+  margin: 4px auto;
+  input {
+    width: 200px;
+  }
+`;
+const StyledSelect = styled(Select)`
+  justify-content: space-between !important;
+  margin: 4px auto;
+
+  button {
+    width: 180px;
+  }
+`;
 
 interface PropertiesTabProps {
   selectedWidget: WidgetComponent | null;
@@ -76,10 +101,15 @@ function ColumnPropertyEditor({ columns, onChange }: ColumnPropertyEditor) {
         {columns.map((c) => {
           return (
             <Collapsible key={c.label} label={c.label}>
-              <div>
-                <Input value={c.label} label={"Label"} />
-                <br />
-                <Select
+              <div
+                style={{
+                  padding: "4px 8px",
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+              >
+                <StyledInput value={c.label} label={"Label"} />
+                <StyledSelect
                   onChange={onColumnTypeUpdate(c.label)}
                   placeholder="Column Type"
                   label="Type"
@@ -108,14 +138,14 @@ function PropertiesItem({
   switch (type) {
     case "string": {
       return (
-        <div className="widget-property-item">
+        <WidgetPropertyItemWrapper>
           <Input
             id={id}
             label={label}
             value={value as string}
             onChange={onChange}
           ></Input>
-        </div>
+        </WidgetPropertyItemWrapper>
       );
     }
     case "columns": {
@@ -128,14 +158,14 @@ function PropertiesItem({
     }
     default: {
       return (
-        <div className="widget-property-item">
+        <WidgetPropertyItemWrapper>
           <Input
             id={id}
             label={label}
             value={value as string}
             onChange={onChange}
           ></Input>
-        </div>
+        </WidgetPropertyItemWrapper>
       );
     }
   }

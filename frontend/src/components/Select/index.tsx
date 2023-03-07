@@ -11,6 +11,7 @@ interface SelectProps {
   labelPostion?: LabelPosition;
   label?: string;
   onChange?: (value: string) => void;
+  className?: string;
 }
 
 const SelectTrigger = styled(RadixSelect.Trigger)`
@@ -19,10 +20,8 @@ const SelectTrigger = styled(RadixSelect.Trigger)`
   align-items: center;
   justify-content: space-between;
   border-radius: 4px;
-  padding: 4px 16px;
-  height: 35px;
-  font-size: 16px;
-  line-height: 1;
+  padding: 8px;
+
   gap: 4px;
   cursor: pointer;
   background: ${({ theme }) => theme.colors.white};
@@ -30,8 +29,10 @@ const SelectTrigger = styled(RadixSelect.Trigger)`
   color: #000;
   min-width: 120px;
 
-  svg {
-    font-size: 18px;
+  span {
+    font-size: 16px;
+    line-height: 1;
+    height: 16px;
   }
 `;
 
@@ -73,9 +74,15 @@ export default function Select({
   label,
   id,
   onChange,
+  className = "",
 }: SelectProps) {
   return (
-    <Label label={label} htmlFor={id} position={labelPostion}>
+    <Label
+      label={label}
+      htmlFor={id}
+      position={labelPostion}
+      className={className}
+    >
       <RadixSelect.Root onValueChange={onChange}>
         <SelectTrigger>
           <RadixSelect.Value placeholder={placeholder} />

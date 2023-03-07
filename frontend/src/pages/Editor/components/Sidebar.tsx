@@ -14,7 +14,9 @@ const StyledSidebar = styled.div`
   padding: 8px;
 `;
 
-const StyledLink = styled(Link)<{ isActive?: boolean }>`
+const StyledLink = styled(Link).withConfig({
+  shouldForwardProp: (prop) => !["isActive"].includes(prop),
+})<{ isActive?: boolean }>`
   display: flex;
   margin-bottom: 16px;
   width: 100%;

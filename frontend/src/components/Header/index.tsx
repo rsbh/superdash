@@ -2,18 +2,19 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Button from "../Button";
 import * as Avatar from "@radix-ui/react-avatar";
-import { blackA, violet } from "@radix-ui/colors";
 import { rgba } from "polished";
 
 const StyledHeader = styled.header`
   width: 100%;
-  background-color: white;
+  background-color: ${({ theme }) => theme.colors.white};
   min-height: 48px;
   padding: 8px 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 2px 4px 0 ${({ theme }) => rgba(theme.colors.black, 0.1)};
+  position: relative;
+  z-index: 20;
 `;
 
 const AvatarRoot = styled(Avatar.Root)`
@@ -26,8 +27,8 @@ const AvatarRoot = styled(Avatar.Root)`
   width: 45px;
   height: 45px;
   border-radius: 100%;
-  background-color: ${blackA.blackA1};
-  border: 2px solid ${violet.violet11};
+  background-color: ${({ theme }) => theme.colors.white};
+  border: 2px solid ${({ theme }) => rgba(theme.colors.primary, 0.1)};
 `;
 
 const AvatarFallback = styled(Avatar.Fallback)`
@@ -36,7 +37,7 @@ const AvatarFallback = styled(Avatar.Fallback)`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: ${violet.violet11};
+  color: ${({ theme }) => theme.colors.primary};
   font-size: 15px;
   line-height: 1;
   font-weight: 500;

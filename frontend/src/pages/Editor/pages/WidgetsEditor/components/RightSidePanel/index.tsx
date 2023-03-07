@@ -15,6 +15,8 @@ interface RightSidePanelProps {
 const RightSidePanelWrapper = styled.div`
   width: 300px;
   border-left: 0.5px solid grey;
+  z-index: 2;
+  background-color: ${({ theme }) => theme.colors.white};
 `;
 
 const StyledTab = styled(Tabs)`

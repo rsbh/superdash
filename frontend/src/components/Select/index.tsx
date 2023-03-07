@@ -26,8 +26,8 @@ const SelectTrigger = styled(RadixSelect.Trigger)`
   cursor: pointer;
   background: ${({ theme }) => theme.colors.white};
   border: 2px solid ${({ theme }) => theme.colors.primary};
-  color: #000;
-  min-width: 120px;
+  color: ${({ theme }) => theme.colors.black};
+  min-width: 80px;
 
   span {
     font-size: 16px;
@@ -40,8 +40,9 @@ const SelectContent = styled(RadixSelect.SelectContent)`
   background-color: ${({ theme }) => theme.colors.white};
   overflow: hidden;
   border-radius: 4px;
-  min-width: 120px;
-  padding: 8px;
+  min-width: 80px;
+  padding: 4px 2px;
+  z-index: 100;
 `;
 
 const SelectViewport = styled(RadixSelect.Viewport)`

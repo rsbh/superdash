@@ -143,7 +143,7 @@ function PropertiesItem({
             id={id}
             label={label}
             value={value as string}
-            onChange={onChange}
+            onBlur={onChange}
           ></Input>
         </WidgetPropertyItemWrapper>
       );

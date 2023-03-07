@@ -105,7 +105,7 @@ export const BASE_WIDGET_MAP: Record<WidgetTypes, BaseWidget> = {
         id: "label",
         label: "Label",
         type: "string",
-        defaultValue: "",
+        defaultValue: "Select",
       },
       {
         id: "placeholder",
@@ -144,7 +144,7 @@ export const BASE_WIDGET_MAP: Record<WidgetTypes, BaseWidget> = {
         id: "label",
         label: "Label",
         type: "string",
-        defaultValue: "",
+        defaultValue: "Switch",
       },
       {
         id: "defaultValue",
@@ -176,7 +176,7 @@ export const BASE_WIDGET_MAP: Record<WidgetTypes, BaseWidget> = {
         id: "label",
         label: "Label",
         type: "string",
-        defaultValue: "",
+        defaultValue: "Checkbox",
       },
       {
         id: "defaultValue",

@@ -53,7 +53,7 @@ const SelectViewport = styled(RadixSelect.Viewport)`
 `;
 
 const SelectItem = styled(RadixSelect.Item)`
-  padding: 12px 0;
+  padding: 8px 0;
   display: flex;
   align-items: center;
   justify-content: center;

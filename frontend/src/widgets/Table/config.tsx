@@ -7,7 +7,7 @@ const config: BaseWidget = {
   icon: <RxTable />,
   styleProperties: [
     { id: "height", label: "Height", defaultValue: "400px", type: "string" },
-    { id: "width", label: "Width", defaultValue: "304px", type: "string" },
+    { id: "width", label: "Width", defaultValue: "600px", type: "string" },
     { id: "left", label: "Left", defaultValue: "0px", type: "string" },
     { id: "top", label: "Top", defaultValue: "0px", type: "string" },
   ],

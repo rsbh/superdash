@@ -1,3 +1,4 @@
+import { TableColumnTypes, TableColumnTypesMap } from "@/types/table";
 import { BaseWidget } from "@/types/widget";
 import { RxTable } from "react-icons/rx";
 
@@ -35,3 +36,15 @@ const config: BaseWidget = {
 };
 
 export default config;
+
+export const tableColumnTypes: Array<{
+  label: string;
+  value: TableColumnTypes;
+}> = [
+  { label: "Text", value: TableColumnTypesMap.TEXT },
+  { label: "Input", value: TableColumnTypesMap.INPUT },
+  { label: "Button", value: TableColumnTypesMap.BUTTON },
+  { label: "Switch", value: TableColumnTypesMap.SWITCH },
+  { label: "Checkbox", value: TableColumnTypesMap.CHECKBOX },
+  { label: "Select", value: TableColumnTypesMap.SELECT },
+];

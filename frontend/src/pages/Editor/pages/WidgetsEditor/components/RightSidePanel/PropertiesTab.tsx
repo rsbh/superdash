@@ -1,16 +1,9 @@
 import Input from "@/components/Input";
 import { BASE_WIDGET_MAP } from "@/constants/widget";
-import {
-  TableColumn,
-  TableColumnTypes,
-  TableColumnTypesMap,
-} from "@/types/table";
+import { TableColumn } from "@/types/table";
 import { WidgetComponent } from "@/types/widget";
-import { useState } from "react";
-import Collapsible from "@/components/Collapsible";
-import Button from "@/components/Button";
-import Select from "@/components/Select";
 import styled from "styled-components";
+import ColumnPropertyEditor from "./ColumnPropertyEditor";
 
 const WidgetPropertyItemWrapper = styled.div`
   label {
@@ -18,22 +11,6 @@ const WidgetPropertyItemWrapper = styled.div`
     width: 40px;
   }
   margin: 8px 0;
-`;
-
-const StyledInput = styled(Input)`
-  justify-content: space-between !important;
-  margin: 4px auto;
-  input {
-    width: 200px;
-  }
-`;
-const StyledSelect = styled(Select)`
-  justify-content: space-between !important;
-  margin: 4px auto;
-
-  button {
-    width: 180px;
-  }
 `;
 
 interface PropertiesTabProps {
@@ -47,88 +24,6 @@ interface PropertiesItemProps {
   value: string | Array<any>;
   onChange: (e: any) => void;
   type: string;
-}
-
-interface ColumnPropertyEditor {
-  columns: TableColumn[];
-  onChange: (e: any) => void;
-}
-
-const tableColumnTypes: Array<{ label: string; value: TableColumnTypes }> = [
-  { label: "Text", value: TableColumnTypesMap.TEXT },
-  { label: "Input", value: TableColumnTypesMap.INPUT },
-  { label: "Button", value: TableColumnTypesMap.BUTTON },
-  { label: "Switch", value: TableColumnTypesMap.SWITCH },
-  { label: "Checkbox", value: TableColumnTypesMap.CHECKBOX },
-  { label: "Select", value: TableColumnTypesMap.SELECT },
-];
-
-function ColumnPropertyEditor({ columns, onChange }: ColumnPropertyEditor) {
-  const [text, setText] = useState("");
-
-  function onTextChange(e: React.ChangeEvent<HTMLInputElement>) {
-    setText(e.target.value);
-  }
-
-  function onClick() {
-    const newCol: TableColumn = { label: text, type: TableColumnTypesMap.TEXT };
-    const updatedColumns = [...columns, newCol];
-    onChange({
-      target: {
-        value: updatedColumns,
-      },
-    });
-  }
-
-  function onColumnTypeUpdate(colLabel: string) {
-    return function (newType: string) {
-      const updatedColumns = columns.map((c) => {
-        return c.label === colLabel
-          ? {
-              ...c,
-              type: newType as TableColumnTypes,
-            }
-          : c;
-      });
-      onChange({
-        target: {
-          value: updatedColumns,
-        },
-      });
-    };
-  }
-  return (
-    <div className="widget-property-item">
-      <h3>Columns</h3>
-      <div>
-        {columns.map((c) => {
-          return (
-            <Collapsible key={c.label} label={c.label}>
-              <div
-                style={{
-                  padding: "4px 8px",
-                  display: "flex",
-                  flexDirection: "column",
-                }}
-              >
-                <StyledInput value={c.label} label={"Label"} />
-                <StyledSelect
-                  onChange={onColumnTypeUpdate(c.label)}
-                  placeholder="Column Type"
-                  label="Type"
-                  options={tableColumnTypes}
-                />
-              </div>
-            </Collapsible>
-          );
-        })}
-        <Input value={text} onChange={onTextChange} />
-        <Button disabled={text.trim().length === 0} onClick={onClick}>
-          Add Column
-        </Button>
-      </div>
-    </div>
-  );
 }
 
 function PropertiesItem({

@@ -1,5 +1,6 @@
 import Input from "@/components/Input";
 import { BASE_WIDGET_MAP } from "@/constants/widget";
+import PropertyField from "@/pages/Editor/components/PropertyField";
 import { TableColumn } from "@/types/table";
 import { WidgetComponent } from "@/types/widget";
 import styled from "styled-components";
@@ -37,12 +38,12 @@ function PropertiesItem({
     case "string": {
       return (
         <WidgetPropertyItemWrapper>
-          <Input
+          <PropertyField
             id={id}
             label={label}
             value={value as string}
             onBlur={onChange}
-          ></Input>
+          />
         </WidgetPropertyItemWrapper>
       );
     }
@@ -57,12 +58,12 @@ function PropertiesItem({
     default: {
       return (
         <WidgetPropertyItemWrapper>
-          <Input
+          <PropertyField
             id={id}
             label={label}
             value={value as string}
-            onChange={onChange}
-          ></Input>
+            onBlur={onChange}
+          />
         </WidgetPropertyItemWrapper>
       );
     }

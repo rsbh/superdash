@@ -13,6 +13,10 @@ export default {
 
 export const Primary = () => (
   <ThemeProvider theme={theme}>
-    <PropertyField id="abcd" />
+    <PropertyField
+      id="abcd"
+      value="{{[{id: 1, name: User 1, email: user1@example.com},{id: 1, name: User 1, email: user1@example.com}]}}"
+      label="Label"
+    />
   </ThemeProvider>
 );

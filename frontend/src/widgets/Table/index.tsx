@@ -85,9 +85,8 @@ export default function TableWidget({
 
   const tableData = useMemo(() => {
     try {
-      const actionKey =
-        trimCustomVariableRegex(config["data"]) || "actions.getUserData.result";
-      const result = runCustomCode(actionKey, {
+      const customCode = trimCustomVariableRegex(config["data"]);
+      const result = runCustomCode(customCode, {
         actions: actionsValuesMap,
         widgets: {},
       });

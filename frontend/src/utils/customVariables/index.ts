@@ -6,10 +6,14 @@ interface PageData {
 }
 
 export function runCustomCode(code: string, { actions, widgets }: PageData) {
-  return new Function(
-    "widgets",
-    "actions",
-    `'use strict'; 
+  try {
+    return JSON.parse(code);
+  } catch (err) {
+    console.log(err, code);
+    return new Function(
+      "widgets",
+      "actions",
+      `'use strict'; 
 
     const deepFreeze = obj => {
       Object.keys(obj).forEach(prop => {
@@ -21,7 +25,8 @@ export function runCustomCode(code: string, { actions, widgets }: PageData) {
       deepFreeze(widgets);
       deepFreeze(actions);
       return ${code}`
-  )(widgets, actions);
+    )(widgets, actions);
+  }
 }
 
 export function trimCustomVariableRegex(str: string) {

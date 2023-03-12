@@ -1,14 +1,6 @@
 import Label from "@/components/Label";
-import {
-  autocompletion,
-  completeFromList,
-  CompletionContext,
-  CompletionResult,
-} from "@codemirror/autocomplete";
+
 import CodeMirror from "@uiw/react-codemirror";
-import { javascript, localCompletionSource } from "@codemirror/lang-javascript";
-import { json } from "@codemirror/lang-json";
-import { syntaxTree } from "@codemirror/language";
 
 import { rgba } from "polished";
 import styled from "styled-components";
@@ -26,28 +18,8 @@ const StyledCodeMirror = styled(CodeMirror)`
   font-size: 14px;
 `;
 
-const completePropertyAfter = ["PropertyName", ".", "?."];
-const dontCompleteIn = [
-  "TemplateString",
-  "LineComment",
-  "BlockComment",
-  "VariableDefinition",
-  "PropertyDefinition",
-];
-
 export default function PropertyField({ id }: PropertyFieldProps) {
   const [value, setValue] = useState("");
-  function localVariablesAutoComplete(
-    context: CompletionContext
-  ): CompletionResult | null {
-    let word = context.matchBefore(/\w*/);
-    if (word === null || (word?.from == word?.to && !context.explicit))
-      return null;
-    return {
-      from: word?.from,
-      options: [{ label: "match", type: "keyword" }],
-    };
-  }
 
   function handleChange(v: string) {
     setValue(v);
@@ -60,13 +32,7 @@ export default function PropertyField({ id }: PropertyFieldProps) {
           id={id}
           value={value}
           maxHeight="100px"
-          extensions={[
-            javascript(),
-            json(),
-            autocompletion({
-              override: [localVariablesAutoComplete, localCompletionSource],
-            }),
-          ]}
+          extensions={[]}
           basicSetup={{
             lineNumbers: false,
             highlightActiveLine: false,

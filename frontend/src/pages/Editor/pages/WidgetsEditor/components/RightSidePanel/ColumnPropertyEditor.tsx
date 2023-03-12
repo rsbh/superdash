@@ -11,6 +11,7 @@ import {
   TableColumnTypes,
 } from "@/types/table";
 import { tableColumnTypes } from "@/widgets/Table/config";
+import PropertyField from "@/pages/Editor/components/PropertyField";
 
 interface ColumnPropertyEditorProps {
   columns: TableColumn[];
@@ -44,7 +45,11 @@ export default function ColumnPropertyEditor({
   }
 
   function onClick() {
-    const newCol: TableColumn = { label: text, type: TableColumnTypesMap.TEXT };
+    const newCol: TableColumn = {
+      label: text,
+      type: TableColumnTypesMap.TEXT,
+      data: "",
+    };
     const updatedColumns = [...columns, newCol];
     onChange({
       target: {
@@ -53,13 +58,14 @@ export default function ColumnPropertyEditor({
     });
   }
 
-  function onColumnTypeUpdate(colLabel: string) {
-    return function (newType: string) {
+  function onColumnUpdate(colLabel: string, field: "type" | "data") {
+    return function (newValue: string) {
       const updatedColumns = columns.map((c) => {
         return c.label === colLabel
           ? {
               ...c,
-              type: newType as TableColumnTypes,
+              ...(field === "type" && { type: newValue as TableColumnTypes }),
+              ...(field === "data" && { data: newValue }),
             }
           : c;
       });
@@ -70,11 +76,12 @@ export default function ColumnPropertyEditor({
       });
     };
   }
+
   return (
     <div className="widget-property-item">
       <h3>Columns</h3>
       <div>
-        {columns.map((c) => {
+        {columns.map((c, i) => {
           return (
             <Collapsible key={c.label} label={c.label}>
               <div
@@ -86,14 +93,17 @@ export default function ColumnPropertyEditor({
               >
                 <StyledInput value={c.label} label={"Label"} />
                 <StyledSelect
-                  onChange={onColumnTypeUpdate(c.label)}
+                  onChange={onColumnUpdate(c.label, "type")}
                   placeholder="Column Type"
                   label="Type"
                   options={tableColumnTypes}
                 />
-                <StyledInput
+                <PropertyField
+                  labelPosition="left"
+                  id={`property-field-${i}`}
                   label={"Data"}
-                  defaultValue={c.key ? `{{rowData.${c.key}}}` : ""}
+                  value={c.data}
+                  onBlur={onColumnUpdate(c.label, "data")}
                 />
               </div>
             </Collapsible>

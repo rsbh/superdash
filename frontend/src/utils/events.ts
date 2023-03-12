@@ -55,6 +55,7 @@ export async function executeEvent({
   const urlWithValues = resolveCustomVariables(url, {
     actions: {},
     widgets: {},
+    rowData: {},
   });
   console.log(urlWithValues);
   return urlWithValues;

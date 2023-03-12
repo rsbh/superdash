@@ -1,4 +1,4 @@
-import Label from "@/components/Label";
+import Label, { LabelPosition } from "@/components/Label";
 
 import CodeMirror from "@uiw/react-codemirror";
 import { EditorView } from "@codemirror/view";
@@ -11,6 +11,7 @@ import { json } from "@codemirror/lang-json";
 interface PropertyFieldProps {
   id: string;
   label: string;
+  labelPosition?: LabelPosition;
   value: string;
   onBlur?: (value: string) => void;
   onChange?: (value: string) => void;
@@ -30,6 +31,7 @@ export default function PropertyField({
   value,
   onChange,
   onBlur,
+  labelPosition = "top",
 }: PropertyFieldProps) {
   const [text, setText] = useState(value);
 
@@ -47,7 +49,7 @@ export default function PropertyField({
   }
   return (
     <>
-      <Label label={label} position={"top"} htmlFor={id}>
+      <Label label={label} htmlFor={id} position={labelPosition}>
         <StyledCodeMirror
           id={id}
           value={text}

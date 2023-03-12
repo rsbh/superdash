@@ -12,6 +12,7 @@ import {
 } from "@/types/table";
 import { WidgetComponent } from "@/types/widget";
 import {
+  resolveCustomVariables,
   runCustomCode,
   trimCustomVariableRegex,
 } from "@/utils/customVariables";
@@ -114,6 +115,7 @@ export default function TableWidget({
         label: key.toUpperCase(),
         key,
         type: TableColumnTypesMap.TEXT,
+        data: `{{rowData.${key}}}`,
       }));
       onWidgetUpdate(id, {
         ...widget,
@@ -126,14 +128,13 @@ export default function TableWidget({
   }, [tableData.keys, columns]);
 
   const rows = useMemo(() => {
-    return tableData.data.map((dataObj) => {
-      return columns.map(
-        (col: TableColumn) =>
-          (col.key && { data: dataObj[col.key], type: col.type }) || {
-            data: "",
-            type: col.type,
-          }
-      );
+    return tableData.data.map((rowData = {}) => {
+      return columns.map((col: TableColumn) => {
+        const data = col.data
+          ? resolveCustomVariables(col.data, { rowData })
+          : "";
+        return { data, type: col.type };
+      });
     });
   }, [columns, tableData.data]);
 

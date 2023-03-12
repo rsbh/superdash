@@ -13,4 +13,5 @@ export interface TableColumn {
   label: string;
   key?: string;
   type: TableColumnTypes;
+  data: string;
 }

@@ -117,7 +117,7 @@ export const BASE_WIDGET_MAP: Record<WidgetTypes, BaseWidget> = {
         id: "options",
         label: "options",
         type: "options",
-        defaultValue: [],
+        defaultValue: `{{[{"label": "Option 1", "value": "option1"},{"label": "Option 2", "value": "option2"}]}}`,
       },
     ],
     events: [

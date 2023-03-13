@@ -1,4 +1,8 @@
 import Select from "@/components/Select";
+import {
+  runCustomCode,
+  trimCustomVariableRegex,
+} from "@/utils/customVariables";
 import { CSSProperties, useMemo } from "react";
 
 interface SelectWidgetProps {
@@ -26,7 +30,11 @@ export default function SelectWidget({
   }
 
   const options = useMemo(() => {
-    return config["options"] || [];
+    const customCode = trimCustomVariableRegex(config["options"]);
+    return runCustomCode(customCode, {
+      actions: {},
+      widgets: {},
+    });
   }, [config["options"]]);
 
   return (

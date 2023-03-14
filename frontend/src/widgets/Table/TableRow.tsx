@@ -9,23 +9,52 @@ import {
   TableColumnTypes,
   TableColumnTypesMap,
 } from "@/types/table";
+import { useEffect, useState } from "react";
 
 interface TableCellProps {
+  col: TableColumn;
   id: string;
-  data: any;
-  colType: TableColumnTypes;
+  onCellUpdate: (updateData: any) => void;
 }
 
-function TableCell({ colType, data, id }: TableCellProps) {
-  switch (colType) {
+function TableCell({ col, id, onCellUpdate }: TableCellProps) {
+  const { type, data } = col;
+  function onInputChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const newValue = e.target.value;
+    onCellUpdate({
+      ...col,
+      data: newValue,
+    });
+  }
+
+  function onSwitchChange(newValue: boolean) {
+    onCellUpdate({
+      ...col,
+      data: newValue,
+    });
+  }
+
+  switch (type) {
     case TableColumnTypesMap.BUTTON:
       return <Button>Button</Button>;
     case TableColumnTypesMap.INPUT:
-      return <Input id={id} value={data} />;
+      return <Input id={id} value={data} onChange={onInputChange} />;
     case TableColumnTypesMap.SWITCH:
-      return <Switch id={id} defaultValue={Boolean(data)} />;
+      return (
+        <Switch
+          id={id}
+          defaultValue={Boolean(data)}
+          onChange={onSwitchChange}
+        />
+      );
     case TableColumnTypesMap.CHECKBOX:
-      return <Checkbox id={id} defaultValue={Boolean(data)} />;
+      return (
+        <Checkbox
+          id={id}
+          defaultValue={Boolean(data)}
+          onChange={onSwitchChange}
+        />
+      );
     case TableColumnTypesMap.SELECT:
       return <Select id={id} options={[]} />;
     default:
@@ -39,17 +68,33 @@ interface TableRowProps {
 }
 
 export function TableRow({ selectRow, row }: TableRowProps) {
+  const [rowData, setRowData] = useState(row);
+
+  useEffect(() => {
+    setRowData(row);
+  }, [row]);
+
   function handleClick() {
-    selectRow(row);
+    selectRow(rowData);
+  }
+
+  function onCellUpdate(updatedCell: TableColumn) {
+    const updatedRow = rowData.map((cell) => {
+      return cell.key === updatedCell.key && cell.label === updatedCell.label
+        ? updatedCell
+        : cell;
+    });
+    setRowData(updatedRow);
+    selectRow(updatedRow);
   }
 
   return (
     <Tr onClick={handleClick}>
-      {row.map((col, j) => {
-        const key = `table-${j}`;
+      {rowData.map((col, j) => {
+        const key = `table-${j}-${col.key}`;
         return (
           <Td key={key}>
-            <TableCell data={col.data} colType={col.type} id={key} />
+            <TableCell col={col} id={key} onCellUpdate={onCellUpdate} />
           </Td>
         );
       })}

@@ -1,15 +1,8 @@
 import Button from "@/components/Button";
-import Checkbox from "@/components/Checkbox";
 import Input from "@/components/Input";
-import Select from "@/components/Select";
-import Switch from "@/components/Switch";
-import { Table, THead, Tr, Th, TBody, Td } from "@/components/Table";
+import { Table, THead, Tr, Th, TBody } from "@/components/Table";
 import { ValuesMap } from "@/types/page";
-import {
-  TableColumn,
-  TableColumnTypes,
-  TableColumnTypesMap,
-} from "@/types/table";
+import { TableColumn, TableColumnTypesMap } from "@/types/table";
 import { WidgetComponent } from "@/types/widget";
 import {
   resolveCustomVariables,
@@ -18,6 +11,7 @@ import {
 } from "@/utils/customVariables";
 import { CSSProperties, useEffect, useMemo } from "react";
 import styled from "styled-components";
+import { TableRow } from "./TableRow";
 
 interface TableWidgetProps {
   id: string;
@@ -43,29 +37,6 @@ const TableTopBar = styled.div`
   justify-content: space-between;
   align-items: center;
 `;
-
-interface TableCellProps {
-  id: string;
-  data: any;
-  colType: TableColumnTypes;
-}
-
-function TableCell({ colType, data, id }: TableCellProps) {
-  switch (colType) {
-    case TableColumnTypesMap.BUTTON:
-      return <Button>Button</Button>;
-    case TableColumnTypesMap.INPUT:
-      return <Input id={id} defaultValue={data} />;
-    case TableColumnTypesMap.SWITCH:
-      return <Switch id={id} defaultValue={Boolean(data)} />;
-    case TableColumnTypesMap.CHECKBOX:
-      return <Checkbox id={id} defaultValue={Boolean(data)} />;
-    case TableColumnTypesMap.SELECT:
-      return <Select id={id} options={[]} />;
-    default:
-      return <>{data}</>;
-  }
-}
 
 export default function TableWidget({
   id,
@@ -127,21 +98,19 @@ export default function TableWidget({
     }
   }, [tableData.keys, columns]);
 
-  const rows = useMemo(() => {
+  const rows: Array<Array<TableColumn>> = useMemo(() => {
     return tableData.data.map((rowData = {}) => {
       return columns.map((col: TableColumn) => {
         const data = col.data
           ? resolveCustomVariables(col.data, { rowData })
           : "";
-        return { data, type: col.type };
+        return { ...col, data };
       });
     });
   }, [columns, tableData.data]);
 
-  function onRowClick(rowData: any) {
-    return function () {
-      updateWidgetsData(name, rowData, "selectedRow");
-    };
+  function selectRow(rowData: Array<TableColumn>) {
+    updateWidgetsData(name, rowData, "selectedRow");
   }
 
   return (
@@ -163,16 +132,7 @@ export default function TableWidget({
         </THead>
         <TBody>
           {rows.map((row, i) => (
-            <Tr key={i} onClick={onRowClick(row)}>
-              {row.map((col, j) => {
-                const key = `table-${name}-${i}-${j}`;
-                return (
-                  <Td key={key}>
-                    <TableCell data={col.data} colType={col.type} id={key} />
-                  </Td>
-                );
-              })}
-            </Tr>
+            <TableRow key={i} row={row} selectRow={selectRow} />
           ))}
         </TBody>
       </Table>

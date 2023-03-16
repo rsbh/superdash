@@ -9,9 +9,6 @@ interface executeEventsArgs {
   widgetsValuesMap: ValuesMap;
 }
 
-const VARIABLE_REGEX =
-  /{{\w+-?\d*.\w+##[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}}}/g;
-
 export async function executeEvents({
   pageConfig,
   widgetId,

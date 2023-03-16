@@ -4,7 +4,7 @@ import { useState } from "react";
 import { CustomDragLayer } from "./components/CustomDragLayer";
 import { Canvas } from "./components/Canvas";
 import WidgetList from "./components/WidgetList";
-import RightSidePanel from "./components/RightSidePanel";
+import RightSidePanel from "../../components/RightSidePanel";
 import { ActionsMap, WidgetComponent, WidgetsMap } from "@/types/widget";
 import { createNewWidgetFromDropItem } from "@/utils/widget";
 import { ValuesMap } from "@/types/page";
@@ -26,8 +26,9 @@ export default function Editor({
   actionMap,
   actionsValuesMap,
 }: WidgetsEditorProps) {
-  const [selectedWidget, setSelectedWidget] =
-    useState<WidgetComponent | null>(null);
+  const [selectedWidget, setSelectedWidget] = useState<WidgetComponent | null>(
+    null
+  );
 
   function onDrop(item: WidgetComponent) {
     const widgetCompoenent = item.id

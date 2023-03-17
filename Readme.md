@@ -69,4 +69,31 @@
 
 ### 5. Select
 
+#### configs
+
+| name       | type    | default  | TODO                         |
+| ---------- | ------- | -------- | ---------------------------- |
+| `label`    | string  | `Select` |                              |
+| `disabled` | boolean | `false`  | Add Switch to disable Select |
+
 ### 6. Table
+
+#### configs
+
+| name | type | default | TODO |
+| ---- | ---- | ------- | ---- |
+|      |      |         |      |
+
+## TODO:
+
+Actions:
+
+1. [ ] Alert
+2. [ ] Navigate
+3. [ ] REST API CALL
+4. [ ] Google Spreadsheet
+
+Widgets:
+
+1. [ ] Form
+2. [ ] Link

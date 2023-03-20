@@ -3,6 +3,7 @@ import { BASE_WIDGET_MAP } from "@/constants/widget";
 import PropertyField from "@/pages/Editor/components/PropertyField";
 import { TableColumn } from "@/types/table";
 import { WidgetComponent } from "@/types/widget";
+import { boolToString } from "@/utils";
 import styled from "styled-components";
 import ColumnPropertyEditor from "./ColumnPropertyEditor";
 
@@ -22,8 +23,8 @@ interface PropertiesTabProps {
 interface PropertiesItemProps {
   id: string;
   label: string;
-  value: string | Array<any>;
-  onChange: (e: any) => void;
+  value: any | Array<any>;
+  onChange: (e: string) => void;
   type: string;
 }
 
@@ -42,6 +43,18 @@ function PropertiesItem({
             id={id}
             label={label}
             value={value as string}
+            onBlur={onChange}
+          />
+        </WidgetPropertyItemWrapper>
+      );
+    }
+    case "boolean": {
+      return (
+        <WidgetPropertyItemWrapper>
+          <PropertyField
+            id={id}
+            label={label}
+            value={boolToString(value)}
             onBlur={onChange}
           />
         </WidgetPropertyItemWrapper>
@@ -78,18 +91,16 @@ export default function PropertiesTab({
 
   const baseWidget = BASE_WIDGET_MAP[selectedWidget?.widgetType];
 
-  const onConfigChange =
-    (id: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
-      const value = e.target.value;
-      const newConfig = {
-        ...selectedWidget.config,
-        [id]: value,
-      };
-      onWidgetUpdate(selectedWidget.id, {
-        ...selectedWidget,
-        config: newConfig,
-      });
+  const onConfigChange = (id: string) => (value: string) => {
+    const newConfig = {
+      ...selectedWidget.config,
+      [id]: value,
     };
+    onWidgetUpdate(selectedWidget.id, {
+      ...selectedWidget,
+      config: newConfig,
+    });
+  };
 
   return (
     <div>
